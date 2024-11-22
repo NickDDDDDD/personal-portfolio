@@ -19,6 +19,16 @@ const HomePage = () => {
   const navRefs = useRef([]);
   const contentRefs = useRef([]);
   const contentContainerRef = useRef(null);
+  const [navScrollProgressValue, setNavScrollProgressValue] = useState(0);
+
+  const handleScrollProgress = (id, scrollYProgressValue) => {
+    if (id === expandedId) {
+      setNavScrollProgressValue(scrollYProgressValue);
+      console.log(
+        `Section ${id} scroll progress in HomePage: ${scrollYProgressValue}`
+      );
+    }
+  };
 
   const handleInViewChange = useCallback((id) => {
     console.log(`In view: ${id}`);
@@ -34,12 +44,6 @@ const HomePage = () => {
     }
   }, []);
 
-  const handleScrollProgress = (id, progress) => {
-    if (id === expandedId) {
-      console.log(`Section ${id} scroll progress in HomePage: ${progress}`);
-    }
-  };
-
   const handleExpand = (id) => {
     if (expandedId !== id) {
       setExpandedId(id);
@@ -53,7 +57,7 @@ const HomePage = () => {
   };
 
   const sectionComponents = {
-    Hello: <HelloSection />,
+    Hello: <HelloSection scrollYProgressValue={navScrollProgressValue} />,
     Intro: <IntroSection />,
     AboutMe: <AboutMeSection />,
     Tech: <TechSection />,
@@ -74,6 +78,7 @@ const HomePage = () => {
               id={item.id}
               name={item.name}
               isExpanded={expandedId === item.id}
+              progress={expandedId === item.id ? navScrollProgressValue : 0}
               onExpand={handleExpand}
             />
           ))}

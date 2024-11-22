@@ -9,7 +9,7 @@ const ContentSection = forwardRef(
   ) => {
     const innerRef = useRef(null);
 
-    const isInView = useInView(innerRef, { margin: "-40% 0px -60% 0px" });
+    const isInView = useInView(innerRef, { margin: "-20% 0px -80% 0px" });
 
     useEffect(() => {
       if (isInView) {
@@ -28,7 +28,8 @@ const ContentSection = forwardRef(
     const { scrollYProgress } = useScroll({
       target: innerRef,
       container: contentContainerRef,
-      offset: ["start end", "end start"],
+      offset:
+        id === 0 ? ["start start", "end start"] : ["start end", "end start"],
       layoutEffect: false,
     });
 
@@ -48,7 +49,7 @@ const ContentSection = forwardRef(
       <motion.section
         ref={innerRef}
         id={`section-${id}`}
-        className="min-h-[300vh] bg-blue-300 rounded-3xl p-5"
+        className="min-h-[50vh] bg-blue-300 rounded-3xl p-5"
       >
         {children}
       </motion.section>
