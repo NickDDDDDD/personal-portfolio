@@ -2,7 +2,15 @@
 export default {
   content: ["./src/**/*.{html,js,jsx}"],
   theme: {
-    extend: {},
+    extend: {
+      text: {
+        secondary: "rgba(255, 255, 255, 0.6)",
+      },
+      fontFamily: {
+        sans: ["JetBrains Mono", "monospace"],
+      },
+      typography: {},
+    },
   },
   plugins: [],
 };

@@ -1,5 +1,28 @@
+import AnimatedLetters from "../typography/AnimatedLetters.jsx";
+import AnimatedLettersContainer from "../typography/AnimatedLettersContainer.jsx";
+import MyAvatar from "../MyAvatar";
+
 const IntroSection = () => {
-  return <div>IntroSection</div>;
+  return (
+    <AnimatedLettersContainer>
+      <div className="flex flex-col items-center justify-center gap-4">
+        <AnimatedLetters
+          inputString="Hello, my name is"
+          fontVariant="h2"
+          ease="backInOut"
+          shootFromDirection="top"
+        />
+        <AnimatedLetters
+          inputString="Nick"
+          fontVariant="h1"
+          ease="backInOut"
+          shootFromDirection="top"
+          className="text-[#ffaf1b] font-bold"
+        />
+        <MyAvatar />
+      </div>
+    </AnimatedLettersContainer>
+  );
 };
 
 export default IntroSection;

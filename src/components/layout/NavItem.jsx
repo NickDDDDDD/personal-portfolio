@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import PropTypes from "prop-types";
 
 const NavItem = forwardRef(
-  ({ id, name, isExpanded, onExpand, progress }, ref) => {
+  ({ id, name, bgColor, textColor, isExpanded, onExpand, progress }, ref) => {
     const formattedId = id.toString().padStart(2, "0");
 
     const handleClick = () => {
@@ -15,15 +15,16 @@ const NavItem = forwardRef(
       <button
         ref={ref}
         onClick={handleClick}
-        className={`relative flex flex-col min-h-28 p-4 justify-between items-start rounded-3xl bg-green-400 transition-all duration-300 ${
+        style={{ backgroundColor: bgColor, color: textColor }}
+        className={`relative flex flex-col min-h-28 p-4 justify-between items-start rounded-3xl transition-all duration-300 ${
           isExpanded ? "h-96" : "h-28"
         }`}
       >
-        <span>{formattedId}</span>
-        <span>{name}</span>
+        <span className="text-sm font-normal">{formattedId}</span>
+        <span className="text-lg font-medium">{name}</span>
         {isExpanded && (
           <div
-            className="absolute  right-2 size-2 bg-red-500 rounded-full"
+            className="absolute  right-2 size-2 bg-[#f4e9e1] rounded-full"
             style={{
               top: `${effectiveProgress * 100}%`,
               transition: "top 0.05s ease-in-out",
@@ -43,6 +44,8 @@ NavItem.propTypes = {
   isExpanded: PropTypes.bool.isRequired,
   onExpand: PropTypes.func.isRequired,
   progress: PropTypes.number.isRequired,
+  textColor: PropTypes.string.isRequired,
+  bgColor: PropTypes.string.isRequired,
 };
 NavItem.displayName = "NavItem";
 

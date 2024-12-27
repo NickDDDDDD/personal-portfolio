@@ -10,9 +10,29 @@ import ContactSection from "../components/sections/Contact";
 
 const HomePage = () => {
   const navNames = ["Hello", "Intro", "AboutMe", "Tech", "Work", "Contact"];
+  const bgColors = [
+    "#ffaf1b",
+    "#000000",
+    "#5900cc",
+    "#2835f8",
+    "#ff003d",
+    "#ff3d00",
+  ];
+
+  const textColors = [
+    "#000000",
+    "#ffffff",
+    "#ffffff",
+    "#ffffff",
+    "#ffffff",
+    "#ffffff",
+  ];
+
   const navItems = navNames.map((name, index) => ({
     id: index,
     name,
+    bgColor: bgColors[index],
+    textColor: textColors[index],
   }));
 
   const [expandedId, setExpandedId] = useState(null);
@@ -67,7 +87,7 @@ const HomePage = () => {
 
   return (
     <div className="h-screen min-h-screen grid grid-cols-[226px_1fr]">
-      <div className="h-screen overflow-y-auto scrollbar-hide bg-red-300 p-7">
+      <div className="h-screen overflow-y-auto scrollbar-hide bg-[#f4e9e1] p-7 pr-4">
         <nav className="flex flex-col gap-4">
           {navItems.map((item, index) => (
             <NavItem
@@ -77,6 +97,8 @@ const HomePage = () => {
               key={item.id}
               id={item.id}
               name={item.name}
+              bgColor={item.bgColor}
+              textColor={item.textColor}
               isExpanded={expandedId === item.id}
               progress={expandedId === item.id ? navScrollProgressValue : 0}
               onExpand={handleExpand}
@@ -87,9 +109,9 @@ const HomePage = () => {
 
       <div
         ref={contentContainerRef}
-        className="min-h-screen h-screen overflow-y-auto bg-yellow-200"
+        className="min-h-screen h-screen overflow-y-auto bg-[#f4e9e1]"
       >
-        <div className=" flex flex-col gap-5 p-7">
+        <div className=" flex flex-col gap-5 p-7 pl-4">
           {navItems.map((item, index) => (
             <ContentSection
               ref={(el) => {
@@ -97,6 +119,8 @@ const HomePage = () => {
               }}
               key={item.id}
               id={item.id}
+              bgColor={item.bgColor}
+              textColor={item.textColor}
               onInViewChange={handleInViewChange}
               contentContainerRef={contentContainerRef}
               onScrollProgress={handleScrollProgress}

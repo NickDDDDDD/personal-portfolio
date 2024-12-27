@@ -29,6 +29,7 @@ const HelloSection = ({ scrollYProgressValue }) => {
     [0, 1],
     [80, 80]
   );
+  const overlayTransform = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
     <div className="relative h-[80vh] overflow-hidden">
@@ -94,6 +95,16 @@ const HelloSection = ({ scrollYProgressValue }) => {
         style={{
           backgroundImage: `url(${manOnMountain})`,
           translateY: manOnMountainTransform,
+        }}
+      />
+
+      {/* Overlay Mask */}
+      <motion.div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5))",
+          opacity: overlayTransform,
         }}
       />
     </div>

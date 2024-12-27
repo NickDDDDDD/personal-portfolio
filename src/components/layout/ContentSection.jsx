@@ -4,7 +4,15 @@ import { useInView, motion, useScroll } from "framer-motion";
 
 const ContentSection = forwardRef(
   (
-    { id, onInViewChange, onScrollProgress, contentContainerRef, children },
+    {
+      id,
+      bgColor,
+      textColor,
+      onInViewChange,
+      onScrollProgress,
+      contentContainerRef,
+      children,
+    },
     ref
   ) => {
     const innerRef = useRef(null);
@@ -49,7 +57,8 @@ const ContentSection = forwardRef(
       <motion.section
         ref={innerRef}
         id={`section-${id}`}
-        className="min-h-[50vh] bg-blue-300 rounded-3xl p-5"
+        style={{ backgroundColor: bgColor, color: textColor }}
+        className="min-h-[50vh] bg-black rounded-3xl overflow-hidden"
       >
         {children}
       </motion.section>
@@ -60,6 +69,8 @@ const ContentSection = forwardRef(
 ContentSection.displayName = "ContentSection";
 ContentSection.propTypes = {
   id: PropTypes.number.isRequired,
+  bgColor: PropTypes.string.isRequired,
+  textColor: PropTypes.string.isRequired,
   onInViewChange: PropTypes.func.isRequired,
   onScrollProgress: PropTypes.func,
   contentContainerRef: PropTypes.object,
