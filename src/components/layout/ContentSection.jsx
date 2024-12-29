@@ -26,6 +26,7 @@ const ContentSection = forwardRef(
         id === 0 ? ["start start", "end start"] : ["start 10%", "end 10%"],
       layoutEffect: false,
     });
+    console.log("ContentSection render");
 
     useEffect(() => {
       if (isInView) {

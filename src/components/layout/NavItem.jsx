@@ -5,12 +5,13 @@ import { useMediaQuery } from "react-responsive";
 
 const NavItem = forwardRef(
   ({ id, name, bgColor, textColor, isExpanded, onExpand, progress }, ref) => {
-    const isMd = useMediaQuery({ query: "(min-width: 768px)" });
+    const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
     const formattedId = id.toString().padStart(2, "0");
 
     const handleClick = () => {
       onExpand(id);
     };
+    console.log("navItem render");
 
     // const effectiveProgress = Math.max(progress, 0.1);
 
@@ -33,15 +34,23 @@ const NavItem = forwardRef(
         {/* white dot */}
         {isExpanded && (
           <div
-            className="absolute size-1  md:size-2 bg-[#f4e9e1] rounded-full"
+            className="absolute inset-0 w-full h-full"
             style={{
-              top: isMd ? `calc(${progress * 100}% + 20px)` : "auto",
-              right: isMd ? "10px" : "auto",
-              left: !isMd ? `calc(${progress * 100}% + 20px)` : "auto",
-              transition: "all 0.05s ease-in-out",
+              transform: isMobile
+                ? `translateX(${progress * 100}%)`
+                : `translateY(${progress * 100}%)`,
+              willChange: "transform",
+              transition: "transform 0.05s linear",
             }}
           >
-            {/* {console.log(`NavItem ${id} - Progress:`, progress)} */}
+            <div
+              className="absolute bg-[#f4e9e1] size-2 md:size-3 rounded-full"
+              style={{
+                top: isMobile ? "20%" : "5%",
+                left: isMobile ? "10%" : "auto",
+                right: isMobile ? "auto" : "8%",
+              }}
+            />
           </div>
         )}
       </button>

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
+import { useMediaQuery } from "react-responsive";
 import ResponsiveTypography from "./ResponsiveTypography";
 
 // Function to generate array of letter objects from a string
@@ -20,8 +21,8 @@ const AnimatedLetters = ({
   ...props
 }) => {
   const letters = generateLetters(inputString);
+  const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
 
-  // Determine the initial position based on shootFromDirection
   const getInitialPosition = () => {
     switch (shootFromDirection) {
       case "right":
@@ -38,40 +39,51 @@ const AnimatedLetters = ({
 
   const initialPosition = getInitialPosition();
 
+  const getMotionProps = (index) => {
+    if (isMobile) {
+      return {
+        initial: { opacity: 1, x: xEnd, y: yEnd },
+        whileInView: {},
+        transition: { duration: 0 },
+      };
+    } else {
+      return {
+        initial: { opacity: 0, x: initialPosition.x, y: initialPosition.y },
+        whileInView: { opacity: 1, x: xEnd, y: yEnd },
+        transition: {
+          duration: 0.5,
+          ease: ease,
+          delay: index * 0.05,
+        },
+      };
+    }
+  };
+
   return (
     <div className={`flex flex-wrap ${className}`}>
-      {letters.map((letter, index) => (
-        <motion.div
-          key={index}
-          initial={{
-            opacity: 0,
-            x: initialPosition.x,
-            y: initialPosition.y,
-          }}
-          whileInView={{
-            opacity: 1,
-            x: xEnd,
-            y: yEnd,
-          }}
-          transition={{
-            duration: 0.5,
-            ease: ease,
-            delay: index * 0.05,
-          }}
-          viewport={{
-            amount: 1,
-            once: true,
-          }}
-        >
-          <ResponsiveTypography
-            variant={fontVariant}
-            className={className}
-            {...props}
+      {letters.map((letter, index) => {
+        const motionProps = getMotionProps(index);
+        return (
+          <motion.div
+            key={index}
+            initial={motionProps.initial}
+            whileInView={motionProps.whileInView}
+            transition={motionProps.transition}
+            viewport={{
+              amount: 1,
+              once: true,
+            }}
           >
-            {letter.char}
-          </ResponsiveTypography>
-        </motion.div>
-      ))}
+            <ResponsiveTypography
+              variant={fontVariant}
+              className={className}
+              {...props}
+            >
+              {letter.char}
+            </ResponsiveTypography>
+          </motion.div>
+        );
+      })}
     </div>
   );
 };
