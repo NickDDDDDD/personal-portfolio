@@ -41,22 +41,18 @@ const HomePage = () => {
   const contentContainerRef = useRef(null);
   const [navScrollProgressValue, setNavScrollProgressValue] = useState(0);
 
-  const handleScrollProgress = (id, scrollYProgressValue) => {
-    if (id === expandedId) {
-      setNavScrollProgressValue(scrollYProgressValue);
-      console.log(
-        `Section ${id} scroll progress in HomePage: ${scrollYProgressValue}`
-      );
-    }
-  };
+  const handleScrollProgress = useCallback(
+    (id, scrollYProgressValue) => {
+      if (id === expandedId) {
+        setNavScrollProgressValue(scrollYProgressValue);
+      }
+    },
+    [expandedId]
+  );
 
   const handleInViewChange = useCallback((id) => {
-    console.log(`In view: ${id}`);
-
     setExpandedId(id);
-
     if (navRefs.current[id]) {
-      console.log(`Scrolling to ${id}`);
       navRefs.current[id]?.scrollIntoView({
         behavior: "smooth",
         block: "center",
@@ -86,32 +82,13 @@ const HomePage = () => {
   };
 
   return (
-    <div className="h-screen min-h-screen grid grid-cols-[226px_1fr]">
-      <div className="h-screen overflow-y-auto scrollbar-hide bg-[#f4e9e1] p-7 pr-4">
-        <nav className="flex flex-col gap-4">
-          {navItems.map((item, index) => (
-            <NavItem
-              ref={(el) => {
-                navRefs.current[index] = el;
-              }}
-              key={item.id}
-              id={item.id}
-              name={item.name}
-              bgColor={item.bgColor}
-              textColor={item.textColor}
-              isExpanded={expandedId === item.id}
-              progress={expandedId === item.id ? navScrollProgressValue : 0}
-              onExpand={handleExpand}
-            />
-          ))}
-        </nav>
-      </div>
-
+    <div className=" h-screen  grid grid-rows-[1fr_auto]  md:grid-cols-[minmax(200px,_1fr)_7fr]">
+      {/* Content */}
       <div
         ref={contentContainerRef}
-        className="min-h-screen h-screen overflow-y-auto bg-[#f4e9e1]"
+        className="relative overflow-y-auto md:order-1  md:h-screen  bg-[#f4e9e1]"
       >
-        <div className=" flex flex-col gap-5 p-7 pl-4">
+        <div className=" flex flex-col gap-5 p-2 md:p-7">
           {navItems.map((item, index) => (
             <ContentSection
               ref={(el) => {
@@ -129,6 +106,27 @@ const HomePage = () => {
             </ContentSection>
           ))}
         </div>
+      </div>
+
+      {/* Navigation */}
+      <div className="w-screen  md:w-auto md:order-0 md:h-screen md:overflow-y-auto md:scrollbar-hide bg-[#f4e9e1] p-2 md:p-7">
+        <nav className=" overflow-x-auto flex gap-1 flex-nowrap  md:flex-col md:gap-4">
+          {navItems.map((item, index) => (
+            <NavItem
+              ref={(el) => {
+                navRefs.current[index] = el;
+              }}
+              key={item.id}
+              id={item.id}
+              name={item.name}
+              bgColor={item.bgColor}
+              textColor={item.textColor}
+              isExpanded={expandedId === item.id}
+              progress={expandedId === item.id ? navScrollProgressValue : 0}
+              onExpand={handleExpand}
+            />
+          ))}
+        </nav>
       </div>
     </div>
   );

@@ -33,7 +33,6 @@ const HelloSection = ({ scrollYProgressValue }) => {
 
   return (
     <div className="relative h-[80vh] overflow-hidden">
-      {console.log("HelloSection scrollYProgressValue:", scrollYProgressValue)}
       {/* Background Image */}
       <motion.div
         className="absolute inset-0 bg-cover bg-center"

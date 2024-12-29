@@ -17,7 +17,15 @@ const ContentSection = forwardRef(
   ) => {
     const innerRef = useRef(null);
 
-    const isInView = useInView(innerRef, { margin: "-20% 0px -80% 0px" });
+    const isInView = useInView(innerRef, { margin: "-10% 0px -90% 0px" });
+
+    const { scrollYProgress } = useScroll({
+      target: innerRef,
+      container: contentContainerRef,
+      offset:
+        id === 0 ? ["start start", "end start"] : ["start 10%", "end 10%"],
+      layoutEffect: false,
+    });
 
     useEffect(() => {
       if (isInView) {
@@ -28,18 +36,11 @@ const ContentSection = forwardRef(
     useEffect(() => {
       if (typeof ref === "function") {
         ref(innerRef.current);
+        return () => ref(null);
       } else if (ref) {
         ref.current = innerRef.current;
       }
     }, [ref]);
-
-    const { scrollYProgress } = useScroll({
-      target: innerRef,
-      container: contentContainerRef,
-      offset:
-        id === 0 ? ["start start", "end start"] : ["start end", "end start"],
-      layoutEffect: false,
-    });
 
     useEffect(() => {
       if (!isInView) {
