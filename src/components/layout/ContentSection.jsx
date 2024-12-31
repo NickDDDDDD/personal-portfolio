@@ -60,7 +60,7 @@ const ContentSection = forwardRef(
         ref={innerRef}
         id={`section-${id}`}
         style={{ backgroundColor: bgColor, color: textColor }}
-        className="min-h-[50vh] bg-black rounded-3xl overflow-hidden"
+        className=" rounded-3xl overflow-hidden"
       >
         {children}
       </motion.section>

@@ -1,5 +1,11 @@
+import AnimatedLettersContainer from "../typography/AnimatedLettersContainer.jsx";
+
 const WorkSection = () => {
-  return <div>WorkSection</div>;
+  return (
+    <AnimatedLettersContainer>
+      <div>WorkSection</div>
+    </AnimatedLettersContainer>
+  );
 };
 
 export default WorkSection;

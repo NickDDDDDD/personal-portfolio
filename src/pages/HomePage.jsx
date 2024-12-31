@@ -7,6 +7,7 @@ import AboutMeSection from "../components/sections/AboutMeSection";
 import TechSection from "../components/sections/TechSection";
 import WorkSection from "../components/sections/WorkSection";
 import ContactSection from "../components/sections/Contact";
+import FooterSection from "../components/sections/FooterSection";
 
 const HomePage = () => {
   const navNames = ["Hello", "Intro", "AboutMe", "Tech", "Work", "Contact"];
@@ -105,11 +106,12 @@ const HomePage = () => {
               {sectionComponents[item.name]}
             </ContentSection>
           ))}
+          <FooterSection></FooterSection>
         </div>
       </div>
 
       {/* Navigation */}
-      <div className="w-screen  md:w-auto md:order-0 md:h-screen md:overflow-y-auto md:scrollbar-hide bg-[#f4e9e1] p-2 md:p-7">
+      <div className="w-screen scrollbar-hide  md:w-auto md:order-0 md:h-screen md:overflow-y-auto  bg-[#f4e9e1] p-2 md:p-7">
         <nav className=" overflow-x-auto flex gap-1 flex-nowrap  md:flex-col md:gap-4">
           {navItems.map((item, index) => (
             <NavItem
