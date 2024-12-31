@@ -22,8 +22,7 @@ const ContentSection = forwardRef(
     const { scrollYProgress } = useScroll({
       target: innerRef,
       container: contentContainerRef,
-      offset:
-        id === 0 ? ["start start", "end start"] : ["start 10%", "end 10%"],
+      offset: ["start 10%", "end 10%"],
       layoutEffect: false,
     });
     console.log("ContentSection render");

@@ -13,7 +13,6 @@ const NavItem = forwardRef(
     };
     console.log("navItem render");
 
-    // const effectiveProgress = Math.max(progress, 0.1);
 
     return (
       <button
