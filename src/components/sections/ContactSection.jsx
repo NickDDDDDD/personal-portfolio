@@ -1,11 +1,11 @@
 import AnimatedLettersContainer from "../typography/AnimatedLettersContainer.jsx";
 
-const Contact = () => {
+const ContactSection = () => {
   return (
-    <AnimatedLettersContainer>
+    <AnimatedLettersContainer className="h-[60vh] md:h-[95vh]">
       <div>Contact</div>
     </AnimatedLettersContainer>
   );
 };
 
-export default Contact;
+export default ContactSection;

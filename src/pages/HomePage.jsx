@@ -6,11 +6,11 @@ import IntroSection from "../components/sections/IntroSection";
 import AboutMeSection from "../components/sections/AboutMeSection";
 import TechSection from "../components/sections/TechSection";
 import WorkSection from "../components/sections/WorkSection";
-import ContactSection from "../components/sections/Contact";
+import ContactSection from "../components/sections/ContactSection";
 import FooterSection from "../components/sections/FooterSection";
 
 const HomePage = () => {
-  const navNames = ["Hello", "Intro", "AboutMe", "Tech", "Work", "Contact"];
+  const navNames = ["Hello", "Intro", "About Me", "Tech", "Work", "Contact"];
   const bgColors = [
     "#ffaf1b",
     "#000000",
@@ -76,14 +76,14 @@ const HomePage = () => {
   const sectionComponents = {
     Hello: <HelloSection scrollYProgressValue={navScrollProgressValue} />,
     Intro: <IntroSection />,
-    AboutMe: <AboutMeSection />,
+    "About Me": <AboutMeSection />,
     Tech: <TechSection />,
     Work: <WorkSection />,
     Contact: <ContactSection />,
   };
 
   return (
-    <div className=" h-screen  grid grid-rows-[1fr_auto]  md:grid-cols-[minmax(200px,_1fr)_7fr]">
+    <div className=" h-screen overflow-hidden  grid grid-rows-[1fr_auto]  md:grid-cols-[minmax(200px,_1fr)_7fr]">
       {/* Content */}
       <div
         ref={contentContainerRef}
@@ -97,8 +97,10 @@ const HomePage = () => {
               }}
               key={item.id}
               id={item.id}
+              name={item.name}
               bgColor={item.bgColor}
               textColor={item.textColor}
+              displayTitle={item.id !== 0}
               onInViewChange={handleInViewChange}
               contentContainerRef={contentContainerRef}
               onScrollProgress={handleScrollProgress}

@@ -1,12 +1,16 @@
 import { useRef, useEffect, forwardRef } from "react";
 import PropTypes from "prop-types";
 import { useInView, motion, useScroll } from "framer-motion";
+import AnimatedLetters from "../typography/AnimatedLetters.jsx";
+import AnimatedLettersContainer from "../typography/AnimatedLettersContainer.jsx";
 
 const ContentSection = forwardRef(
   (
     {
       id,
+      name,
       bgColor,
+      displayTitle = true,
       textColor,
       onInViewChange,
       onScrollProgress,
@@ -54,14 +58,42 @@ const ContentSection = forwardRef(
       return () => unsubscribe();
     }, [scrollYProgress, id, onScrollProgress, isInView]);
 
+    const formattedId = id.toString().padStart(2, "0");
+
     return (
       <motion.section
         ref={innerRef}
         id={`section-${id}`}
-        style={{ backgroundColor: bgColor, color: textColor }}
-        className=" rounded-3xl overflow-hidden"
+        className="flex flex-col gap-5 rounded-3xl overflow-hidden"
       >
-        {children}
+        {displayTitle && (
+          <AnimatedLettersContainer
+            style={{ backgroundColor: bgColor, color: textColor }}
+            className="rounded-3xl h-[50vh]"
+          >
+            <div className="rounded-3xl h-full flex flex-col items-center justify-around gap-5 ">
+              <AnimatedLetters
+                inputString={formattedId}
+                fontVariant="h3"
+                ease="backInOut"
+                shootFromDirection="right"
+              />
+              <AnimatedLetters
+                inputString={name}
+                fontVariant="h1"
+                ease="backInOut"
+                shootFromDirection="right"
+                className="font-bold"
+              />
+            </div>
+          </AnimatedLettersContainer>
+        )}
+        <div
+          style={{ backgroundColor: bgColor, color: textColor }}
+          className="rounded-3xl"
+        >
+          {children}
+        </div>
       </motion.section>
     );
   }
@@ -70,9 +102,11 @@ const ContentSection = forwardRef(
 ContentSection.displayName = "ContentSection";
 ContentSection.propTypes = {
   id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
   bgColor: PropTypes.string.isRequired,
   textColor: PropTypes.string.isRequired,
   onInViewChange: PropTypes.func.isRequired,
+  displayTitle: PropTypes.bool.isRequired,
   onScrollProgress: PropTypes.func,
   contentContainerRef: PropTypes.object,
 

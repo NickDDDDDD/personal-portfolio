@@ -17,17 +17,25 @@ const {
 const HelloSection = ({ scrollYProgressValue }) => {
   const scrollYProgress = motionValue(scrollYProgressValue);
 
-  const backgroundTransform = useTransform(scrollYProgress, [0, 1], [0, 280]);
-  const mountainsTransform = useTransform(scrollYProgress, [0, 1], [0, 240]);
-  const jungle1Transform = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const jungle2Transform = useTransform(scrollYProgress, [0, 1], [0, 160]);
-  const jungle3Transform = useTransform(scrollYProgress, [0, 1], [0, 120]);
-  const jungle4Transform = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const jungle5Transform = useTransform(scrollYProgress, [0, 1], [0, 40]);
+  const backgroundTransform = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["0%", "60%"]
+  );
+  const mountainsTransform = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["0%", "50%"]
+  );
+  const jungle1Transform = useTransform(scrollYProgress, [0, 1], ["3%", "40%"]);
+  const jungle2Transform = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const jungle3Transform = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const jungle4Transform = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
+  const jungle5Transform = useTransform(scrollYProgress, [0, 1], ["0%", "0%"]);
   const manOnMountainTransform = useTransform(
     scrollYProgress,
     [0, 1],
-    [80, 80]
+    ["10%", "10%"]
   );
   const overlayTransform = useTransform(scrollYProgress, [0, 1], [0, 1]);
 

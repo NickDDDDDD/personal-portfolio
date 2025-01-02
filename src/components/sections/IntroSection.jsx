@@ -4,7 +4,7 @@ import MyAvatar from "../MyAvatar";
 
 const IntroSection = () => {
   return (
-    <AnimatedLettersContainer>
+    <AnimatedLettersContainer className="h-[60vh] md:h-[95vh]">
       <div className="flex flex-col items-center justify-center gap-5 h-full">
         <AnimatedLetters
           inputString="Hello, my name is"

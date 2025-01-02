@@ -1,12 +1,11 @@
 import PropTypes from "prop-types";
 
-const AnimatedLettersContainer = ({ children, className = "" }) => (
+const AnimatedLettersContainer = ({ children, className = "", style = {} }) => (
   <div
-    className={`relative overflow-hidden h-[60vh] md:h-[95vh]  w-full ${className}`}
+    className={`relative overflow-hidden min-h-[50vh]  w-full ${className}`}
+    style={style}
   >
-    <div className="flex flex-col justify-center items-center absolute inset-0 gap-[10em]">
-      {children}
-    </div>
+    <div className="absolute inset-0 ">{children}</div>
   </div>
 );
 
@@ -14,6 +13,7 @@ AnimatedLettersContainer.propTypes = {
   children: PropTypes.node,
   backgroundColor: PropTypes.string,
   className: PropTypes.string,
+  style: PropTypes.object,
 };
 
 export default AnimatedLettersContainer;
