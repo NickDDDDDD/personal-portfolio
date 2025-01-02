@@ -1,6 +1,10 @@
 import { TechSectionContent } from "/src/utils/content";
 import AnimatedLetters from "../typography/AnimatedLetters.jsx";
 import AnimatedLettersContainer from "../typography/AnimatedLettersContainer.jsx";
+import Tree from "/src/components/tree/Tree";
+import Node from "/src/components/tree/Node";
+import NodeContent from "../tree/NodeContent.jsx";
+import NodeChildren from "../tree/NodeChildren.jsx";
 
 const {
   ReactIcon,
@@ -19,72 +23,103 @@ const {
 
 const TechSection = () => {
   return (
-    <AnimatedLettersContainer className="h-[60vh] md:h-[95vh] rounded-3xl border bg-[#f4e9e1] border-[#2835f8]">
-      <section className="flex flex-col items-center justify-center gap-20 p-40">
-        <div className="w-full flex flex-col items-center justify-center gap-10">
-          <AnimatedLetters
-            inputString="My current"
-            fontVariant="h3"
-            xEnd="0vw"
-            easing="easeInOut"
-            shootFromDirection="right"
-            className="text-gray-800"
-          />
-          <AnimatedLetters
-            inputString="tech skill tree"
-            fontVariant="h2"
-            xEnd="0vw"
-            easing="easeInOut"
-            shootFromDirection="right"
-            className="text-[#2835f8] font-bold"
-          />
-        </div>
+    <AnimatedLettersContainer className="h-[60vh] md:h-[200vh] rounded-3xl border bg-[#f4e9e1] border-[#2835f8]">
+      <section className="flex flex-col h-full items-center justify-center gap-10 p-40">
+        <AnimatedLetters
+          inputString="My current"
+          fontVariant="h3"
+          xEnd="0vw"
+          easing="easeInOut"
+          shootFromDirection="right"
+          className="text-gray-800"
+        />
+        <AnimatedLetters
+          inputString="tech skill tree"
+          fontVariant="h2"
+          xEnd="0vw"
+          easing="easeInOut"
+          shootFromDirection="right"
+          className="text-[#2835f8] font-bold"
+        />
+        <Tree>
+          <Node id="htmlcssjs">
+            <NodeContent>
+              <div className="grid grid-cols-3">
+                <a
+                  href="https://developer.mozilla.org/docs/Web/HTML"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <HtmlIcon className="w-full h-full" fill="white" />
+                </a>
+                <a
+                  href="https://developer.mozilla.org/docs/Web/CSS"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <CssIcon className="w-full h-full" fill="white" />
+                </a>
+                <a
+                  href="https://developer.mozilla.org/docs/Web/JavaScript"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <JsIcon className="w-full h-full" />
+                </a>
+              </div>
+            </NodeContent>
+            <NodeChildren>
+              <Node id="react">
+                <NodeContent>
+                  <div className="grid grid-cols-3">
+                    <a
+                      href="https://react.dev/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <ReactIcon className="w-full h-full" />
+                    </a>
+                  </div>
+                </NodeContent>
+                <NodeChildren>
+                  <Node id="tailwind">
+                    <NodeContent>
+                      <div className="grid grid-cols-3">
+                        <a
+                          href="https://tailwindcss.com/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <TailwindIcon className="w-full h-full" />
+                        </a>
+                      </div>
+                    </NodeContent>
+                  </Node>
+                  <Node id="material-ui">
+                    <NodeContent>
+                      <div className="grid grid-cols-3">
+                        <a
+                          href="https://mui.com/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <MaterialUiIcon className="w-full h-full" />
+                        </a>
+                      </div>
+                    </NodeContent>
+                  </Node>
+                </NodeChildren>
+              </Node>
+            </NodeChildren>
+          </Node>
+        </Tree>
         {/* Tech Arsenal Grid */}
-        <div className="grid w-full h-auto grid-cols-2 gap-4">
-          {/* Front-end */}
+        {/* <div className="grid w-full h-auto grid-cols-2 gap-4">
           <div className="grid w-full grid-cols-3  gap-4">
-            <a
-              href="https://developer.mozilla.org/docs/Web/HTML"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <HtmlIcon className="w-full h-full" fill="white" />
-            </a>
-            <a
-              href="https://developer.mozilla.org/docs/Web/CSS"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <CssIcon className="w-full h-full" fill="white" />
-            </a>
-            <a
-              href="https://developer.mozilla.org/docs/Web/JavaScript"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <JsIcon className="w-full h-full" />
-            </a>
-            <a
-              href="https://react.dev/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <ReactIcon className="w-full h-full" />
-            </a>
-            <a
-              href="https://tailwindcss.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <TailwindIcon className="w-full h-full" />
-            </a>
-            <a
-              href="https://mui.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <MaterialUiIcon className="w-full h-full" />
-            </a>
+            
+           
+           
+            
 
             <a
               href="https://vitejs.dev/"
@@ -109,7 +144,6 @@ const TechSection = () => {
             </a>
           </div>
 
-          {/* Back-end */}
           <div className="grid w-full grid-cols-3  gap-4">
             <a
               href="https://www.java.com/"
@@ -133,7 +167,7 @@ const TechSection = () => {
               <PostgresqlIcon className="w-full h-full" />
             </a>
           </div>
-        </div>
+        </div> */}
       </section>
     </AnimatedLettersContainer>
   );

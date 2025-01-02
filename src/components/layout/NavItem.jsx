@@ -11,8 +11,7 @@ const NavItem = forwardRef(
     const handleClick = () => {
       onExpand(id);
     };
-    console.log("navItem render");
-
+    // console.log("navItem render");
 
     return (
       <button

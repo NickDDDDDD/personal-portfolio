@@ -11,7 +11,7 @@ const AboutMeSection = () => {
           fontVariant="h3"
           xEnd="0vw"
           easing="easeInOut"
-          shootFromDirection="top"
+          shootFromDirection="right"
           className="text-gray-800"
         />
 
@@ -20,7 +20,7 @@ const AboutMeSection = () => {
           fontVariant="h2"
           xEnd="0vw"
           easing="easeInOut"
-          shootFromDirection="top"
+          shootFromDirection="right"
           className="text-[#5900cc] font-bold"
         />
 

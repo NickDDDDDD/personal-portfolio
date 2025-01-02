@@ -10,13 +10,13 @@ const IntroSection = () => {
           inputString="Hello, my name is"
           fontVariant="h2"
           ease="backInOut"
-          shootFromDirection="top"
+          shootFromDirection="right"
         />
         <AnimatedLetters
           inputString="Nick"
           fontVariant="h1"
           ease="backInOut"
-          shootFromDirection="top"
+          shootFromDirection="right"
           className="text-[#ffaf1b] font-bold"
         />
         <MyAvatar />
