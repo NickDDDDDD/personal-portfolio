@@ -25,7 +25,7 @@ const TechSection = () => {
   return (
     <AnimatedLettersContainer className="h-[60vh] md:h-[200vh] rounded-3xl border bg-[#f4e9e1] border-[#2835f8]">
       <section className="flex flex-col h-full items-center justify-center gap-10 p-40">
-        <AnimatedLetters
+        {/* <AnimatedLetters
           inputString="My current"
           fontVariant="h3"
           xEnd="0vw"
@@ -112,7 +112,7 @@ const TechSection = () => {
               </Node>
             </NodeChildren>
           </Node>
-        </Tree>
+        </Tree> */}
         {/* Tech Arsenal Grid */}
         {/* <div className="grid w-full h-auto grid-cols-2 gap-4">
           <div className="grid w-full grid-cols-3  gap-4">
