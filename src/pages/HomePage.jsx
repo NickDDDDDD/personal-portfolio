@@ -83,11 +83,11 @@ const HomePage = () => {
   };
 
   return (
-    <div className=" h-screen overflow-hidden  grid grid-rows-[1fr_auto]  md:grid-cols-[minmax(200px,_1fr)_7fr]">
+    <div className=" h-dvh overflow-hidden  grid grid-rows-[1fr_auto]  md:grid-cols-[minmax(200px,_1fr)_7fr]">
       {/* Content */}
       <div
         ref={contentContainerRef}
-        className="relative overflow-y-auto md:order-1  md:h-screen  bg-[#f4e9e1]"
+        className="relative overflow-y-auto md:order-1  md:h-dvh  bg-[#f4e9e1]"
       >
         <div className=" flex flex-col gap-5 p-2 md:p-7">
           {navItems.map((item, index) => (
@@ -113,8 +113,8 @@ const HomePage = () => {
       </div>
 
       {/* Navigation */}
-      <div className="w-screen scrollbar-hide  md:w-auto md:order-0 md:h-screen md:overflow-y-auto  bg-[#f4e9e1] p-2 md:p-7">
-        <nav className=" overflow-x-auto flex gap-1 flex-nowrap  md:flex-col md:gap-4">
+      <div className="w-screen scrollbar-hide  md:w-auto md:order-0 md:h-dvh md:overflow-y-auto  bg-[#f4e9e1] p-2 md:p-7">
+        <nav className="scrollbar-hide overflow-x-auto flex gap-1 flex-nowrap  md:flex-col md:gap-4">
           {navItems.map((item, index) => (
             <NavItem
               ref={(el) => {
