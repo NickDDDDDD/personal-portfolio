@@ -69,7 +69,7 @@ const ContentSection = forwardRef(
         {displayTitle && (
           <AnimatedLettersContainer
             style={{ backgroundColor: bgColor, color: textColor }}
-            className="rounded-3xl h-[50vh]"
+            className="rounded-3xl h-[30dvh] md:h-[50vh]"
           >
             <div className="rounded-3xl h-full flex flex-col items-center justify-around gap-5 ">
               <AnimatedLetters

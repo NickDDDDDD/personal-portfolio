@@ -12,6 +12,10 @@ import jungle5 from "../assets/images/firewatch-hero/jungle5.png";
 import manOnMountain from "../assets/images/firewatch-hero/man_on_mountain.png";
 
 // tech stack
+//background images
+
+import boxImage from "../assets/images/background/box.png";
+
 //front-end
 import { ReactComponent as ReactIcon } from "../assets/images/tech-icons/react.svg";
 import { ReactComponent as HtmlIcon } from "../assets/images/tech-icons/html5.svg";
@@ -41,6 +45,7 @@ export const TechSectionContent = {
   JavaIcon,
   MySqlIcon,
   PostgresqlIcon,
+  boxImage,
 };
 
 export const HeroSectionContentFirewatch = {

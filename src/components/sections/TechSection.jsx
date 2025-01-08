@@ -1,10 +1,11 @@
 import { TechSectionContent } from "/src/utils/content";
+import { useRef } from "react";
 import AnimatedLetters from "../typography/AnimatedLetters.jsx";
 import AnimatedLettersContainer from "../typography/AnimatedLettersContainer.jsx";
-import Tree from "/src/components/tree/Tree";
-import Node from "/src/components/tree/Node";
-import NodeContent from "../tree/NodeContent.jsx";
-import NodeChildren from "../tree/NodeChildren.jsx";
+import TiltCard from "../TiltCard";
+import DragCard from "../DragCard";
+import { nanoid } from "nanoid";
+import { useState, useEffect, useCallback } from "react";
 
 const {
   ReactIcon,
@@ -13,20 +14,69 @@ const {
   JsIcon,
   TailwindIcon,
   MaterialUiIcon,
-  ViteIcon,
-  WebpackIcon,
   PlaywrightIcon,
-  JavaIcon,
-  MySqlIcon,
-  PostgresqlIcon,
 } = TechSectionContent;
 
 const TechSection = () => {
+  const frontEndContainerRef = useRef(null);
+  const [frontEndIcons, setFrontEndIcons] = useState([]);
+
+  const generateRandomPosition = (existingPositions, minDistance = 20) => {
+    let position;
+    let isValid = false;
+
+    while (!isValid) {
+      const top = Math.random() * (80 - 10) + 5;
+      const left = Math.random() * (80 - 10) + 5;
+
+      position = { top, left };
+
+      isValid = existingPositions.every(
+        (pos) =>
+          Math.sqrt((pos.top - top) ** 2 + (pos.left - left) ** 2) > minDistance
+      );
+    }
+
+    return position;
+  };
+
+  const generateFrontEndIcons = useCallback(() => {
+    const icons = [
+      HtmlIcon,
+      CssIcon,
+      JsIcon,
+      ReactIcon,
+      MaterialUiIcon,
+      TailwindIcon,
+      PlaywrightIcon,
+    ];
+
+    const positions = [];
+    const frontEndIcons = icons.map((Icon) => {
+      const { top, left } = generateRandomPosition(positions);
+      positions.push({ top, left });
+
+      return {
+        Icon,
+        id: nanoid(),
+        rotate: Math.random() * 60 - 30,
+        top: `${top}%`,
+        left: `${left}%`,
+      };
+    });
+
+    return frontEndIcons;
+  }, []);
+
+  useEffect(() => {
+    setFrontEndIcons(generateFrontEndIcons());
+  }, [generateFrontEndIcons]);
+
   return (
-    <AnimatedLettersContainer className="h-[60vh] md:h-[200vh] rounded-3xl border bg-[#f4e9e1] border-[#2835f8]">
+    <AnimatedLettersContainer className="h-[60vh] md:h-[100vh] rounded-3xl border bg-[#f4e9e1] border-[#2835f8]">
       <section className="flex flex-col h-full items-center justify-center gap-10 p-40">
-        {/* <AnimatedLetters
-          inputString="My current"
+        <AnimatedLetters
+          inputString="What's in my"
           fontVariant="h3"
           xEnd="0vw"
           easing="easeInOut"
@@ -34,140 +84,39 @@ const TechSection = () => {
           className="text-gray-800"
         />
         <AnimatedLetters
-          inputString="tech skill tree"
+          inputString="toolbox"
           fontVariant="h2"
           xEnd="0vw"
           easing="easeInOut"
           shootFromDirection="right"
           className="text-[#2835f8] font-bold"
         />
-        <Tree>
-          <Node id="htmlcssjs">
-            <NodeContent>
-              <div className="grid grid-cols-3">
-                <a
-                  href="https://developer.mozilla.org/docs/Web/HTML"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <HtmlIcon className="w-full h-full" fill="white" />
-                </a>
-                <a
-                  href="https://developer.mozilla.org/docs/Web/CSS"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <CssIcon className="w-full h-full" fill="white" />
-                </a>
-                <a
-                  href="https://developer.mozilla.org/docs/Web/JavaScript"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <JsIcon className="w-full h-full" />
-                </a>
-              </div>
-            </NodeContent>
-            <NodeChildren>
-              <Node id="react">
-                <NodeContent>
-                  <div className="grid grid-cols-3">
-                    <a
-                      href="https://react.dev/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <ReactIcon className="w-full h-full" />
-                    </a>
-                  </div>
-                </NodeContent>
-                <NodeChildren>
-                  <Node id="tailwind">
-                    <NodeContent>
-                      <div className="grid grid-cols-3">
-                        <a
-                          href="https://tailwindcss.com/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <TailwindIcon className="w-full h-full" />
-                        </a>
-                      </div>
-                    </NodeContent>
-                  </Node>
-                  <Node id="material-ui">
-                    <NodeContent>
-                      <div className="grid grid-cols-3">
-                        <a
-                          href="https://mui.com/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <MaterialUiIcon className="w-full h-full" />
-                        </a>
-                      </div>
-                    </NodeContent>
-                  </Node>
-                </NodeChildren>
-              </Node>
-            </NodeChildren>
-          </Node>
-        </Tree> */}
-        {/* Tech Arsenal Grid */}
-        {/* <div className="grid w-full h-auto grid-cols-2 gap-4">
-          <div className="grid w-full grid-cols-3  gap-4">
-            
-           
-           
-            
 
-            <a
-              href="https://vitejs.dev/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <ViteIcon className="w-full h-full" />
-            </a>
-            <a
-              href="https://webpack.js.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <WebpackIcon className="w-full h-full" />
-            </a>
-            <a
-              href="https://playwright.dev/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <PlaywrightIcon className="w-full h-full" />
-            </a>
+        <div className="grid w-full h-full grid-cols-1 ">
+          {/* front-end */}
+          <div
+            className="relative rounded-xl bg-cover bg-center bg-no-repeat"
+            ref={frontEndContainerRef}
+          >
+            <div className="absolute inset-0 z-10 rounded-lg">
+              {frontEndIcons.map((icon) => (
+                <DragCard
+                  key={icon.id}
+                  containerRef={frontEndContainerRef}
+                  rotate={icon.rotate}
+                  top={icon.top}
+                  left={icon.left}
+                >
+                  <TiltCard>
+                    <icon.Icon className="w-24 h-24" />
+                  </TiltCard>
+                </DragCard>
+              ))}
+            </div>
           </div>
-
-          <div className="grid w-full grid-cols-3  gap-4">
-            <a
-              href="https://www.java.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <JavaIcon className="w-full h-full" />
-            </a>
-            <a
-              href="https://www.mysql.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <MySqlIcon className="w-full h-full" />
-            </a>
-            <a
-              href="https://www.postgresql.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <PostgresqlIcon className="w-full h-full" />
-            </a>
-          </div>
-        </div> */}
+          {/* back-end */}
+          {/* <div className="relative border border-[#2835f8]"></div> */}
+        </div>
       </section>
     </AnimatedLettersContainer>
   );
