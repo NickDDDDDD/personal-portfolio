@@ -14,8 +14,6 @@ import manOnMountain from "../assets/images/firewatch-hero/man_on_mountain.png";
 // tech stack
 //background images
 
-import boxImage from "../assets/images/background/box.png";
-
 //front-end
 import { ReactComponent as ReactIcon } from "../assets/images/tech-icons/react.svg";
 import { ReactComponent as HtmlIcon } from "../assets/images/tech-icons/html5.svg";
@@ -31,6 +29,8 @@ import { ReactComponent as PlaywrightIcon } from "../assets/images/tech-icons/pl
 import { ReactComponent as JavaIcon } from "../assets/images/tech-icons/java.svg";
 import { ReactComponent as MySqlIcon } from "../assets/images/tech-icons/mysql.svg";
 import { ReactComponent as PostgresqlIcon } from "../assets/images/tech-icons/postgresql.svg";
+import { ReactComponent as Burpsuite } from "../assets/images/tech-icons/burpsuite.svg";
+import { ReactComponent as Postman } from "../assets/images/tech-icons/postman.svg";
 
 export const TechSectionContent = {
   ReactIcon,
@@ -39,13 +39,14 @@ export const TechSectionContent = {
   JsIcon,
   TailwindIcon,
   MaterialUiIcon,
+  PlaywrightIcon,
   ViteIcon,
   WebpackIcon,
-  PlaywrightIcon,
   JavaIcon,
   MySqlIcon,
   PostgresqlIcon,
-  boxImage,
+  Burpsuite,
+  Postman,
 };
 
 export const HeroSectionContentFirewatch = {

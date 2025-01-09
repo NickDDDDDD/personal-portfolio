@@ -51,7 +51,7 @@ DragCard.propTypes = {
   containerRef: PropTypes.object.isRequired,
   top: PropTypes.string.isRequired,
   left: PropTypes.string.isRequired,
-  rotate: PropTypes.string.isRequired,
+  rotate: PropTypes.number.isRequired,
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
 };
