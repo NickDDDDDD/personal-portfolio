@@ -40,17 +40,19 @@ const TechSection = () => {
   const [icons, setIcons] = useState([]);
 
   const calculateIconProperties = useCallback(() => {
-    const baseSize = Math.min(width, height) / 8;
+    const baseSize = width / 20;
     const minDistance = baseSize * 1.5;
     return { baseSize, minDistance };
-  }, [width, height]);
+  }, [width]);
 
   const generateRandomPosition = useCallback(
     (existingPositions, baseSize, minDistance) => {
       let position;
       let isValid = false;
+      const maxAttempts = 1000;
+      let attempts = 0;
 
-      while (!isValid) {
+      while (!isValid && attempts < maxAttempts) {
         const top = Math.random() * (height - baseSize);
         const left = Math.random() * (width - baseSize);
 
@@ -61,6 +63,16 @@ const TechSection = () => {
             Math.sqrt((pos.top - top) ** 2 + (pos.left - left) ** 2) >
             minDistance
         );
+
+        attempts++;
+      }
+
+      if (!isValid) {
+        console.warn("Unable to find a valid position after maxAttempts.");
+        position = {
+          top: Math.random() * (height - baseSize),
+          left: Math.random() * (width - baseSize),
+        };
       }
 
       return position;
@@ -114,9 +126,13 @@ const TechSection = () => {
     return frontEndIcons;
   }, [calculateIconProperties, generateRandomPosition, width, height]);
 
-  useEffect(() => {
+  const shuffle = useCallback(() => {
     setIcons(generateIcons());
   }, [generateIcons]);
+
+  useEffect(() => {
+    shuffle();
+  }, [shuffle]);
 
   return (
     <AnimatedLettersContainer className="h-[60vh] md:h-[95vh] rounded-3xl border bg-[#f4e9e1] border-[#2835f8]">
@@ -138,12 +154,20 @@ const TechSection = () => {
           className="text-[#2835f8] font-bold"
         />
 
-        <div className="w-full h-full">
+        <div className="w-full h-full flex flex-col items-center justify-center ">
+          <button onClick={shuffle} className="mb-10">
+            shuffle
+          </button>
+
           <div
-            className="relative w-full h-full rounded-xl bg-cover bg-center bg-no-repeat"
+            className="relative w-[80%] h-[80%] rounded-xl  "
+            style={{
+              outline: "1px solid red",
+              outlineOffset: "2rem",
+            }}
             ref={setRefs}
           >
-            <div className="absolute inset-0 z-10 rounded-lg">
+            <div className="absolute inset-0 z-10 rounded-lg  ">
               {icons.map((icon) => (
                 <DragCard
                   key={icon.id}
