@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const AnimatedLettersContainer = ({ children, className = "", style = {} }) => (
   <div
-    className={`relative overflow-hidden min-h-[50vh]  w-full ${className}`}
+    className={`relative overflow-hidden min-h-[30dvh]   w-full ${className}`}
     style={style}
   >
     <div className="absolute inset-0 ">{children}</div>

@@ -29,7 +29,6 @@ const ContentSection = forwardRef(
       offset: ["start 10%", "end 10%"],
       layoutEffect: false,
     });
-    // console.log("ContentSection render");
 
     useEffect(() => {
       if (isInView) {

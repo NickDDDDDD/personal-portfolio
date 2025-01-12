@@ -8,6 +8,7 @@ import TechSection from "../components/sections/TechSection";
 import WorkSection from "../components/sections/WorkSection";
 import ContactSection from "../components/sections/ContactSection";
 import FooterSection from "../components/sections/FooterSection";
+import { useMotionValue } from "framer-motion";
 
 const HomePage = () => {
   const navNames = ["Hello", "Intro", "About Me", "Tech", "Work", "Contact"];
@@ -36,19 +37,19 @@ const HomePage = () => {
     textColor: textColors[index],
   }));
 
-  const [expandedId, setExpandedId] = useState(null);
+  const [expandedId, setExpandedId] = useState(0);
   const navRefs = useRef([]);
   const contentRefs = useRef([]);
   const contentContainerRef = useRef(null);
-  const [navScrollProgressValue, setNavScrollProgressValue] = useState(0);
+  const navScrollProgressValue = useMotionValue(0);
 
   const handleScrollProgress = useCallback(
     (id, scrollYProgressValue) => {
       if (id === expandedId) {
-        setNavScrollProgressValue(scrollYProgressValue);
+        navScrollProgressValue.set(scrollYProgressValue);
       }
     },
-    [expandedId]
+    [expandedId, navScrollProgressValue]
   );
 
   const handleInViewChange = useCallback((id) => {
@@ -73,6 +74,8 @@ const HomePage = () => {
     }
   };
 
+  console.log("HomePage render");
+
   const sectionComponents = {
     Hello: <HelloSection scrollYProgressValue={navScrollProgressValue} />,
     Intro: <IntroSection />,
@@ -87,7 +90,7 @@ const HomePage = () => {
       {/* Content */}
       <div
         ref={contentContainerRef}
-        className="relative overflow-y-auto md:order-1  md:h-dvh  bg-[#f4e9e1]"
+        className="relative overflow-y-auto md:order-1  md:h-dvh  bg-stone-100"
       >
         <div className=" flex flex-col gap-5 p-2 md:p-7">
           {navItems.map((item, index) => (
@@ -113,7 +116,7 @@ const HomePage = () => {
       </div>
 
       {/* Navigation */}
-      <div className="w-screen scrollbar-hide  md:w-auto md:order-0 md:h-dvh md:overflow-y-auto  bg-[#f4e9e1] p-2 md:p-7">
+      <div className="w-screen scrollbar-hide  md:w-auto md:order-0 md:h-dvh md:overflow-y-auto  bg-stone-100 p-2 md:p-7">
         <nav className="scrollbar-hide overflow-x-auto flex gap-1 flex-nowrap  md:flex-col md:gap-4">
           {navItems.map((item, index) => (
             <NavItem
@@ -126,7 +129,7 @@ const HomePage = () => {
               bgColor={item.bgColor}
               textColor={item.textColor}
               isExpanded={expandedId === item.id}
-              progress={expandedId === item.id ? navScrollProgressValue : 0}
+              progressValue={navScrollProgressValue}
               onExpand={handleExpand}
             />
           ))}

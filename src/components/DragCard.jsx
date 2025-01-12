@@ -27,16 +27,17 @@ const DragCard = ({ containerRef, top, left, rotate, className, children }) => {
   return (
     <motion.div
       onMouseDown={updateZIndex}
-      style={{
+      animate={{
         top,
         left,
         rotate,
         zIndex,
       }}
-      className={twMerge("drag-elements absolute  p-1 ", className)}
+      transition={{ duration: 0.6 }}
+      style={{ top, left, rotate, zIndex, willChange: "transform" }}
+      className={twMerge("drag-elements absolute", className)}
       drag
       dragConstraints={containerRef}
-      // Uncomment below and remove dragElastic to remove movement after release
       //   dragMomentum={false}
       dragElastic={0.65}
     >

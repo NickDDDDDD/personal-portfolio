@@ -4,9 +4,11 @@ import AnimatedLetters from "../typography/AnimatedLetters.jsx";
 import AnimatedLettersContainer from "../typography/AnimatedLettersContainer.jsx";
 import TiltCard from "../TiltCard";
 import DragCard from "../DragCard";
+import ShakeOnEnterDiv from "./ShakeOnEnterDiv.jsx";
 import { nanoid } from "nanoid";
 import { useState, useEffect, useCallback } from "react";
 import { useMeasure } from "react-use";
+import { motion } from "framer-motion";
 
 const {
   ReactIcon,
@@ -28,6 +30,7 @@ const {
 const TechSection = () => {
   const containerRef = useRef(null);
   const [measureRef, { width, height }] = useMeasure();
+  const [iconObjs, setIconObjs] = useState([]);
 
   const setRefs = useCallback(
     (node) => {
@@ -37,10 +40,8 @@ const TechSection = () => {
     [measureRef]
   );
 
-  const [icons, setIcons] = useState([]);
-
   const calculateIconProperties = useCallback(() => {
-    const baseSize = width / 20;
+    const baseSize = width / 15;
     const minDistance = baseSize * 1.5;
     return { baseSize, minDistance };
   }, [width]);
@@ -101,6 +102,7 @@ const TechSection = () => {
     ];
 
     const { baseSize, minDistance } = calculateIconProperties();
+    console.log(width, height, baseSize, minDistance);
 
     const positions = [];
     const frontEndIcons = icons.map((Icon) => {
@@ -110,8 +112,6 @@ const TechSection = () => {
         minDistance
       );
       positions.push({ top, left });
-
-      console.log(baseSize);
 
       return {
         Icon,
@@ -127,19 +127,74 @@ const TechSection = () => {
   }, [calculateIconProperties, generateRandomPosition, width, height]);
 
   const shuffle = useCallback(() => {
-    setIcons(generateIcons());
-  }, [generateIcons]);
+    console.log("Shuffling");
+    setIconObjs((prevIcons) => {
+      const { baseSize, minDistance } = calculateIconProperties();
+
+      const positions = [];
+      const updatedIcons = prevIcons.map((icon) => {
+        let bestPosition = null;
+        let smallestDistance = Infinity;
+
+        for (let i = 0; i < 100; i++) {
+          const { top, left } = generateRandomPosition(
+            positions,
+            baseSize,
+            minDistance
+          );
+
+          const distance = Math.sqrt(
+            Math.pow(parseFloat(icon.top) - top, 2) +
+              Math.pow(parseFloat(icon.left) - left, 2)
+          );
+
+          if (distance > 0 && distance < smallestDistance) {
+            bestPosition = { top, left };
+            smallestDistance = distance;
+          }
+        }
+
+        if (bestPosition) {
+          positions.push(bestPosition);
+          return {
+            ...icon,
+            top: `${bestPosition.top}px`,
+            left: `${bestPosition.left}px`,
+            rotate: Math.random() * 60 - 30,
+          };
+        }
+
+        const fallbackPosition = generateRandomPosition(
+          positions,
+          baseSize,
+          minDistance
+        );
+        positions.push(fallbackPosition);
+        return {
+          ...icon,
+          top: `${fallbackPosition.top}px`,
+          left: `${fallbackPosition.left}px`,
+          rotate: Math.random() * 60 - 30,
+        };
+      });
+
+      return updatedIcons;
+    });
+  }, [calculateIconProperties, generateRandomPosition]);
 
   useEffect(() => {
-    shuffle();
-  }, [shuffle]);
+    setIconObjs(generateIcons());
+    console.log("TechSection useEffect");
+  }, [generateIcons]);
+
+  console.log("TechSection render");
 
   return (
-    <AnimatedLettersContainer className="h-[60vh] md:h-[95vh] rounded-3xl border bg-[#f4e9e1] border-[#2835f8]">
+    <AnimatedLettersContainer className="h-[60vh] md:h-[95vh] rounded-3xl border bg-stone-100 border-[#2835f8]">
       <section className="flex flex-col h-full items-center justify-center gap-5 p-10">
         <AnimatedLetters
           inputString="What's in my"
-          fontVariant="h3"
+          fontVariant="h2"
           xEnd="0vw"
           easing="easeInOut"
           shootFromDirection="right"
@@ -147,44 +202,41 @@ const TechSection = () => {
         />
         <AnimatedLetters
           inputString="toolbox"
-          fontVariant="h2"
+          fontVariant="h1"
           xEnd="0vw"
           easing="easeInOut"
           shootFromDirection="right"
           className="text-[#2835f8] font-bold"
         />
 
-        <div className="w-full h-full flex flex-col items-center justify-center ">
-          <button onClick={shuffle} className="mb-10">
-            shuffle
-          </button>
-
-          <div
-            className="relative w-[80%] h-[80%] rounded-xl  "
-            style={{
-              outline: "1px solid red",
-              outlineOffset: "2rem",
-            }}
-            ref={setRefs}
+        <div className="w-full h-full  ">
+          <ShakeOnEnterDiv
+            className="relative w-full h-full border border-[#2835f8] rounded-xl"
+            shakeBehaviour={shuffle}
           >
-            <div className="absolute inset-0 z-10 rounded-lg  ">
-              {icons.map((icon) => (
-                <DragCard
-                  key={icon.id}
-                  containerRef={containerRef}
-                  rotate={icon.rotate}
-                  top={icon.top}
-                  left={icon.left}
-                >
-                  <TiltCard>
-                    <icon.Icon
-                      style={{ width: icon.size, height: icon.size }}
-                    />
-                  </TiltCard>
-                </DragCard>
-              ))}
-            </div>
-          </div>
+            <motion.div
+              className="absolute inset-0  rounded-xl  "
+              ref={setRefs}
+            >
+              <div className="   ">
+                {iconObjs.map((iconObj) => (
+                  <DragCard
+                    key={iconObj.id}
+                    containerRef={containerRef}
+                    rotate={iconObj.rotate}
+                    top={iconObj.top}
+                    left={iconObj.left}
+                  >
+                    <TiltCard>
+                      <iconObj.Icon
+                        style={{ width: iconObj.size, height: iconObj.size }}
+                      />
+                    </TiltCard>
+                  </DragCard>
+                ))}
+              </div>
+            </motion.div>
+          </ShakeOnEnterDiv>
         </div>
       </section>
     </AnimatedLettersContainer>

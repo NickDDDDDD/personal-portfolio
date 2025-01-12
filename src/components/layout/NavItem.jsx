@@ -1,12 +1,21 @@
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 import PropTypes from "prop-types";
 import ResponsiveTypography from "../typography/ResponsiveTypography";
 import { useMediaQuery } from "react-responsive";
+import { useMotionValueEvent } from "framer-motion";
 
 const NavItem = forwardRef(
-  ({ id, name, bgColor, textColor, isExpanded, onExpand, progress }, ref) => {
+  (
+    { id, name, bgColor, textColor, isExpanded, onExpand, progressValue },
+    ref
+  ) => {
     const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
     const formattedId = id.toString().padStart(2, "0");
+    const [progress, setProgress] = useState(0);
+
+    useMotionValueEvent(progressValue, "change", (latest) => {
+      setProgress(latest);
+    });
 
     const handleClick = () => {
       onExpand(id);
@@ -61,9 +70,9 @@ NavItem.propTypes = {
   name: PropTypes.string.isRequired,
   isExpanded: PropTypes.bool.isRequired,
   onExpand: PropTypes.func.isRequired,
-  progress: PropTypes.number.isRequired,
   textColor: PropTypes.string.isRequired,
   bgColor: PropTypes.string.isRequired,
+  progressValue: PropTypes.object.isRequired,
 };
 NavItem.displayName = "NavItem";
 
