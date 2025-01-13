@@ -6,7 +6,7 @@ import TiltCard from "../TiltCard";
 import DragCard from "../DragCard";
 import ShakeOnEnterDiv from "./ShakeOnEnterDiv.jsx";
 import { nanoid } from "nanoid";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useLayoutEffect, useCallback } from "react";
 import { useMeasure } from "react-use";
 import { motion } from "framer-motion";
 
@@ -32,20 +32,16 @@ const TechSection = () => {
   const [measureRef, { width, height }] = useMeasure();
   const [iconObjs, setIconObjs] = useState([]);
 
+  const baseSize = Math.max(width, height) / 15;
+  const minDistance = baseSize * 1.5;
+
   const setRefs = (node) => {
     containerRef.current = node;
     measureRef(node);
   };
 
-  const calculateIconProperties = useCallback(() => {
-    console.log("Calculating icon properties");
-    const baseSize = Math.max(width, height) / 15;
-    const minDistance = baseSize * 1.5;
-    return { baseSize, minDistance };
-  }, [width, height]);
-
   const generateRandomPosition = useCallback(
-    (existingPositions, baseSize, minDistance) => {
+    (existingPositions) => {
       let position;
       let isValid = false;
       const maxAttempts = 1000;
@@ -76,14 +72,10 @@ const TechSection = () => {
 
       return position;
     },
-    [width, height]
+    [baseSize, height, minDistance, width]
   );
 
   const generateIcons = useCallback(() => {
-    console.log("try generating icons");
-    if (width === 0 || height === 0) return [];
-    console.log("start generating icons");
-
     const icons = [
       HtmlIcon,
       CssIcon,
@@ -101,15 +93,9 @@ const TechSection = () => {
       Postman,
     ];
 
-    const { baseSize, minDistance } = calculateIconProperties();
-
     const positions = [];
-    const frontEndIcons = icons.map((Icon) => {
-      const { top, left } = generateRandomPosition(
-        positions,
-        baseSize,
-        minDistance
-      );
+    const iconObjs = icons.map((Icon) => {
+      const { top, left } = generateRandomPosition(positions);
       positions.push({ top, left });
 
       return {
@@ -122,14 +108,12 @@ const TechSection = () => {
       };
     });
 
-    return frontEndIcons;
-  }, [calculateIconProperties, generateRandomPosition, width, height]);
+    return iconObjs;
+  }, [baseSize, generateRandomPosition]);
 
   const shuffle = useCallback(() => {
     console.log("Shuffling");
     setIconObjs((prevIcons) => {
-      const { baseSize, minDistance } = calculateIconProperties();
-
       const positions = [];
       const updatedIcons = prevIcons.map((icon) => {
         let bestPosition = null;
@@ -179,18 +163,13 @@ const TechSection = () => {
 
       return updatedIcons;
     });
-  }, [calculateIconProperties, generateRandomPosition]);
+  }, [baseSize, minDistance, generateRandomPosition]);
 
-  useEffect(() => {
-    console.log("TechSection useEffect");
-    setIconObjs((prev) => {
-      const newIcons = generateIcons();
-      if (JSON.stringify(prev) === JSON.stringify(newIcons)) {
-        return prev;
-      }
-      return newIcons;
-    });
-  }, [generateIcons]);
+  useLayoutEffect(() => {
+    if (width > 0 && height > 0) {
+      setIconObjs(generateIcons());
+    }
+  }, [generateIcons, width, height]);
 
   console.log("TechSection render");
 
