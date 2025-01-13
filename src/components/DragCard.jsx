@@ -34,11 +34,17 @@ const DragCard = ({ containerRef, top, left, rotate, className, children }) => {
         zIndex,
       }}
       transition={{ duration: 0.6 }}
-      style={{ top, left, rotate, zIndex, willChange: "transform" }}
+      style={{
+        top,
+        left,
+        zIndex,
+        willChange: "transform",
+        transform: ` rotate(${rotate}deg)`,
+      }}
       className={twMerge("drag-elements absolute", className)}
       drag
       dragConstraints={containerRef}
-      //   dragMomentum={false}
+      dragMomentum={false}
       dragElastic={0.65}
     >
       {children}

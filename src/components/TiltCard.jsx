@@ -54,7 +54,7 @@ const TiltCard = ({ children }) => {
         transform,
         display: "inline-block",
       }}
-      className="rounded-xl bg-white shadow-lg"
+      className="rounded-sm p-1 md:rounded-xl md:p-2 bg-white shadow-lg"
     >
       <motion.div
         whileHover={{
@@ -70,7 +70,6 @@ const TiltCard = ({ children }) => {
           transformStyle: "preserve-3d",
           filter: "drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3))",
         }}
-        className="rounded-xl p-2"
       >
         {children}
       </motion.div>

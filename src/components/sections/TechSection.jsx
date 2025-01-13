@@ -32,19 +32,17 @@ const TechSection = () => {
   const [measureRef, { width, height }] = useMeasure();
   const [iconObjs, setIconObjs] = useState([]);
 
-  const setRefs = useCallback(
-    (node) => {
-      containerRef.current = node;
-      measureRef(node);
-    },
-    [measureRef]
-  );
+  const setRefs = (node) => {
+    containerRef.current = node;
+    measureRef(node);
+  };
 
   const calculateIconProperties = useCallback(() => {
-    const baseSize = width / 15;
+    console.log("Calculating icon properties");
+    const baseSize = Math.max(width, height) / 15;
     const minDistance = baseSize * 1.5;
     return { baseSize, minDistance };
-  }, [width]);
+  }, [width, height]);
 
   const generateRandomPosition = useCallback(
     (existingPositions, baseSize, minDistance) => {
@@ -82,7 +80,9 @@ const TechSection = () => {
   );
 
   const generateIcons = useCallback(() => {
+    console.log("try generating icons");
     if (width === 0 || height === 0) return [];
+    console.log("start generating icons");
 
     const icons = [
       HtmlIcon,
@@ -102,7 +102,6 @@ const TechSection = () => {
     ];
 
     const { baseSize, minDistance } = calculateIconProperties();
-    console.log(width, height, baseSize, minDistance);
 
     const positions = [];
     const frontEndIcons = icons.map((Icon) => {
@@ -183,14 +182,20 @@ const TechSection = () => {
   }, [calculateIconProperties, generateRandomPosition]);
 
   useEffect(() => {
-    setIconObjs(generateIcons());
     console.log("TechSection useEffect");
+    setIconObjs((prev) => {
+      const newIcons = generateIcons();
+      if (JSON.stringify(prev) === JSON.stringify(newIcons)) {
+        return prev;
+      }
+      return newIcons;
+    });
   }, [generateIcons]);
 
   console.log("TechSection render");
 
   return (
-    <AnimatedLettersContainer className="h-[60vh] md:h-[95vh] rounded-3xl border bg-stone-100 border-[#2835f8]">
+    <AnimatedLettersContainer className="h-[60dvh] md:h-[95dvh] rounded-3xl border bg-stone-100 border-[#2835f8]">
       <section className="flex flex-col h-full items-center justify-center gap-5 p-10">
         <AnimatedLetters
           inputString="What's in my"
@@ -209,32 +214,29 @@ const TechSection = () => {
           className="text-[#2835f8] font-bold"
         />
 
-        <div className="w-full h-full  ">
+        <div className="w-full h-full flex items-center justify-center">
           <ShakeOnEnterDiv
-            className="relative w-full h-full border border-[#2835f8] rounded-xl"
+            className="relative w-[80%] h-[80%]  rounded-xl"
+            style={{ outline: "1px solid #2835f8", outlineOffset: "3rem" }}
             shakeBehaviour={shuffle}
           >
-            <motion.div
-              className="absolute inset-0  rounded-xl  "
-              ref={setRefs}
-            >
-              <div className="   ">
-                {iconObjs.map((iconObj) => (
-                  <DragCard
-                    key={iconObj.id}
-                    containerRef={containerRef}
-                    rotate={iconObj.rotate}
-                    top={iconObj.top}
-                    left={iconObj.left}
-                  >
-                    <TiltCard>
-                      <iconObj.Icon
-                        style={{ width: iconObj.size, height: iconObj.size }}
-                      />
-                    </TiltCard>
-                  </DragCard>
-                ))}
-              </div>
+            <motion.div className="absolute inset-0   " ref={setRefs}>
+              {iconObjs.map((iconObj) => (
+                <DragCard
+                  key={iconObj.id}
+                  iconId={iconObj.id}
+                  containerRef={containerRef}
+                  rotate={iconObj.rotate}
+                  top={iconObj.top}
+                  left={iconObj.left}
+                >
+                  <TiltCard>
+                    <iconObj.Icon
+                      style={{ width: iconObj.size, height: iconObj.size }}
+                    />
+                  </TiltCard>
+                </DragCard>
+              ))}
             </motion.div>
           </ShakeOnEnterDiv>
         </div>

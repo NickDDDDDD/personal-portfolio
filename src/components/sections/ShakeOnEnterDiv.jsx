@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { twMerge } from "tailwind-merge";
 import { useRef } from "react";
 
-const ShakeOnEnterDiv = ({ children, shakeBehaviour, className }) => {
+const ShakeOnEnterDiv = ({ children, shakeBehaviour, className, style }) => {
   const controls = useAnimation();
   const hasShaken = useRef(false);
 
@@ -37,13 +37,11 @@ const ShakeOnEnterDiv = ({ children, shakeBehaviour, className }) => {
   return (
     <motion.div
       className={twMerge("", className)}
-      style={{ willChange: "transform" }}
+      style={{ willChange: "transform", ...style }}
       onViewportEnter={() => {
-        console.log("shake div : Viewport Enter Triggered");
-
         handleViewportEnter();
       }}
-      onClick={triggerShake}
+      onDoubleClick={triggerShake}
       viewport={{
         amount: 1,
         once: true,
@@ -59,6 +57,7 @@ ShakeOnEnterDiv.propTypes = {
   className: PropTypes.string,
   shakeBehaviour: PropTypes.func,
   clickBehaviour: PropTypes.func,
+  style: PropTypes.object,
 };
 
 export default ShakeOnEnterDiv;

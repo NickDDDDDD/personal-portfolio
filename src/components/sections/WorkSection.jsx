@@ -1,10 +1,6 @@
-import AnimatedLettersContainer from "../typography/AnimatedLettersContainer.jsx";
-
 const WorkSection = () => {
   return (
-    <AnimatedLettersContainer className="h-[60vh] md:h-[95vh]">
-      <div>WorkSection</div>
-    </AnimatedLettersContainer>
+    <section className="rounded-3xl h-[60dvh] md:h-[95dvh] bg-stone-100 border border-[#ff003d]"></section>
   );
 };
 
