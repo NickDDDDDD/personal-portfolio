@@ -2,12 +2,7 @@ import { motion } from "framer-motion";
 import { useRef } from "react";
 import PropTypes from "prop-types";
 
-const ShuffleCard = ({
-  children,
-  handleShuffle,
-  position,
-  totalCardsCount,
-}) => {
+const ShuffleCard = ({ children, handleShuffle, position }) => {
   const mousePosRef = useRef(0);
 
   const onDragStart = (e) => {
@@ -25,7 +20,6 @@ const ShuffleCard = ({
   };
 
   const rotateDeg = 6;
-  const center = Math.floor(totalCardsCount / 2);
   const x = `${position * 33}%`;
   const rotateZ = `${position * rotateDeg}deg`;
 
@@ -37,6 +31,7 @@ const ShuffleCard = ({
     <motion.div
       style={{
         zIndex,
+        willChange: "transform, backdrop-filter",
       }}
       animate={{ rotate: rotateZ, x }}
       drag
@@ -53,7 +48,7 @@ const ShuffleCard = ({
       transition={{
         duration: 0.35,
       }}
-      className={`absolute left-0 top-0 grid w-full aspect-[7/10] select-none place-content-center space-y-6 rounded-2xl border-2 border-slate-700 bg-slate-800/20 p-6 shadow-xl backdrop-blur-md ${
+      className={`absolute inset-0  w-full aspect-[7/10] select-none   rounded-2xl border-2 border-slate-700 bg-slate-800/95  p-6 shadow-xl ${
         draggable ? "cursor-grab active:cursor-grabbing" : ""
       }`}
     >
