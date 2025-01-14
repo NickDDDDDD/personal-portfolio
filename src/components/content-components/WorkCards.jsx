@@ -2,27 +2,55 @@ import { useState } from "react";
 import ShuffleCard from "../reuse-components/cards/ShuffleCard";
 
 const WorkCards = () => {
-  const [order, setOrder] = useState(["front", "middle", "back"]);
+  const totalCardsCount = 5;
+  const [order, setOrder] = useState(
+    Array.from({ length: totalCardsCount }, (_, i) => i)
+  );
 
+  console.log("work card render");
   const handleShuffle = () => {
-    setOrder((prevOrder) => {
-      const last = prevOrder[prevOrder.length - 1];
-      const rest = prevOrder.slice(0, -1);
-      return [last, ...rest];
-    });
+    const orderCopy = [...order];
+    orderCopy.unshift(orderCopy.pop());
+    setOrder(orderCopy);
   };
 
   return (
-    <div className="grid place-content-center h-full w-full">
-      <div className="relative  h-96 w-72 ">
-        <ShuffleCard handleShuffle={handleShuffle} position={order[0]}>
+    <div className="flex items-center justify-center h-full w-full ">
+      <div className="relative w-1/3  md:w-1/5 aspect-[7/10] ">
+        <ShuffleCard
+          handleShuffle={handleShuffle}
+          position={order[0]}
+          totalCardsCount={totalCardsCount}
+        >
           work 1
         </ShuffleCard>
-        <ShuffleCard handleShuffle={handleShuffle} position={order[1]}>
+        <ShuffleCard
+          handleShuffle={handleShuffle}
+          position={order[1]}
+          totalCardsCount={totalCardsCount}
+        >
           work 2
         </ShuffleCard>
-        <ShuffleCard handleShuffle={handleShuffle} position={order[2]}>
+        <ShuffleCard
+          handleShuffle={handleShuffle}
+          position={order[2]}
+          totalCardsCount={totalCardsCount}
+        >
           work 3
+        </ShuffleCard>
+        <ShuffleCard
+          handleShuffle={handleShuffle}
+          position={order[3]}
+          totalCardsCount={totalCardsCount}
+        >
+          work 4
+        </ShuffleCard>
+        <ShuffleCard
+          handleShuffle={handleShuffle}
+          position={order[4]}
+          totalCardsCount={totalCardsCount}
+        >
+          work 5
         </ShuffleCard>
       </div>
     </div>

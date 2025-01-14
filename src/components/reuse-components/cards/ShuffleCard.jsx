@@ -2,7 +2,12 @@ import { motion } from "framer-motion";
 import { useRef } from "react";
 import PropTypes from "prop-types";
 
-const ShuffleCard = ({ children, handleShuffle, position }) => {
+const ShuffleCard = ({
+  children,
+  handleShuffle,
+  position,
+  totalCardsCount,
+}) => {
   const mousePosRef = useRef(0);
 
   const onDragStart = (e) => {
@@ -19,12 +24,14 @@ const ShuffleCard = ({ children, handleShuffle, position }) => {
     mousePosRef.current = 0;
   };
 
-  const x = position === "front" ? "0%" : position === "middle" ? "33%" : "66%";
-  const rotateZ =
-    position === "front" ? "-6deg" : position === "middle" ? "0deg" : "6deg";
-  const zIndex = position === "front" ? "2" : position === "middle" ? "1" : "0";
+  const rotateDeg = 6;
+  const center = Math.floor(totalCardsCount / 2);
+  const x = `${position * 33}%`;
+  const rotateZ = `${position * rotateDeg}deg`;
 
-  const draggable = position === "front";
+  const zIndex = `${5 - position}`;
+
+  const draggable = position === 0;
 
   return (
     <motion.div
@@ -46,7 +53,7 @@ const ShuffleCard = ({ children, handleShuffle, position }) => {
       transition={{
         duration: 0.35,
       }}
-      className={`absolute left-0 top-0 grid h-96 w-72 select-none place-content-center space-y-6 rounded-2xl border-2 border-slate-700 bg-slate-800/20 p-6 shadow-xl backdrop-blur-md ${
+      className={`absolute left-0 top-0 grid w-full aspect-[7/10] select-none place-content-center space-y-6 rounded-2xl border-2 border-slate-700 bg-slate-800/20 p-6 shadow-xl backdrop-blur-md ${
         draggable ? "cursor-grab active:cursor-grabbing" : ""
       }`}
     >
@@ -57,7 +64,8 @@ const ShuffleCard = ({ children, handleShuffle, position }) => {
 ShuffleCard.propTypes = {
   children: PropTypes.node.isRequired,
   handleShuffle: PropTypes.func.isRequired,
-  position: PropTypes.oneOf(["front", "middle", "back"]).isRequired,
+  position: PropTypes.number.isRequired,
+  totalCardsCount: PropTypes.number.isRequired,
 };
 
 export default ShuffleCard;
