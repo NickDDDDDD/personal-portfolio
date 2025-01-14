@@ -1,7 +1,7 @@
-import AnimatedLetters from "../typography/AnimatedLetters.jsx";
-import AnimatedLettersContainer from "../typography/AnimatedLettersContainer.jsx";
-import ResponsiveTypography from "../typography/ResponsiveTypography";
-import Watermark from "../WaterMark.jsx";
+import AnimatedLetters from "../components/reuse-components/typography/AnimatedLetters.jsx";
+import AnimatedLettersContainer from "../components/reuse-components/typography/AnimatedLettersContainer.jsx";
+import ResponsiveTypography from "../components/reuse-components/typography/ResponsiveTypography.jsx";
+import Watermark from "../components/reuse-components/background/WaterMark.jsx";
 
 const AboutMeSection = () => {
   return (

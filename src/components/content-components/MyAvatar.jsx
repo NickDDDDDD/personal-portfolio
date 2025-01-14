@@ -1,4 +1,4 @@
-import photo from "../assets/images/avatar/photo.png";
+import photo from "/src/assets/images/avatar/photo.png";
 
 const MyAvatar = () => {
   return (

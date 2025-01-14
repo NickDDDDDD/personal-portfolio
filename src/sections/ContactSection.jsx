@@ -1,4 +1,4 @@
-import AnimatedLettersContainer from "../typography/AnimatedLettersContainer.jsx";
+import AnimatedLettersContainer from "../components/reuse-components/typography/AnimatedLettersContainer.jsx";
 
 const ContactSection = () => {
   return (

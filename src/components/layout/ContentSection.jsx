@@ -1,8 +1,8 @@
 import { useRef, useEffect, forwardRef } from "react";
 import PropTypes from "prop-types";
 import { useInView, motion, useScroll } from "framer-motion";
-import AnimatedLetters from "../typography/AnimatedLetters.jsx";
-import AnimatedLettersContainer from "../typography/AnimatedLettersContainer.jsx";
+import AnimatedLetters from "/src/components/reuse-components/typography/AnimatedLetters.jsx";
+import AnimatedLettersContainer from "/src/components/reuse-components/typography/AnimatedLettersContainer.jsx";
 
 const ContentSection = forwardRef(
   (

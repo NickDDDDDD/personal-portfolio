@@ -1,6 +1,6 @@
 import { forwardRef, useState } from "react";
 import PropTypes from "prop-types";
-import ResponsiveTypography from "../typography/ResponsiveTypography";
+import ResponsiveTypography from "/src/components/reuse-components/typography/ResponsiveTypography";
 import { useMediaQuery } from "react-responsive";
 import { useMotionValueEvent } from "framer-motion";
 

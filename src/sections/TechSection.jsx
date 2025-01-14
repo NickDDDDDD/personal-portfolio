@@ -1,9 +1,9 @@
 import { TechSectionContent } from "/src/utils/content";
 import { useRef } from "react";
-import AnimatedLetters from "../typography/AnimatedLetters.jsx";
-import AnimatedLettersContainer from "../typography/AnimatedLettersContainer.jsx";
-import TiltCard from "../TiltCard";
-import DragCard from "../DragCard";
+import AnimatedLetters from "../components/reuse-components/typography/AnimatedLetters.jsx";
+import AnimatedLettersContainer from "../components/reuse-components/typography/AnimatedLettersContainer.jsx";
+import TiltCard from "../components/reuse-components/cards/TiltCard.jsx";
+import DragCard from "../components/reuse-components/cards/DragCard.jsx";
 import ShakeOnEnterDiv from "./ShakeOnEnterDiv.jsx";
 import { nanoid } from "nanoid";
 import { useState, useLayoutEffect, useCallback } from "react";

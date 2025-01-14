@@ -1,6 +1,6 @@
-import AnimatedLetters from "../typography/AnimatedLetters.jsx";
-import AnimatedLettersContainer from "../typography/AnimatedLettersContainer.jsx";
-import MyAvatar from "../MyAvatar";
+import AnimatedLetters from "../components/reuse-components/typography/AnimatedLetters.jsx";
+import AnimatedLettersContainer from "../components/reuse-components/typography/AnimatedLettersContainer.jsx";
+import MyAvatar from "../components/content-components/MyAvatar.jsx";
 
 const IntroSection = () => {
   return (

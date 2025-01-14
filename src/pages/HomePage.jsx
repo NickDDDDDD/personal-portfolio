@@ -1,13 +1,13 @@
 import { useState, useCallback, useRef } from "react";
 import NavItem from "/src/components/layout/NavItem";
 import ContentSection from "/src/components/layout/ContentSection";
-import HelloSection from "../components/sections/HelloSection";
-import IntroSection from "../components/sections/IntroSection";
-import AboutMeSection from "../components/sections/AboutMeSection";
-import TechSection from "../components/sections/TechSection";
-import WorkSection from "../components/sections/WorkSection";
-import ContactSection from "../components/sections/ContactSection";
-import FooterSection from "../components/sections/FooterSection";
+import HelloSection from "../sections/HelloSection";
+import IntroSection from "../sections/IntroSection";
+import AboutMeSection from "../sections/AboutMeSection";
+import TechSection from "../sections/TechSection";
+import WorkSection from "../sections/WorkSection";
+import ContactSection from "../sections/ContactSection";
+import FooterSection from "../sections/FooterSection";
 import { useMotionValue } from "framer-motion";
 
 const HomePage = () => {
