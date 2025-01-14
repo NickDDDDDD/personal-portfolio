@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useMemo } from "react";
 import NavItem from "/src/components/layout/NavItem";
 import ContentSection from "/src/components/layout/ContentSection";
 import HelloSection from "../sections/HelloSection";
@@ -62,27 +62,37 @@ const HomePage = () => {
     }
   }, []);
 
-  const handleExpand = (id) => {
-    if (expandedId !== id) {
-      setExpandedId(id);
-      if (contentRefs.current[id]) {
-        contentRefs.current[id]?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
+  const handleExpand = useCallback(
+    (id) => {
+      if (expandedId !== id) {
+        setExpandedId(id);
+        if (contentRefs.current[id]) {
+          contentRefs.current[id]?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
       }
-    }
-  };
+    },
+    [expandedId]
+  );
 
   console.log("HomePage render");
 
+  const staticComponents = useMemo(
+    () => ({
+      Intro: <IntroSection />,
+      "About Me": <AboutMeSection />,
+      Tech: <TechSection />,
+      Work: <WorkSection />,
+      Contact: <ContactSection />,
+    }),
+    []
+  );
+
   const sectionComponents = {
     Hello: <HelloSection scrollYProgressValue={navScrollProgressValue} />,
-    Intro: <IntroSection />,
-    "About Me": <AboutMeSection />,
-    Tech: <TechSection />,
-    Work: <WorkSection />,
-    Contact: <ContactSection />,
+    ...staticComponents,
   };
 
   return (

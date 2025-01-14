@@ -16,12 +16,7 @@ const WorkCards = () => {
 
   return (
     <div className="flex items-center justify-center h-full w-full ">
-      <div
-        className="relative w-1/3 -ml-24 md:-ml-44 md:w-1/5 aspect-[7/10] "
-        style={{
-          willChange: "transform",
-        }}
-      >
+      <div className="relative w-1/3 -ml-24 md:-ml-44 md:w-1/5 aspect-[7/10] ">
         <ShuffleCard
           id="work-1"
           handleShuffle={handleShuffle}

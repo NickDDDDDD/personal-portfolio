@@ -15,6 +15,7 @@ const {
 } = HeroSectionContentFirewatch;
 
 const HelloSection = ({ scrollYProgressValue }) => {
+  console.log("HelloSection render", scrollYProgressValue);
   const backgroundTransform = useTransform(
     scrollYProgressValue,
     [0, 1],

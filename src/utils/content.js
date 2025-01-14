@@ -2,14 +2,14 @@
 import logo from "../assets/images/logo.svg";
 
 // Firewatch Hero Section
-import backgroundImage from "../assets/images/firewatch-hero/background.png";
-import mountains from "../assets/images/firewatch-hero/mountains.png";
-import jungle1 from "../assets/images/firewatch-hero/jungle1.png";
-import jungle2 from "../assets/images/firewatch-hero/jungle2.png";
-import jungle3 from "../assets/images/firewatch-hero/jungle3.png";
-import jungle4 from "../assets/images/firewatch-hero/jungle4.png";
-import jungle5 from "../assets/images/firewatch-hero/jungle5.png";
-import manOnMountain from "../assets/images/firewatch-hero/man_on_mountain.png";
+import backgroundImage from "../assets/images/firewatch-hero/background.webp";
+import mountains from "../assets/images/firewatch-hero/mountains.webp";
+import jungle1 from "../assets/images/firewatch-hero/jungle1.webp";
+import jungle2 from "../assets/images/firewatch-hero/jungle2.webp";
+import jungle3 from "../assets/images/firewatch-hero/jungle3.webp";
+import jungle4 from "../assets/images/firewatch-hero/jungle4.webp";
+import jungle5 from "../assets/images/firewatch-hero/jungle5.webp";
+import manOnMountain from "../assets/images/firewatch-hero/man_on_mountain.webp";
 
 // tech stack
 //background images
