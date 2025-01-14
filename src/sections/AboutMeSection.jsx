@@ -5,7 +5,7 @@ import Watermark from "../components/reuse-components/background/WaterMark.jsx";
 
 const AboutMeSection = () => {
   return (
-    <AnimatedLettersContainer className="relative bg-stone-100 h-[60vh] md:h-[95vh]  rounded-3xl  border border-[#5900cc]">
+    <AnimatedLettersContainer className="relative bg-stone-200 h-[60vh] md:h-[95vh]  rounded-3xl  border border-[#5900cc]">
       <div className="absolute flex flex-col items-center justify-center h-full gap-10 z-10">
         <AnimatedLetters
           inputString="I'm a"
@@ -32,7 +32,7 @@ const AboutMeSection = () => {
           </ResponsiveTypography>
         </div>
       </div>
-      <div className="text-stone-200">
+      <div className="text-stone-300">
         <Watermark text="Get motivated" />
         <Watermark text="Live inspired" reverse />
         <Watermark text="Find your passion" />

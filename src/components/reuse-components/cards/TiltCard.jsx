@@ -54,7 +54,7 @@ const TiltCard = ({ children }) => {
         transform,
         display: "inline-block",
       }}
-      className="rounded-sm p-1 md:rounded-xl md:p-2 bg-white shadow-lg"
+      className="rounded-sm p-1 md:rounded-xl md:p-2 bg-stone-50 shadow-xl"
     >
       <motion.div
         whileHover={{

@@ -174,8 +174,8 @@ const TechSection = () => {
   console.log("TechSection render");
 
   return (
-    <AnimatedLettersContainer className="h-[60dvh] md:h-[95dvh] rounded-3xl border bg-stone-100 border-[#2835f8]">
-      <section className="flex flex-col h-full items-center justify-center gap-5 p-10">
+    <AnimatedLettersContainer className="h-[60dvh] md:h-[95dvh] rounded-3xl border bg-stone-200 border-[#2835f8]">
+      <section className="flex flex-col h-full items-center justify-center gap-5 p-4 md:p-10">
         <AnimatedLetters
           inputString="What's in my"
           fontVariant="h2"
@@ -193,30 +193,31 @@ const TechSection = () => {
           className="text-[#2835f8] font-bold"
         />
 
-        <div className="w-full h-full flex items-center justify-center">
+        <div className="w-full h-full flex items-center justify-center ">
           <ShakeOnEnterDiv
-            className="relative w-[80%] h-[80%]  rounded-xl"
-            style={{ outline: "1px solid #2835f8", outlineOffset: "3rem" }}
+            className="w-[90%] h-[70%] md:w-[70%] md:h-[90%] bg-stone-400/30 rounded-3xl flex items-center justify-center  "
             shakeBehaviour={shuffle}
           >
-            <motion.div className="absolute inset-0   " ref={setRefs}>
-              {iconObjs.map((iconObj) => (
-                <DragCard
-                  key={iconObj.id}
-                  iconId={iconObj.id}
-                  containerRef={containerRef}
-                  rotate={iconObj.rotate}
-                  top={iconObj.top}
-                  left={iconObj.left}
-                >
-                  <TiltCard>
-                    <iconObj.Icon
-                      style={{ width: iconObj.size, height: iconObj.size }}
-                    />
-                  </TiltCard>
-                </DragCard>
-              ))}
-            </motion.div>
+            <div className="relative w-[80%] h-[80%]">
+              <motion.div className="absolute inset-0" ref={setRefs}>
+                {iconObjs.map((iconObj) => (
+                  <DragCard
+                    key={iconObj.id}
+                    iconId={iconObj.id}
+                    containerRef={containerRef}
+                    rotate={iconObj.rotate}
+                    top={iconObj.top}
+                    left={iconObj.left}
+                  >
+                    <TiltCard>
+                      <iconObj.Icon
+                        style={{ width: iconObj.size, height: iconObj.size }}
+                      />
+                    </TiltCard>
+                  </DragCard>
+                ))}
+              </motion.div>
+            </div>
           </ShakeOnEnterDiv>
         </div>
       </section>
