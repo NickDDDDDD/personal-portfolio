@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useMemo } from "react";
+import { useState, useCallback, useRef } from "react";
 import NavItem from "/src/components/layout/NavItem";
 import ContentSection from "/src/components/layout/ContentSection";
 import HelloSection from "../sections/HelloSection";
@@ -80,18 +80,14 @@ const HomePage = () => {
 
   console.log("HomePage render");
 
-  const sectionComponents = useMemo(
-    () => ({
-      Hello: <HelloSection scrollYProgressValue={sectionScrollProgressValue} />,
-
-      Intro: <IntroSection />,
-      "About Me": <AboutMeSection />,
-      Tech: <TechSection />,
-      Work: <WorkSection />,
-      Contact: <ContactSection />,
-    }),
-    [sectionScrollProgressValue]
-  );
+  const sectionComponents = {
+    Hello: <HelloSection scrollYProgressValue={sectionScrollProgressValue} />,
+    Intro: <IntroSection />,
+    "About Me": <AboutMeSection />,
+    Tech: <TechSection />,
+    Work: <WorkSection />,
+    Contact: <ContactSection />,
+  };
 
   return (
     <div className=" h-dvh overflow-hidden  grid grid-rows-[1fr_auto]  md:grid-cols-[minmax(200px,_1fr)_7fr]">
