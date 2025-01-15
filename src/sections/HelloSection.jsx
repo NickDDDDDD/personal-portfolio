@@ -66,7 +66,6 @@ const HelloSection = ({ scrollYProgressValue }) => {
         style={{
           backgroundImage: `url(${backgroundImage})`,
           translateY: backgroundTransform,
-          willChange: "transform",
         }}
       />
 
@@ -76,7 +75,6 @@ const HelloSection = ({ scrollYProgressValue }) => {
         style={{
           backgroundImage: `url(${mountains})`,
           translateY: mountainsTransform,
-          willChange: "transform",
         }}
       />
 
@@ -86,7 +84,6 @@ const HelloSection = ({ scrollYProgressValue }) => {
         style={{
           backgroundImage: `url(${jungle1})`,
           translateY: jungle1Transform,
-          willChange: "transform",
         }}
       />
       <motion.div
@@ -94,7 +91,6 @@ const HelloSection = ({ scrollYProgressValue }) => {
         style={{
           backgroundImage: `url(${jungle2})`,
           translateY: jungle2Transform,
-          willChange: "transform",
         }}
       />
       <motion.div
@@ -102,7 +98,6 @@ const HelloSection = ({ scrollYProgressValue }) => {
         style={{
           backgroundImage: `url(${jungle3})`,
           translateY: jungle3Transform,
-          willChange: "transform",
         }}
       />
       <motion.div
@@ -110,7 +105,6 @@ const HelloSection = ({ scrollYProgressValue }) => {
         style={{
           backgroundImage: `url(${jungle4})`,
           translateY: jungle4Transform,
-          willChange: "transform",
         }}
       />
       <motion.div
@@ -118,7 +112,6 @@ const HelloSection = ({ scrollYProgressValue }) => {
         style={{
           backgroundImage: `url(${jungle5})`,
           translateY: jungle5Transform,
-          willChange: "transform",
         }}
       />
 
@@ -128,7 +121,6 @@ const HelloSection = ({ scrollYProgressValue }) => {
         style={{
           backgroundImage: `url(${manOnMountain})`,
           translateY: manOnMountainTransform,
-          willChange: "transform",
         }}
       />
 
@@ -139,7 +131,6 @@ const HelloSection = ({ scrollYProgressValue }) => {
           background:
             "linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5))",
           opacity: overlayTransform,
-          willChange: "opacity",
         }}
       />
     </div>
