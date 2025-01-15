@@ -6,7 +6,6 @@ import IntroSection from "../sections/IntroSection";
 import AboutMeSection from "../sections/AboutMeSection";
 import TechSection from "../sections/TechSection";
 import WorkSection from "../sections/WorkSection";
-import { KeepAlive } from "react-keep-alive";
 
 import ContactSection from "../sections/ContactSection";
 import FooterSection from "../sections/FooterSection";
@@ -82,11 +81,7 @@ const HomePage = () => {
   console.log("HomePage render");
 
   const sectionComponents = {
-    Hello: (
-      <KeepAlive id="hello-section">
-        <HelloSection scrollYProgressValue={sectionScrollProgressValue} />
-      </KeepAlive>
-    ),
+    Hello: <HelloSection scrollYProgressValue={sectionScrollProgressValue} />,
     Intro: <IntroSection />,
     "About Me": <AboutMeSection />,
     Tech: <TechSection />,
