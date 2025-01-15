@@ -38,6 +38,7 @@ const DragCard = ({ containerRef, top, left, rotate, className, children }) => {
         top,
         left,
         zIndex,
+        willChange: "transform",
         transform: ` rotate(${rotate}deg)`,
       }}
       className={twMerge("drag-elements absolute", className)}

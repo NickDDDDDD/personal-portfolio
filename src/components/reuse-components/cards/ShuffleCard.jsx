@@ -31,6 +31,7 @@ const ShuffleCard = ({ children, handleShuffle, position }) => {
     <motion.div
       style={{
         zIndex,
+        willChange: "transform",
       }}
       animate={{ rotate: rotateZ, x }}
       drag
