@@ -48,7 +48,7 @@ const ShuffleCard = ({ children, handleShuffle, position }) => {
       transition={{
         duration: 0.35,
       }}
-      className={`absolute inset-0  w-full aspect-[7/10] select-none   rounded-2xl border-2 border-slate-700 bg-slate-800/95  p-6 shadow-xl ${
+      className={`absolute inset-0  w-full aspect-[7/10] select-none   rounded-2xl border-2 border-slate-700 bg-slate-800/20 backdrop-blur-md  p-6 shadow-xl ${
         draggable ? "cursor-grab active:cursor-grabbing" : ""
       }`}
     >

@@ -6,6 +6,7 @@ import IntroSection from "../sections/IntroSection";
 import AboutMeSection from "../sections/AboutMeSection";
 import TechSection from "../sections/TechSection";
 import WorkSection from "../sections/WorkSection";
+
 import ContactSection from "../sections/ContactSection";
 import FooterSection from "../sections/FooterSection";
 import { useMotionValue } from "framer-motion";
@@ -41,15 +42,15 @@ const HomePage = () => {
   const navRefs = useRef([]);
   const contentRefs = useRef([]);
   const contentContainerRef = useRef(null);
-  const navScrollProgressValue = useMotionValue(0);
+  const sectionScrollProgressValue = useMotionValue(0);
 
   const handleScrollProgress = useCallback(
     (id, scrollYProgressValue) => {
       if (id === expandedId) {
-        navScrollProgressValue.set(scrollYProgressValue);
+        sectionScrollProgressValue.set(scrollYProgressValue);
       }
     },
-    [expandedId, navScrollProgressValue]
+    [expandedId, sectionScrollProgressValue]
   );
 
   const handleInViewChange = useCallback((id) => {
@@ -79,21 +80,18 @@ const HomePage = () => {
 
   console.log("HomePage render");
 
-  const staticComponents = useMemo(
+  const sectionComponents = useMemo(
     () => ({
+      Hello: <HelloSection scrollYProgressValue={sectionScrollProgressValue} />,
+
       Intro: <IntroSection />,
       "About Me": <AboutMeSection />,
       Tech: <TechSection />,
       Work: <WorkSection />,
       Contact: <ContactSection />,
     }),
-    []
+    [sectionScrollProgressValue]
   );
-
-  const sectionComponents = {
-    Hello: <HelloSection scrollYProgressValue={navScrollProgressValue} />,
-    ...staticComponents,
-  };
 
   return (
     <div className=" h-dvh overflow-hidden  grid grid-rows-[1fr_auto]  md:grid-cols-[minmax(200px,_1fr)_7fr]">
@@ -139,7 +137,7 @@ const HomePage = () => {
               bgColor={item.bgColor}
               textColor={item.textColor}
               isExpanded={expandedId === item.id}
-              progressValue={navScrollProgressValue}
+              progressValue={sectionScrollProgressValue}
               onExpand={handleExpand}
             />
           ))}
