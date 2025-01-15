@@ -37,7 +37,7 @@ const ShakeOnEnterDiv = ({ children, shakeBehaviour, className, style }) => {
   return (
     <motion.div
       className={twMerge("", className)}
-      style={{ willChange: "transform", ...style }}
+      style={{ ...style }}
       onViewportEnter={() => {
         handleViewportEnter();
       }}

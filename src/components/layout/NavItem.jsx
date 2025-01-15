@@ -30,7 +30,6 @@ const NavItem = forwardRef(
         style={{
           backgroundColor: bgColor,
           color: textColor,
-          willChange: "width, height",
         }}
         className={`relative flex flex-col shrink-0 p-2 justify-between items-start min-h-15  rounded-xl md:rounded-3xl md:min-h-28 md:p-4 transition-all duration-300 ${
           isExpanded ? "w-[50vw] md:w-auto md:h-96" : "w-20 md:w-auto md:h-28"
@@ -50,7 +49,6 @@ const NavItem = forwardRef(
             style={{
               translateX: isMobile ? translateValue : undefined,
               translateY: !isMobile ? translateValue : undefined,
-              willChange: "transform",
               transition: isMobile ? "" : "transform 0.05s linear",
             }}
           >
