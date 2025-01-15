@@ -1,7 +1,12 @@
 import HomePage from "./pages/HomePage";
+import { AliveScope } from "react-keep-alive";
 
 function App() {
-  return <HomePage />;
+  return (
+    <AliveScope>
+      <HomePage />
+    </AliveScope>
+  );
 }
 
 export default App;
