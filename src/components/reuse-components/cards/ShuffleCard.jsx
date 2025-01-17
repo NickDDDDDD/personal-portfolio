@@ -60,7 +60,6 @@ ShuffleCard.propTypes = {
   children: PropTypes.node.isRequired,
   handleShuffle: PropTypes.func.isRequired,
   position: PropTypes.number.isRequired,
-  totalCardsCount: PropTypes.number.isRequired,
 };
 
 export default ShuffleCard;
