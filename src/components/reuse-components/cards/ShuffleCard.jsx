@@ -12,7 +12,7 @@ const ShuffleCard = ({ children, handleShuffle, position }) => {
   const onDragEnd = (e) => {
     const diff = mousePosRef.current - e.clientX;
 
-    if (diff > 150) {
+    if (diff > 100) {
       handleShuffle();
     }
 
@@ -48,7 +48,7 @@ const ShuffleCard = ({ children, handleShuffle, position }) => {
       transition={{
         duration: 0.35,
       }}
-      className={`absolute inset-0  w-full aspect-[7/10] select-none   rounded-2xl border-2 border-slate-700 bg-slate-800/20 backdrop-blur-md  p-6 shadow-xl ${
+      className={`rounded-xl absolute inset-0  w-full aspect-[7/10] md:aspect-[4/3] select-none  border-2 border-zinc-700/50 bg-zinc-800/90 backdrop-blur-md  p-6 shadow-xl ${
         draggable ? "cursor-grab active:cursor-grabbing" : ""
       }`}
     >

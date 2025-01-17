@@ -4,7 +4,7 @@ const WorkSection = () => {
   console.log("WorkSection render");
 
   return (
-    <section className="rounded-3xl h-[60dvh] md:h-[95dvh] bg-stone-100 border border-[#ff003d]">
+    <section className="h-[60dvh] md:h-[95dvh] bg-stone-200 ]">
       <WorkCards />
     </section>
   );

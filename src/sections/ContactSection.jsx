@@ -1,10 +1,9 @@
-import AnimatedLettersContainer from "../components/reuse-components/typography/AnimatedLettersContainer.jsx";
-
+import HoverButton from "../components/reuse-components/buttons/HoverButton.jsx";
 const ContactSection = () => {
   return (
-    <AnimatedLettersContainer className="h-[60vh] md:h-[95vh]">
-      <div>Contact</div>
-    </AnimatedLettersContainer>
+    <section className="h-[60vh] md:h-[95vh] flex items-center justify-center bg-stone-200">
+      <HoverButton>contact button</HoverButton>
+    </section>
   );
 };
 

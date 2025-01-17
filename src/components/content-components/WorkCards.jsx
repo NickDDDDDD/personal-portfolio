@@ -2,7 +2,7 @@ import { useState } from "react";
 import ShuffleCard from "../reuse-components/cards/ShuffleCard";
 
 const WorkCards = () => {
-  const totalCardsCount = 5;
+  const totalCardsCount = 3;
   const [order, setOrder] = useState(
     Array.from({ length: totalCardsCount }, (_, i) => i)
   );
@@ -16,12 +16,11 @@ const WorkCards = () => {
 
   return (
     <div className="flex items-center justify-center h-full w-full ">
-      <div className="relative w-1/3 -ml-24 md:-ml-44 md:w-1/5 aspect-[7/10] ">
+      <div className="relative w-1/3 aspect-[7/10] -ml-24 md:-ml-44 md:w-[40%]  md:aspect-[4/3]">
         <ShuffleCard
           id="work-1"
           handleShuffle={handleShuffle}
           position={order[0]}
-          totalCardsCount={totalCardsCount}
         >
           work 1
         </ShuffleCard>
@@ -29,7 +28,6 @@ const WorkCards = () => {
           id="work-2"
           handleShuffle={handleShuffle}
           position={order[1]}
-          totalCardsCount={totalCardsCount}
         >
           work 2
         </ShuffleCard>
@@ -37,25 +35,8 @@ const WorkCards = () => {
           id="work-3"
           handleShuffle={handleShuffle}
           position={order[2]}
-          totalCardsCount={totalCardsCount}
         >
           work 3
-        </ShuffleCard>
-        <ShuffleCard
-          id="work-4"
-          handleShuffle={handleShuffle}
-          position={order[3]}
-          totalCardsCount={totalCardsCount}
-        >
-          work 4
-        </ShuffleCard>
-        <ShuffleCard
-          id="work-5"
-          handleShuffle={handleShuffle}
-          position={order[4]}
-          totalCardsCount={totalCardsCount}
-        >
-          work 5
         </ShuffleCard>
       </div>
     </div>

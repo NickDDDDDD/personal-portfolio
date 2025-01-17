@@ -174,7 +174,7 @@ const TechSection = () => {
   console.log("TechSection render");
 
   return (
-    <AnimatedLettersContainer className="h-[60dvh] md:h-[95dvh] rounded-3xl border bg-stone-200 border-[#2835f8]">
+    <AnimatedLettersContainer className="h-[60dvh] md:h-[95dvh]  bg-stone-200 ">
       <section className="flex flex-col h-full items-center justify-center gap-5 p-4 md:p-10">
         <AnimatedLetters
           inputString="What's in my"
@@ -195,7 +195,7 @@ const TechSection = () => {
 
         <div className="w-full h-full flex items-center justify-center ">
           <ShakeOnEnterDiv
-            className="w-[90%] h-[70%] md:w-[70%] md:h-[90%] bg-stone-400/30 rounded-3xl flex items-center justify-center  "
+            className="flex items-center justify-center w-[90%] h-[70%] md:w-[70%] md:h-[90%] bg-stone-400/20  shadow-[-1px_-1px_5px_rgba(255,_255,_255,_0.6),_1px_1px_5px_rgba(0,_0,_0,_0.3),inset_-2px_-2px_5px_rgba(255,_255,_255,_1),inset_2px_2px_4px_rgba(0,_0,_0,_0.3)]"
             shakeBehaviour={shuffle}
           >
             <div className="relative w-[80%] h-[80%]">

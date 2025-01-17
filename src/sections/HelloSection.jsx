@@ -59,7 +59,7 @@ const HelloSection = ({ scrollYProgressValue }) => {
   const overlayTransform = useTransform(scrollYProgressValue, [0, 1], [0, 1]);
 
   return (
-    <div className="relative aspect-[4/3] md:aspect-[16/9] overflow-hidden">
+    <div className=" bg-[#ffaf1b]  relative aspect-[4/3] md:aspect-[16/9] overflow-hidden">
       {/* Background Image */}
       <motion.div
         className="absolute inset-0 bg-cover bg-center"

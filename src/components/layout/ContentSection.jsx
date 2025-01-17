@@ -63,14 +63,14 @@ const ContentSection = forwardRef(
       <motion.section
         ref={innerRef}
         id={`section-${id}`}
-        className="flex flex-col gap-5 rounded-3xl overflow-hidden"
+        className="flex flex-col gap-5 "
       >
         {displayTitle && (
           <AnimatedLettersContainer
             style={{ backgroundColor: bgColor, color: textColor }}
-            className="rounded-3xl h-[30dvh] md:h-[50vh]"
+            className="rounded-xl overflow-hidden  h-[30dvh] md:h-[50vh]"
           >
-            <div className="rounded-3xl h-full flex flex-col items-center justify-around gap-5 ">
+            <div className=" h-full flex flex-col items-center justify-around gap-5 ">
               <AnimatedLetters
                 inputString={formattedId}
                 fontVariant="h3"
@@ -88,8 +88,8 @@ const ContentSection = forwardRef(
           </AnimatedLettersContainer>
         )}
         <div
-          style={{ backgroundColor: bgColor, color: textColor }}
-          className="rounded-3xl"
+          className="rounded-xl overflow-hidden  "
+          style={{ border: `2px solid ${bgColor}` }}
         >
           {children}
         </div>

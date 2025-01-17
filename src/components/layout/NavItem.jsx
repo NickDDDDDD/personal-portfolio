@@ -31,7 +31,7 @@ const NavItem = forwardRef(
           backgroundColor: bgColor,
           color: textColor,
         }}
-        className={`relative flex flex-col shrink-0 p-2 justify-between items-start min-h-15  rounded-xl md:rounded-3xl md:min-h-28 md:p-4 transition-all duration-300 ${
+        className={`rounded-xl relative flex flex-col shrink-0 p-2 justify-between items-start min-h-15  overflow-hidden   md:min-h-28 md:p-4 transition-all duration-300  ${
           isExpanded ? "w-[50vw] md:w-auto md:h-96" : "w-20 md:w-auto md:h-28"
         }`}
       >
