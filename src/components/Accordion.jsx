@@ -55,7 +55,12 @@ const Panel = ({ open, setOpen, hover, setHover, id, title }) => {
     }
     setOpen(id);
   }
-  const hoverStyle = { transformOrigin: "bottom center", perspective: 5000 };
+  const hoverStyle = {
+    transformOrigin: "bottom center",
+    perspective: 5000,
+    width: "100%",
+    height: "100%",
+  };
   const hoverTransition = { type: "spring", stiffness: 200 };
 
   return (
@@ -122,11 +127,9 @@ Panel.propTypes = {
 
 const panelVariants = {
   open: {
-    width: "100%",
     height: "50vh",
   },
   closed: {
-    width: "100%",
     height: "0px",
   },
 };
