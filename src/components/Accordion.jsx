@@ -57,9 +57,7 @@ const Panel = ({ open, setOpen, hover, setHover, id, title }) => {
   }
   const hoverStyle = {
     transformOrigin: "bottom center",
-    perspective: 5000,
-    width: "100%",
-    height: "100%",
+    // perspective: 5000,
   };
   const hoverTransition = { type: "spring", stiffness: 200 };
 
@@ -70,9 +68,11 @@ const Panel = ({ open, setOpen, hover, setHover, id, title }) => {
         onClick={handleClick}
         onMouseEnter={() => setHover(id)}
         onMouseLeave={() => setHover(0)}
-        style={{
-          perspective: 5000,
-        }}
+        style={
+          {
+            // perspective: 5000,
+          }
+        }
       >
         <motion.div
           className="bg-amber-300 w-full h-full rounded-xl "
