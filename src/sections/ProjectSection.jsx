@@ -3,7 +3,7 @@ const ProjectSection = () => {
   console.log("WorkSection render");
 
   return (
-    <section>
+    <section className="w-full h-full">
       <Accordion />
     </section>
   );

@@ -55,6 +55,8 @@ const Panel = ({ open, setOpen, hover, setHover, id, title }) => {
     }
     setOpen(id);
   }
+  const hoverStyle = { transformOrigin: "bottom center", perspective: 5000 };
+  const hoverTransition = { type: "spring", stiffness: 200 };
 
   return (
     <>
@@ -68,42 +70,25 @@ const Panel = ({ open, setOpen, hover, setHover, id, title }) => {
         }}
       >
         <motion.div
-          className="bg-amber-300 w-full h-full rounded-xl"
+          className="bg-amber-300 w-full h-full rounded-xl flex"
           variants={rotateVariants}
           animate={isHovered ? "hover" : "initial"}
-          style={{
-            transformOrigin: "bottom center",
-            perspective: 5000,
-          }}
-          transition={{
-            type: "spring",
-            stiffness: 200,
-          }}
+          style={hoverStyle}
+          transition={hoverTransition}
         >
           <motion.div
-            className="bg-blue-500 w-full h-full rounded-xl"
+            className="bg-blue-500 w-full h-full rounded-xl flex"
             variants={rotateVariants}
             animate={isHovered ? "hover" : "initial"}
-            style={{
-              transformOrigin: "bottom center",
-              perspective: 5000,
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 200,
-            }}
+            style={hoverStyle}
+            transition={hoverTransition}
           >
             <motion.div
-              className="bg-[#ff003d] w-full h-full flex flex-col items-center justify-center rounded-xl"
+              className="bg-[#ff003d] w-full h-full  flex-col items-center justify-center rounded-xl flex"
               variants={rotateVariants}
               animate={isHovered ? "hover" : "initial"}
-              style={{
-                transformOrigin: "bottom center",
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 200,
-              }}
+              style={hoverStyle}
+              transition={hoverTransition}
             >
               <span className="block text-xl font-light ">{title}</span>
             </motion.div>
