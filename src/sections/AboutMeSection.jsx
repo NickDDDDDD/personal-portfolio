@@ -32,7 +32,7 @@ const AboutMeSection = () => {
           </ResponsiveTypography>
         </div>
       </div>
-      <div className="absolute index-0 bg-stone-50/10 backdrop-blur-sm w-full h-full z-10"></div>
+      {/* <div className="absolute index-0 bg-stone-50/10 backdrop-blur-sm w-full h-full z-10"></div> */}
       <div className=" absolute text-stone-300 z-5 ">
         <Watermark text="Get motivated" />
         <Watermark text="Live inspired" reverse />

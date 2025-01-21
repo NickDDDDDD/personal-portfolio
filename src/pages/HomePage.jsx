@@ -5,14 +5,14 @@ import HelloSection from "../sections/HelloSection";
 import IntroSection from "../sections/IntroSection";
 import AboutMeSection from "../sections/AboutMeSection";
 import TechSection from "../sections/TechSection";
-import WorkSection from "../sections/WorkSection";
+import ProjectSection from "../sections/ProjectSection";
 
 import ContactSection from "../sections/ContactSection";
 import FooterSection from "../sections/FooterSection";
 import { useMotionValue } from "framer-motion";
 
 const HomePage = () => {
-  const navNames = ["Hello", "Intro", "About Me", "Tech", "Work", "Contact"];
+  const navNames = ["Hello", "Intro", "About Me", "Tech", "Project", "Contact"];
   const bgColors = [
     "#ffaf1b",
     "#000000",
@@ -85,7 +85,7 @@ const HomePage = () => {
     Intro: <IntroSection />,
     "About Me": <AboutMeSection />,
     Tech: <TechSection />,
-    Work: <WorkSection />,
+    Project: <ProjectSection />,
     Contact: <ContactSection />,
   };
 

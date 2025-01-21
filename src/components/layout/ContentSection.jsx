@@ -88,7 +88,7 @@ const ContentSection = forwardRef(
           </AnimatedLettersContainer>
         )}
         <div
-          className="rounded-xl overflow-hidden  "
+          className="rounded-xl  "
           style={{ border: `2px solid ${bgColor}` }}
         >
           {children}
