@@ -69,33 +69,33 @@ const Panel = ({ open, setOpen, hover, setHover, id, title }) => {
         className="bg-black h-[20vh] w-full  text-white flex-col justify-center  items-center gap-4  rounded-xl"
         onClick={handleClick}
         onMouseEnter={() => setHover(id)}
-        onMouseLeave={() => setHover(null)}
+        onMouseLeave={() => setHover(0)}
         style={{
           perspective: 5000,
         }}
       >
         <motion.div
-          className="bg-amber-300 w-full h-full rounded-xl flex"
+          className="bg-amber-300 w-full h-full rounded-xl "
           variants={rotateVariants}
           animate={isHovered ? "hover" : "initial"}
           style={hoverStyle}
           transition={hoverTransition}
         >
           <motion.div
-            className="bg-blue-500 w-full h-full rounded-xl flex"
+            className="bg-blue-500 w-full h-full rounded-xl "
             variants={rotateVariants}
             animate={isHovered ? "hover" : "initial"}
             style={hoverStyle}
             transition={hoverTransition}
           >
             <motion.div
-              className="bg-[#ff003d] w-full h-full  flex-col items-center justify-center rounded-xl flex"
+              className="bg-[#ff003d] w-full h-full  rounded-xl "
               variants={rotateVariants}
               animate={isHovered ? "hover" : "initial"}
               style={hoverStyle}
               transition={hoverTransition}
             >
-              <span className="block text-xl font-light ">{title}</span>
+              <p className=" text-xl font-light ">{title}</p>
             </motion.div>
           </motion.div>
         </motion.div>
