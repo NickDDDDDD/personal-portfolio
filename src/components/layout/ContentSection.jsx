@@ -87,12 +87,7 @@ const ContentSection = forwardRef(
             </div>
           </AnimatedLettersContainer>
         )}
-        <div
-          className="rounded-xl  "
-          style={{ border: `2px solid ${bgColor}` }}
-        >
-          {children}
-        </div>
+        <div>{children}</div>
       </motion.section>
     );
   }

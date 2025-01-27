@@ -174,7 +174,7 @@ const TechSection = () => {
   console.log("TechSection render");
 
   return (
-    <AnimatedLettersContainer className="h-[60dvh] md:h-[95dvh]  bg-stone-200 ">
+    <AnimatedLettersContainer className="h-[60dvh] md:h-[95dvh]  bg-stone-200 border-2 border-[#2835f8] rounded-xl">
       <section className="flex flex-col h-full items-center justify-center gap-5 p-4 md:p-10">
         <AnimatedLetters
           inputString="What's in my"

@@ -5,7 +5,7 @@ import Watermark from "../components/reuse-components/background/WaterMark.jsx";
 
 const AboutMeSection = () => {
   return (
-    <AnimatedLettersContainer className="relative bg-stone-200  h-[60vh] md:h-[95vh]   ">
+    <AnimatedLettersContainer className="relative bg-stone-200  h-[60vh] md:h-[95vh] border-2 border-[#5900cc] rounded-xl  ">
       <div className="absolute flex flex-col items-center justify-center h-full gap-10 z-20">
         <AnimatedLetters
           inputString="I'm a"

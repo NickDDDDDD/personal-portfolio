@@ -50,6 +50,7 @@ const NavItem = forwardRef(
               translateX: isMobile ? translateValue : undefined,
               translateY: !isMobile ? translateValue : undefined,
               transition: isMobile ? "" : "transform 0.05s linear",
+              willChange: "transform",
             }}
           >
             <div

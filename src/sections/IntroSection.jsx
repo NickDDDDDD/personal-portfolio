@@ -4,7 +4,7 @@ import MyAvatar from "../components/content-components/MyAvatar.jsx";
 
 const IntroSection = () => {
   return (
-    <AnimatedLettersContainer className="bg-[#000000]  h-[60vh] md:h-[95vh]">
+    <AnimatedLettersContainer className="bg-[#000000]  h-[60vh] md:h-[95vh] rounded-xl ">
       <div className="flex  flex-col items-center justify-center gap-10 h-full">
         <AnimatedLetters
           inputString="Hello, my name is"
