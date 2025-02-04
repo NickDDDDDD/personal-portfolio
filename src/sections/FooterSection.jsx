@@ -1,10 +1,6 @@
-import Cube from "../components/reuse-components/Cube";
+import Toolbox from "../components/content-components/Toolbox";
 const FooterSection = () => {
-  return (
-    <div className="flex items-center justify-center h-[60vh] md:h-[95vh] ">
-      <Cube />
-    </div>
-  );
+  return <Toolbox />;
 };
 
 export default FooterSection;

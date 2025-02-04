@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
+    "@react-spring/three": "^9.7.5",
+    "@react-three/drei": "^9.121.4",
+    "@react-three/fiber": "^8.17.14",
     "lodash": "^4.17.21",
     "motion": "^11.11.17",
     "nanoid": "^5.0.9",
@@ -21,7 +24,8 @@
     "react-responsive": "^10.0.0",
     "react-scroll-parallax": "^3.4.5",
     "react-use": "^17.6.0",
-    "tailwind-merge": "^2.6.0"
+    "tailwind-merge": "^2.6.0",
+    "three": "^0.173.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",

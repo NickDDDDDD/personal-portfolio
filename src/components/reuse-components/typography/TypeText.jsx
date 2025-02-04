@@ -10,7 +10,7 @@ const MAIN_FADE_DURATION = 0.25;
 
 const SWAP_DELAY_IN_MS = 5500;
 
-const TypeText = ({ textString }) => {
+const TypeText = ({ textString, className }) => {
   const [textIndex, setTextIndex] = useState(0);
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true });
@@ -29,10 +29,7 @@ const TypeText = ({ textString }) => {
   }, [textString.length, isInView]);
 
   return (
-    <p
-      ref={containerRef}
-      className="mb-2.5 text-sm font-light uppercase text-black"
-    >
+    <p ref={containerRef} className={className}>
       <span className="ml-3">
         {textString[textIndex].split("").map((l, i) => (
           <motion.span
@@ -90,4 +87,5 @@ export default TypeText;
 
 TypeText.propTypes = {
   textString: PropTypes.arrayOf(PropTypes.string).isRequired,
+  className: PropTypes.string,
 };

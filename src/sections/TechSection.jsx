@@ -1,10 +1,8 @@
 import { TechSectionContent } from "/src/utils/content";
 import { useRef } from "react";
-import AnimatedLetters from "../components/reuse-components/typography/AnimatedLetters.jsx";
-import AnimatedLettersContainer from "../components/reuse-components/typography/AnimatedLettersContainer.jsx";
-import TiltCard from "../components/reuse-components/cards/TiltCard.jsx";
-import DragCard from "../components/reuse-components/cards/DragCard.jsx";
-import ShakeOnEnterDiv from "./ShakeOnEnterDiv.jsx";
+
+import TechIconCard from "../components/content-components/TechIconCard";
+import ShakeOnEnterDiv from "../components/reuse-components/ShakeOnEnterDiv.jsx";
 import { nanoid } from "nanoid";
 import { useState, useLayoutEffect, useCallback } from "react";
 import { useMeasure } from "react-use";
@@ -174,54 +172,34 @@ const TechSection = () => {
   console.log("TechSection render");
 
   return (
-    <AnimatedLettersContainer className="h-[60dvh] md:h-[95dvh]  bg-stone-200 border-2 border-[#2835f8] rounded-xl">
+    <div className="h-[60dvh] md:h-[95dvh]  bg-stone-200 border-2 border-[#2835f8] rounded-xl">
       <section className="flex flex-col h-full items-center justify-center gap-5 p-4 md:p-10">
-        <AnimatedLetters
-          inputString="What's in my"
-          fontVariant="h2"
-          xEnd="0vw"
-          easing="easeInOut"
-          shootFromDirection="right"
-          className="text-gray-800"
-        />
-        <AnimatedLetters
-          inputString="toolbox"
-          fontVariant="h1"
-          xEnd="0vw"
-          easing="easeInOut"
-          shootFromDirection="right"
-          className="text-[#2835f8] font-bold"
-        />
-
         <div className="w-full h-full flex items-center justify-center ">
           <ShakeOnEnterDiv
-            className="flex items-center justify-center w-[90%] h-[70%] md:w-[70%] md:h-[90%] bg-stone-400/20  shadow-[-1px_-1px_5px_rgba(255,_255,_255,_0.6),_1px_1px_5px_rgba(0,_0,_0,_0.3),inset_-2px_-2px_5px_rgba(255,_255,_255,_1),inset_2px_2px_4px_rgba(0,_0,_0,_0.3)]"
+            className="flex items-center justify-center w-[90%] h-[70%] md:w-[70%] md:h-[90%] bg-stone-400/20  shadow-lg rounded-xl"
             shakeBehaviour={shuffle}
           >
             <div className="relative w-[80%] h-[80%]">
               <motion.div className="absolute inset-0" ref={setRefs}>
                 {iconObjs.map((iconObj) => (
-                  <DragCard
+                  <TechIconCard
                     key={iconObj.id}
-                    iconId={iconObj.id}
                     containerRef={containerRef}
                     rotate={iconObj.rotate}
                     top={iconObj.top}
                     left={iconObj.left}
                   >
-                    <TiltCard>
-                      <iconObj.Icon
-                        style={{ width: iconObj.size, height: iconObj.size }}
-                      />
-                    </TiltCard>
-                  </DragCard>
+                    <iconObj.Icon
+                      style={{ width: iconObj.size, height: iconObj.size }}
+                    />
+                  </TechIconCard>
                 ))}
               </motion.div>
             </div>
           </ShakeOnEnterDiv>
         </div>
       </section>
-    </AnimatedLettersContainer>
+    </div>
   );
 };
 
