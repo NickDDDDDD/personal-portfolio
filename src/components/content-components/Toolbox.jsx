@@ -16,7 +16,10 @@ const Toolbox = () => {
   }
 
   return (
-    <div className="flex items-center justify-center h-[60vh] md:h-[95vh] ">
+    <div
+      className="flex items-center justify-center h-[60vh] md:h-[95vh] "
+      style={{ perspective: 5000 }}
+    >
       <TiltCard className="w-[50%] h-[50%] flex" onClick={onClick}>
         <div
           className=" relative w-full h-full rounded-xl bg-red-300"
@@ -29,10 +32,7 @@ const Toolbox = () => {
               transformStyle: "preserve-3d",
             }}
           >
-            <div
-              className="absolute inset-0 flex flex-col justify-between z-20 "
-              style={{ perspective: 5000 }}
-            >
+            <div className="absolute inset-0 flex flex-col justify-between z-20 ">
               <motion.div
                 className="w-full h-[50%] bg-gray-400 rounded-xl "
                 animate={{ rotateX: isRotated ? 160 : 0 }}
@@ -123,10 +123,12 @@ const TiltCard = ({ children, className, onClick }) => {
       onClick={onClick}
       style={{
         transformStyle: "preserve-3d",
-        perspective: 5000,
         transform,
       }}
-      className={twMerge("relative rounded-lg w-full h-full", className)}
+      className={twMerge(
+        "relative rounded-lg w-full h-full bg-gray-400",
+        className
+      )}
     >
       {children}
     </motion.div>
