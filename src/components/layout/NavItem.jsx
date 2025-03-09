@@ -9,14 +9,10 @@ const NavItem = forwardRef(
     { id, name, bgColor, textColor, isExpanded, onExpand, progressValue },
     ref
   ) => {
-    const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
+    const isLandscape = useMediaQuery({ query: "(orientation: landscape)" });
     const formattedId = id.toString().padStart(2, "0");
 
-    const translateValue = useTransform(
-      progressValue,
-      [0, 1],
-      isMobile ? ["0%", "100%"] : ["0%", "100%"]
-    );
+    const translateValue = useTransform(progressValue, [0, 1], ["0%", "100%"]);
 
     const handleClick = () => {
       onExpand(id);
@@ -31,8 +27,10 @@ const NavItem = forwardRef(
           backgroundColor: bgColor,
           color: textColor,
         }}
-        className={`rounded-xl relative flex flex-col shrink-0 p-2 justify-between items-start min-h-15  overflow-hidden   md:min-h-28 md:p-4 transition-all duration-300  ${
-          isExpanded ? "w-[50vw] md:w-auto md:h-96" : "w-20 md:w-auto md:h-28"
+        className={`rounded-xl relative flex flex-col shrink-0 p-2 justify-between items-start min-h-15  overflow-hidden   landscape:min-h-28 md:p-3 landscape:p-4 transition-all duration-300  ${
+          isExpanded
+            ? "w-[50vw] landscape:w-auto landscape:h-96"
+            : "w-28 landscape:w-auto landscape:h-28"
         }`}
       >
         <ResponsiveTypography variant="overline">
@@ -47,18 +45,18 @@ const NavItem = forwardRef(
           <motion.div
             className="absolute inset-0 w-full h-full"
             style={{
-              translateX: isMobile ? translateValue : undefined,
-              translateY: !isMobile ? translateValue : undefined,
-              transition: isMobile ? "" : "transform 0.05s linear",
+              translateX: !isLandscape ? translateValue : undefined,
+              translateY: isLandscape ? translateValue : undefined,
+              transition: !isLandscape ? "" : "transform 0.05s linear",
               willChange: "transform",
             }}
           >
             <div
               className="absolute bg-[#f4e9e1] size-2 md:size-3 rounded-full"
               style={{
-                top: isMobile ? "20%" : "5%",
-                left: isMobile ? "10%" : "auto",
-                right: isMobile ? "auto" : "8%",
+                top: !isLandscape ? "20%" : "5%",
+                left: !isLandscape ? "10%" : "auto",
+                right: !isLandscape ? "auto" : "8%",
               }}
             />
           </motion.div>

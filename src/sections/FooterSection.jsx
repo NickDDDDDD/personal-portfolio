@@ -1,6 +1,6 @@
-import Toolbox from "../components/content-components/Toolbox";
+import Kanban from "../components/Kanban";
 const FooterSection = () => {
-  return <Toolbox />;
+  return <Kanban />;
 };
 
 export default FooterSection;

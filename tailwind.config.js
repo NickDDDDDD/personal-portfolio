@@ -10,7 +10,20 @@ export default {
         sans: ["JetBrains Mono", "monospace"],
       },
       typography: {},
+      gridTemplateColumns: ["landscape"],
+      gridTemplateRows: ["landscape"],
+      width: ["landscape"],
+      order: ["landscape"],
+      height: ["landscape"],
+      overflow: ["landscape"],
+      padding: ["landscape"],
+      flexDirection: ["landscape"],
+      gap: ["landscape"],
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addVariant }) {
+      addVariant("landscape", "@media (orientation: landscape)");
+    },
+  ],
 };
