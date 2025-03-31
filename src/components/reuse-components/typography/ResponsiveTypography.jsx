@@ -1,20 +1,19 @@
 import PropTypes from "prop-types";
 
 const ResponsiveTypography = ({
-  variant = "h1",
+  variant = "body1",
   children,
   className = "",
   ...props
 }) => {
   const responsiveFontSize = {
-    // Add responsive font sizes for h1, h2, h3, body1, body2, caption, and overline
     h1: "text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl",
     h2: "text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl",
     h3: "text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl",
     body1: "text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl",
     body2: "text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl",
-    caption: "text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg", // Smaller font for captions
-    overline: "text-[8px] sm:text-[10px] md:text-xs lg:text-sm xl:text-base", // Smallest font for overlines
+    caption: "text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg",
+    overline: "text-[8px] sm:text-[10px] md:text-xs lg:text-sm xl:text-base",
   };
 
   const Tag =
@@ -27,7 +26,7 @@ const ResponsiveTypography = ({
 
   return (
     <Tag
-      className={`text-whitesmoke ${responsiveFontSize[variant]} ${className}`}
+      className={`text-neutral-50 ${responsiveFontSize[variant]} ${className}`}
       {...props}
     >
       {children}

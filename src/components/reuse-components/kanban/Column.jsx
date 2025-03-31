@@ -86,7 +86,7 @@ const Column = ({
           <div className="bg-slate-800 p-1 rounded-full text-xs self-center">
             {cards.length}
           </div>
-          <div className="flex items-center flex-1 min-w-0 overflow-hidden ">
+          <div className="flex items-center overflow-x-hidden">
             {isEditing ? (
               <input
                 type="text"
