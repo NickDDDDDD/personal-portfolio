@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import ResponsiveTypography from "/src/components/reuse-components/typography/ResponsiveTypography";
 import { useMediaQuery } from "react-responsive";
 import { useTransform, motion } from "framer-motion";
-
+import { twMerge } from "tailwind-merge";
 const NavItem = forwardRef(
   (
     { id, name, bgColor, textColor, isExpanded, onExpand, progressValue },
@@ -25,18 +25,22 @@ const NavItem = forwardRef(
         onClick={handleClick}
         style={{
           backgroundColor: bgColor,
-          color: textColor,
         }}
-        className={`rounded-xl relative flex flex-col shrink-0 p-2 justify-between items-start min-h-15  overflow-hidden   landscape:min-h-28 md:p-3 landscape:p-4 transition-all duration-300  ${
+        className={twMerge(
+          "rounded-xl   relative flex flex-col shrink-0 p-2 justify-between items-start min-h-15  overflow-hidden   landscape:min-h-28 md:p-3 landscape:p-4 transition-all duration-300",
           isExpanded
             ? "w-[50vw] landscape:w-auto landscape:h-96"
             : "w-28 landscape:w-auto landscape:h-28"
-        }`}
+        )}
       >
-        <ResponsiveTypography variant="overline">
+        <ResponsiveTypography variant="overline" style={{ color: textColor }}>
           {formattedId}
         </ResponsiveTypography>
-        <ResponsiveTypography variant="caption" className="font-semibold">
+        <ResponsiveTypography
+          variant="caption"
+          className="font-semibold"
+          style={{ color: textColor }}
+        >
           {name}
         </ResponsiveTypography>
 
@@ -52,8 +56,9 @@ const NavItem = forwardRef(
             }}
           >
             <div
-              className="absolute bg-[#f4e9e1] size-2 md:size-3 rounded-full"
+              className="absolute  size-2 md:size-3 rounded-full"
               style={{
+                backgroundColor: textColor,
                 top: !isLandscape ? "20%" : "5%",
                 left: !isLandscape ? "10%" : "auto",
                 right: !isLandscape ? "auto" : "8%",

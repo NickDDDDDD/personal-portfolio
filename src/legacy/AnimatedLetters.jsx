@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { useMediaQuery } from "react-responsive";
-import ResponsiveTypography from "./ResponsiveTypography";
+import ResponsiveTypography from "../components/reuse-components/typography/ResponsiveTypography";
+import { twMerge } from "tailwind-merge";
 
 // Function to generate array of letter objects from a string
 const generateLetters = (string) => {
@@ -60,7 +61,7 @@ const AnimatedLetters = ({
   };
 
   return (
-    <div className={`flex flex-wrap ${className}`}>
+    <div className={twMerge("flex flex-wrap", className)}>
       {letters.map((letter, index) => {
         const motionProps = getMotionProps(index);
         return (

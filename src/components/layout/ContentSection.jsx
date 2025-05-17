@@ -1,7 +1,8 @@
 import { useRef, useEffect, forwardRef } from "react";
 import PropTypes from "prop-types";
 import { useInView, motion, useScroll } from "framer-motion";
-import AnimatedLetters from "/src/components/reuse-components/typography/AnimatedLetters.jsx";
+import ShiftLetters from "/src/components/reuse-components/typography/ShiftLetters.jsx";
+import ResponsiveTypography from "../reuse-components/typography/ResponsiveTypography";
 import AnimatedLettersContainer from "/src/components/reuse-components/typography/AnimatedLettersContainer.jsx";
 
 const ContentSection = forwardRef(
@@ -71,17 +72,12 @@ const ContentSection = forwardRef(
             className="rounded-xl overflow-hidden  h-[30dvh] md:h-[50vh]"
           >
             <div className=" h-full flex flex-col items-center justify-around gap-5 ">
-              <AnimatedLetters
-                inputString={formattedId}
-                fontVariant="h3"
-                ease="backInOut"
-                shootFromDirection="right"
-              />
-              <AnimatedLetters
-                inputString={name}
+              <ResponsiveTypography text={formattedId} variant="h3">
+                {formattedId}
+              </ResponsiveTypography>
+              <ShiftLetters
+                text={name}
                 fontVariant="h1"
-                ease="backInOut"
-                shootFromDirection="right"
                 className="font-bold"
               />
             </div>

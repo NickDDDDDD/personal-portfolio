@@ -1,16 +1,18 @@
 import { nanoid } from "nanoid";
 import PlusIcon from "../../icons/PlusIcon";
-import { useMemo, useState, useRef } from "react";
+import { useMemo, useState, useRef, useEffect } from "react";
 import {
   DndContext,
   DragOverlay,
   PointerSensor,
+  TouchSensor,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
 import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import Column from "./Column";
 import Card from "./Card";
+import { twMerge } from "tailwind-merge";
 
 const Kanban = () => {
   const [columns, setColumns] = useState([]);
@@ -21,12 +23,33 @@ const Kanban = () => {
   const [cards, setCards] = useState([]);
   const [activeColumn, setActiveColumn] = useState(null);
   const [activeCard, setActiveCard] = useState(null);
+  const [isDragging, setIsDragging] = useState(false);
 
   const containerRef = useRef(null);
 
   const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 15 } })
+    useSensor(PointerSensor, { activationConstraint: { distance: 15 } }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 250,
+        tolerance: 5,
+      },
+    })
   );
+
+  useEffect(() => {
+    //TODO: FIX THIS LATER
+    if (isDragging) {
+      console.log("Dragging");
+      const originalStyle = window.getComputedStyle(document.body).overflow;
+
+      document.body.style.overflow = "hidden";
+
+      return () => {
+        document.body.style.overflow = originalStyle;
+      };
+    }
+  }, [isDragging]);
 
   function createColumn() {
     const columnToAdd = {
@@ -49,6 +72,8 @@ const Kanban = () => {
   }
 
   function handleDragStart({ active }) {
+    setIsDragging(true);
+
     const column = active.data.current?.column;
     if (active.data.current?.type === "column" && column) {
       setActiveColumn(column);
@@ -103,6 +128,8 @@ const Kanban = () => {
   }
 
   function handleDragEnd({ active, over }) {
+    setIsDragging(false);
+
     setActiveColumn(null);
     setActiveCard(null);
 
@@ -124,21 +151,31 @@ const Kanban = () => {
     });
   }
 
+  function handleDragCancel() {
+    setIsDragging(false);
+    setActiveColumn(null);
+    setActiveCard(null);
+  }
+
   return (
-    <div className=" h-[65dvh] md:h-[95dvh] w-full bg-slate-950 flex items-center overflow-x-auto overflow-y-hidden text-white p-4">
+    <div className=" h-[65dvh] md:h-[95dvh] w-full bg-slate-950 flex  overflow-x-auto overflow-y-hidden text-white p-12">
       <DndContext
         sensors={sensors}
         onDragStart={handleDragStart}
         onDragOver={handleDragOver}
         onDragEnd={handleDragEnd}
+        onDragCancel={handleDragCancel}
       >
         {/* kanban area */}
         <div
-          className="m-auto flex gap-4 items-center relative"
+          className={twMerge(
+            "mx-auto flex h-full justify-start items-start gap-4  relative",
+            isDragging ? "touch-none" : ""
+          )}
           ref={containerRef}
         >
           {/* columns */}
-          <div className="flex gap-4">
+          <div className="flex h-full justify-start items-start gap-4">
             <SortableContext items={columnsIds}>
               {columns.map((column) => (
                 <Column
@@ -170,6 +207,7 @@ const Kanban = () => {
               key={activeColumn.id}
               column={activeColumn}
               deleteColumn={deleteColumn}
+              updateColumn={updateColumn}
               cards={cards.filter((card) => card.columnId === activeColumn.id)}
               setCards={setCards}
               containerRef={containerRef}

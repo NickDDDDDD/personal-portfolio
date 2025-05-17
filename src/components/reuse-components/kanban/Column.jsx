@@ -62,7 +62,7 @@ const Column = ({
 
   return isDragging ? (
     <div
-      className="self-start flex flex-col  w-64  rounded-md border-2 border-rose-500 max-h-[60dvh]  md:max-h-[90dvh]"
+      className=" h-full  w-64  rounded-md border-2 border-rose-500 "
       ref={setNodeRef}
       style={style}
       {...attributes}
@@ -70,102 +70,101 @@ const Column = ({
     ></div>
   ) : (
     <div
-      className="self-start  flex flex-col  w-64  bg-slate-800  rounded-md p-2 gap-2  max-h-[60dvh]  md:max-h-[90dvh] "
+      className="h-full w-64 "
       ref={setNodeRef}
       style={style}
       {...attributes}
       {...listeners}
     >
-      {/* header */}
-      <div
-        className="bg-slate-900 text-base cursor-grab rounded-md rounded-b-none font-bold flex p-2 justify-between items-center "
-        onClick={() => setIsEditing(true)}
-      >
-        <div className="flex gap-2 items-center flex-1">
-          {/* chip for cards num in column */}
-          <div className="bg-slate-800 p-1 rounded-full text-xs self-center">
-            {cards.length}
-          </div>
-          <div className="flex items-center overflow-x-hidden">
-            {isEditing ? (
-              <input
-                type="text"
-                value={column.title}
-                onChange={(e) => updateColumn(column.id, e.target.value)}
-                className="bg-slate-900 text-white resize-none outline-none focus:border-2 border-rose-500 rounded-md w-full"
-                onBlur={() => setIsEditing(false)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    setIsEditing(false);
-                  }
-                }}
-                wrap="soft"
-                autoFocus
-              />
-            ) : (
-              <p>{column.title}</p>
-            )}
-          </div>
-        </div>
+      <div className="bg-slate-800 flex flex-col  rounded-md p-2 gap-2">
+        {/* header */}
 
-        <button
-          className="stroke-gray-500 hover:stroke-white transition duration-150 hover:bg-slate-800 p-1 rounded-md"
-          onClick={() => {
-            deleteColumn(column.id);
-          }}
+        <div
+          className="bg-slate-900 text-base cursor-grab rounded-md rounded-b-none font-bold flex p-2 justify-between items-center "
+          onClick={() => setIsEditing(true)}
         >
-          <TrashIcon className="size-5" />
-        </button>
-      </div>
-      {/* cards container */}
-
-      <div className=" flex flex-col gap-2 overflow-y-auto ">
-        <SortableContext items={cardsIds}>
-          {cards.map((card) => (
-            <Card
-              key={card.id}
-              card={card}
-              deleteCard={deleteCard}
-              setCards={setCards}
-              containerRef={containerRef}
-            />
-          ))}
-        </SortableContext>
-      </div>
-
-      {/* footer */}
-      <div
-        className="overflow-hidden transition-all duration-150"
-        style={{ maxHeight: isAddingCard ? "200px" : "0px" }}
-      >
-        <textarea
-          placeholder="Do something..."
-          value={cardContent}
-          onChange={(e) => setCardContent(e.target.value)}
-          className="w-full p-2 border-none rounded-md bg-slate-900 text-white h-32 resize-none"
-          wrap="soft"
-        />
-      </div>
-
-      <div className="flex gap-2 justify-center items-center">
-        <button
-          className="flex gap-2 cursor-pointer rounded-lg bg-slate-800  p-1 ring-rose-500 hover:ring-2 focus:ring-2 active:scale-95 transition duration-150 justify-center items-center flex-1"
-          onClick={(e) => {
-            createCard(column.id);
-            e.currentTarget.blur();
-          }}
-        >
-          {!isAddingCard && <PlusIcon />}
-          {isAddingCard ? "Confirm" : "Add Card"}
-        </button>
-        {isAddingCard && (
+          <div className="flex gap-2 items-center flex-1">
+            {/* chip for cards num in column */}
+            <div className="bg-slate-800 p-1 rounded-full text-xs self-center">
+              {cards.length}
+            </div>
+            <div className="flex items-center overflow-x-hidden">
+              {isEditing ? (
+                <input
+                  type="text"
+                  value={column.title}
+                  onChange={(e) => updateColumn(column.id, e.target.value)}
+                  className="bg-slate-900 text-white resize-none outline-none focus:border-2 border-rose-500 rounded-md w-full"
+                  onBlur={() => setIsEditing(false)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      setIsEditing(false);
+                    }
+                  }}
+                  wrap="soft"
+                  autoFocus
+                />
+              ) : (
+                <p>{column.title}</p>
+              )}
+            </div>
+          </div>
           <button
-            className="flex gap-2 cursor-pointer rounded-lg bg-slate-800  p-1   active:scale-95 transition duration-150 justify-center items-center flex-2 stroke-gray-500 hover:stroke-white hover:bg-slate-900"
-            onClick={() => setIsAddingCard(false)}
+            className="stroke-gray-500 hover:stroke-white transition duration-150 hover:bg-slate-800 p-1 rounded-md"
+            onClick={() => {
+              deleteColumn(column.id);
+            }}
           >
-            <CloseIcon />
+            <TrashIcon className="size-5" />
           </button>
-        )}
+        </div>
+        {/* cards container */}
+        <div className=" flex flex-col gap-2 overflow-y-auto ">
+          <SortableContext items={cardsIds}>
+            {cards.map((card) => (
+              <Card
+                key={card.id}
+                card={card}
+                deleteCard={deleteCard}
+                setCards={setCards}
+                containerRef={containerRef}
+              />
+            ))}
+          </SortableContext>
+        </div>
+        {/* footer */}
+        <div
+          className="overflow-hidden transition-all duration-150"
+          style={{ maxHeight: isAddingCard ? "200px" : "0px" }}
+        >
+          <textarea
+            placeholder="Do something..."
+            value={cardContent}
+            onChange={(e) => setCardContent(e.target.value)}
+            className="w-full p-2 border-none rounded-md bg-slate-900 text-white h-32 resize-none"
+            wrap="soft"
+          />
+        </div>
+        <div className="flex gap-2 justify-center items-center">
+          <button
+            className="flex gap-2 cursor-pointer rounded-lg bg-slate-800  p-1 ring-rose-500 hover:ring-2 focus:ring-2 active:scale-95 transition duration-150 justify-center items-center flex-1"
+            onClick={(e) => {
+              createCard(column.id);
+              e.currentTarget.blur();
+            }}
+          >
+            {!isAddingCard && <PlusIcon />}
+            {isAddingCard ? "Confirm" : "Add Card"}
+          </button>
+          {isAddingCard && (
+            <button
+              className="flex gap-2 cursor-pointer rounded-lg bg-slate-800  p-1   active:scale-95 transition duration-150 justify-center items-center flex-2 stroke-gray-500 hover:stroke-white hover:bg-slate-900"
+              onClick={() => setIsAddingCard(false)}
+            >
+              <CloseIcon />
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
