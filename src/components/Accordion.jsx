@@ -1,10 +1,12 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import PropTypes from "prop-types";
+import Closure from "./Blog/Closure/Closure";
 const projects = [
   {
     id: 1,
     title: "Project 1",
+    content: <Closure />,
   },
   {
     id: 2,
@@ -32,6 +34,7 @@ const Accordion = () => {
             setHover={setHover}
             id={item.id}
             title={item.title}
+            content={item.content}
           />
         );
       })}
@@ -39,7 +42,7 @@ const Accordion = () => {
   );
 };
 
-const Panel = ({ open, setOpen, hover, setHover, id, title }) => {
+const Panel = ({ open, setOpen, hover, setHover, id, title, content }) => {
   const isOpen = open === id;
   const isHovered = hover === id && !isOpen;
 
@@ -108,7 +111,9 @@ const Panel = ({ open, setOpen, hover, setHover, id, title }) => {
             animate="open"
             exit="closed"
             className="w-full h-full overflow-hidden  "
-          ></motion.div>
+          >
+            {content}
+          </motion.div>
         )}
       </AnimatePresence>
     </>
