@@ -11,29 +11,30 @@ const AboutMeSection = () => {
           I&apos;m a
         </ResponsiveTypography>
         <ShiftLetters
-          text="software developer"
+          text="full stack developer"
           fontVariant="h1"
           className="text-[#5900cc] font-bold"
         />
         <div className="w-[90%] sm:w-[80%] md:w-[70%] lg:w-[70%] xl:w-[70%]">
           <ResponsiveTypography variant="body1" className="text-gray-800">
-            I like to think of myself as a front-end developer with a
-            understanding of back-end technologies. While I enjoy exploring
-            back-end tech, working on the front end brings me more passion. I
-            love the feeling of presenting my work to the user.
+            I like to think of myself as a front-end developer with an
+            understanding of back-end technologies. This allows me to approach
+            problems in two ways: starting from the product to find the right
+            technology, or starting from the technology to discover what kinds
+            of products can be built
           </ResponsiveTypography>
         </div>
       </div>
-      {/* <div className="absolute index-0 bg-stone-50/10 backdrop-blur-sm w-full h-full z-10"></div> */}
+      <div className="absolute index-0 backdrop-blur-sm w-full h-full z-10"></div>
       <div className=" absolute text-stone-300 z-5 ">
-        <Watermark text="Get motivated" />
-        <Watermark text="Live inspired" reverse />
-        <Watermark text="Find your passion" />
-        <Watermark text="Build an empire" reverse />
-        <Watermark text="Get motivated" />
-        <Watermark text="Live inspired" reverse />
-        <Watermark text="Find your passion" />
-        <Watermark text="Build an empire" reverse />
+        <Watermark text="Full Stack" />
+        <Watermark text="Inductive" reverse />
+        <Watermark text="Front-end" />
+        <Watermark text="Product" reverse />
+        <Watermark text="Full Stack" />
+        <Watermark text="Deductive" reverse />
+        <Watermark text="Back-end" />
+        <Watermark text="Technologies" reverse />
       </div>
     </AnimatedLettersContainer>
   );

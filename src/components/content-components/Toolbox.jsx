@@ -1,143 +1,178 @@
-import { useRef, useState } from "react";
-import {
-  motion,
-  useMotionTemplate,
-  useMotionValue,
-  useSpring,
-} from "framer-motion";
-import PropTypes from "prop-types";
-import { twMerge } from "tailwind-merge";
+import { Canvas, useThree, useFrame } from "@react-three/fiber";
+import { OrbitControls, RoundedBox } from "@react-three/drei";
+import { useState, useRef } from "react";
+const ToolBox = () => {
+  const [isOpen, setIsOpen] = useState(false);
 
-const Toolbox = () => {
-  const [isRotated, setIsRotated] = useState(false);
-  const springTransition = { type: "spring", stiffness: 100, damping: 10 };
-  function onClick() {
-    setIsRotated(!isRotated);
-  }
+  const toggleOpen = () => setIsOpen((prev) => !prev);
 
   return (
-    <div
-      className="flex items-center justify-center h-[60vh] md:h-[95vh] "
-      style={{ perspective: 5000 }}
-    >
-      <TiltCard className="w-[50%] h-[50%] flex" onClick={onClick}>
-        <div
-          className=" relative w-full h-full rounded-xl bg-red-300"
-          style={{ transformStyle: "preserve-3d" }}
-        >
-          <div
-            className=" w-full h-full rounded-xl z-0 "
-            style={{
-              transform: "translateZ(150px)",
-              transformStyle: "preserve-3d",
-            }}
-          >
-            <div className="absolute inset-0 flex flex-col justify-between z-20 ">
-              <motion.div
-                className="w-full h-[50%] bg-gray-400 rounded-xl "
-                animate={{ rotateX: isRotated ? 160 : 0 }}
-                transition={springTransition}
-                style={{
-                  transformStyle: "preserve-3d",
-                  transformOrigin: "top",
-                }}
-              />
-              <motion.div
-                className="w-full h-[50%] bg-gray-400  rounded-xl"
-                animate={{ rotateX: isRotated ? -160 : 0 }}
-                transition={springTransition}
-                style={{
-                  transformStyle: "preserve-3d",
-                  transformOrigin: "bottom",
-                }}
-              />
-            </div>
-            <div className="absolute inset-0 flex flex-row justify-between z-10 ">
-              <motion.div
-                className="w-[30%] h-full bg-gray-500 rounded-xl"
-                animate={{ rotateY: isRotated ? -160 : 0 }}
-                transition={springTransition}
-                style={{
-                  transformStyle: "preserve-3d",
-                  transformOrigin: "left",
-                }}
-              />
-              <motion.div
-                className="w-[30%] h-full bg-gray-500 rounded-xl"
-                animate={{ rotateY: isRotated ? 160 : 0 }}
-                transition={springTransition}
-                style={{
-                  transformStyle: "preserve-3d",
-                  transformOrigin: "right",
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      </TiltCard>
+    <div className="aspect-[4/3] h-[80vh] bg-red-500">
+      <Canvas shadows camera={{ position: [1.5, 1.5, 1.5], fov: 60 }}>
+        <hemisphereLight
+          skyColor={"#ffffff"}
+          groundColor={"#444444"}
+          intensity={1}
+        />
+        <CameraLight />
+
+        <ToolboxModel isOpen={isOpen} toggleOpen={toggleOpen} />
+
+        <OrbitControls enableZoom={false} />
+      </Canvas>
     </div>
   );
 };
+const ToolboxModel = ({ isOpen, toggleOpen }) => {
+  const lidGroupRef = useRef();
+  const boxRef = useRef();
 
-const TiltCard = ({ children, className, onClick }) => {
-  const ROTATION_RANGE = 32.5;
-  const HALF_ROTATION_RANGE = 32.5 / 2;
+  // 参数
+  const baseHeight = 0.4;
+  const lidHeight = 0.2;
+  const boxWidth = 2;
+  const boxDepth = 1;
 
-  const ref = useRef(null);
+  const cornerRadius = 0.01;
+  const smoothness = 10;
 
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
+  const lockWidth = 0.2;
+  const lockHalfHeight = 0.1;
+  const lockDepth = 0.03;
+  const lockCornerRadius = 0.01; // 新增：锁的圆角
+  const lockSmoothness = 8;
 
-  const xSpring = useSpring(x);
-  const ySpring = useSpring(y);
+  const baseY = 0;
+  const lidY = (baseHeight + lidHeight) / 2;
 
-  const transform = useMotionTemplate`rotateX(${xSpring}deg) rotateY(${ySpring}deg)`;
+  // 动画
+  useFrame(() => {
+    if (lidGroupRef.current) {
+      const target = isOpen ? -Math.PI / 2 : 0;
+      lidGroupRef.current.rotation.x +=
+        (target - lidGroupRef.current.rotation.x) * 0.1;
+    }
 
-  const handleMouseMove = (e) => {
-    if (!ref.current) return [0, 0];
-
-    const rect = ref.current.getBoundingClientRect();
-
-    const width = rect.width;
-    const height = rect.height;
-
-    const mouseX = (e.clientX - rect.left) * ROTATION_RANGE;
-    const mouseY = (e.clientY - rect.top) * ROTATION_RANGE;
-
-    const rX = (mouseY / height - HALF_ROTATION_RANGE) * -1;
-    const rY = mouseX / width - HALF_ROTATION_RANGE;
-    x.set(rX);
-    y.set(rY);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
+    if (boxRef.current) {
+      const targetY = isOpen ? -0.55 : 0;
+      boxRef.current.position.y += (targetY - boxRef.current.position.y) * 0.1;
+    }
+  });
 
   return (
-    <motion.div
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      onClick={onClick}
-      style={{
-        transformStyle: "preserve-3d",
-        transform,
-      }}
-      className={twMerge(
-        "relative rounded-lg w-full h-full bg-gray-400",
-        className
-      )}
-    >
-      {children}
-    </motion.div>
+    <group ref={boxRef}>
+      {/* 底座组 ➜ 包含底座和锁下半 */}
+      <group position={[0, baseY, 0]}>
+        {/* 底座本体 */}
+        <RoundedBox
+          args={[boxWidth, baseHeight, boxDepth]}
+          radius={cornerRadius}
+          smoothness={smoothness}
+          castShadow
+          receiveShadow
+        >
+          <meshStandardMaterial
+            color="#9CA3AF"
+            metalness={0.6}
+            roughness={0.3}
+          />
+        </RoundedBox>
+
+        {/* 锁下半部分 */}
+        <RoundedBox
+          args={[lockWidth, lockHalfHeight, lockDepth]}
+          radius={lockCornerRadius}
+          smoothness={lockSmoothness}
+          position={[
+            0,
+            baseHeight / 2 - lockHalfHeight / 2,
+            boxDepth / 2 + lockDepth / 2,
+          ]}
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleOpen();
+          }}
+          castShadow
+          receiveShadow
+        >
+          <meshStandardMaterial
+            color="#6B7280"
+            metalness={0.5}
+            roughness={0.4}
+          />
+        </RoundedBox>
+      </group>
+
+      {/* 盖子组 ➜ 可旋转，包括盖子和锁上半 */}
+      <group
+        ref={lidGroupRef}
+        position={[0, lidY - lidHeight / 2, -boxDepth / 2]}
+      >
+        {/* 这个内部 pivotShiftGroup 用来把下沿对齐到 lidGroupRef 的原点 */}
+        <group position={[0, lidHeight / 2, 0]}>
+          {/* 盖子本体 */}
+          <RoundedBox
+            args={[boxWidth, lidHeight, boxDepth]}
+            radius={cornerRadius}
+            smoothness={smoothness}
+            position={[0, 0, boxDepth / 2]}
+            castShadow
+            receiveShadow
+          >
+            <meshStandardMaterial
+              color="#9CA3AF"
+              metalness={0.6}
+              roughness={0.3}
+            />
+          </RoundedBox>
+
+          {/* 锁上半部分 */}
+          <RoundedBox
+            args={[lockWidth, lockHalfHeight, lockDepth]}
+            radius={lockCornerRadius}
+            smoothness={lockSmoothness}
+            position={[
+              0,
+              -lidHeight / 2 + lockHalfHeight / 2,
+              boxDepth + lockDepth / 2,
+            ]}
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleOpen();
+            }}
+            castShadow
+            receiveShadow
+          >
+            <meshStandardMaterial
+              color="#6B7280"
+              metalness={0.5}
+              roughness={0.4}
+            />
+          </RoundedBox>
+        </group>
+      </group>
+    </group>
   );
 };
-TiltCard.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-  onClick: PropTypes.func,
+
+const CameraLight = () => {
+  const lightRef = useRef();
+  const { camera } = useThree();
+
+  useFrame(() => {
+    if (lightRef.current) {
+      lightRef.current.position.copy(camera.position);
+    }
+  });
+
+  return (
+    <directionalLight
+      ref={lightRef}
+      intensity={2}
+      color={"#ffffff"}
+      castShadow
+    />
+  );
 };
 
-export default Toolbox;
+export default ToolBox;

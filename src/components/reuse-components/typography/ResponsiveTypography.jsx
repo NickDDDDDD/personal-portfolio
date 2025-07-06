@@ -25,17 +25,13 @@ const ResponsiveTypography = forwardRef(
     return (
       <Tag
         ref={ref}
-        className={twMerge(
-          "text-neutral-50",
-          responsiveFontSize[variant],
-          className
-        )}
+        className={twMerge(responsiveFontSize[variant], className)}
         {...props}
       >
         {children}
       </Tag>
     );
-  }
+  },
 );
 ResponsiveTypography.displayName = "ResponsiveTypography";
 

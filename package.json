@@ -15,8 +15,8 @@
     "@dnd-kit/utilities": "^3.2.2",
     "@emotion/react": "^11.14.0",
     "@react-spring/three": "^9.7.5",
-    "@react-three/drei": "^9.121.4",
-    "@react-three/fiber": "^8.17.14",
+    "@react-three/drei": "^9.122.0",
+    "@react-three/fiber": "^8.18.0",
     "@reduxjs/toolkit": "^2.8.2",
     "firebase": "^11.5.0",
     "lodash": "^4.17.21",
@@ -46,6 +46,8 @@
     "eslint-plugin-react-refresh": "^0.4.14",
     "globals": "^15.11.0",
     "postcss": "^8.4.49",
+    "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.6.13",
     "tailwindcss": "^3.4.15",
     "vite": "^5.4.10"
   }

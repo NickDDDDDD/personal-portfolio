@@ -1,13 +1,14 @@
 import { TechSectionContent } from "/src/utils/content";
-import { useRef } from "react";
 
 import TechIconCard from "../components/content-components/TechIconCard";
 import ShakeOnEnterDiv from "../components/reuse-components/ShakeOnEnterDiv.jsx";
 import { nanoid } from "nanoid";
-import { useState, useLayoutEffect, useCallback } from "react";
+import { useState, useLayoutEffect, useCallback, useRef } from "react";
 import { useMeasure } from "react-use";
 import { motion } from "framer-motion";
-
+import ResponsiveTypography from "../components/reuse-components/typography/ResponsiveTypography.jsx";
+import ShiftLetters from "../components/reuse-components/typography/ShiftLetters.jsx";
+import ToolBox from "../components/content-components/Toolbox.jsx";
 const {
   ReactIcon,
   HtmlIcon,
@@ -29,6 +30,7 @@ const TechSection = () => {
   const containerRef = useRef(null);
   const [measureRef, { width, height }] = useMeasure();
   const [iconObjs, setIconObjs] = useState([]);
+  const [open, setOpen] = useState(false);
 
   const baseSize = Math.max(width, height) / 15;
   const minDistance = baseSize * 1.5;
@@ -54,7 +56,7 @@ const TechSection = () => {
         isValid = existingPositions.every(
           (pos) =>
             Math.sqrt((pos.top - top) ** 2 + (pos.left - left) ** 2) >
-            minDistance
+            minDistance,
         );
 
         attempts++;
@@ -70,7 +72,7 @@ const TechSection = () => {
 
       return position;
     },
-    [baseSize, height, minDistance, width]
+    [baseSize, height, minDistance, width],
   );
 
   const generateIcons = useCallback(() => {
@@ -121,12 +123,12 @@ const TechSection = () => {
           const { top, left } = generateRandomPosition(
             positions,
             baseSize,
-            minDistance
+            minDistance,
           );
 
           const distance = Math.sqrt(
             Math.pow(parseFloat(icon.top) - top, 2) +
-              Math.pow(parseFloat(icon.left) - left, 2)
+              Math.pow(parseFloat(icon.left) - left, 2),
           );
 
           if (distance > 0 && distance < smallestDistance) {
@@ -148,7 +150,7 @@ const TechSection = () => {
         const fallbackPosition = generateRandomPosition(
           positions,
           baseSize,
-          minDistance
+          minDistance,
         );
         positions.push(fallbackPosition);
         return {
@@ -172,14 +174,22 @@ const TechSection = () => {
   console.log("TechSection render");
 
   return (
-    <div className="h-[60dvh] md:h-[95dvh]  bg-stone-200 border-2 border-[#2835f8] rounded-xl">
-      <section className="flex flex-col h-full items-center justify-center gap-5 p-4 md:p-10">
-        <div className="w-full h-full flex items-center justify-center ">
+    <section className="flex h-full w-full flex-col items-center justify-center gap-5 rounded-xl border-2 border-slate-500 p-4 md:p-10">
+      <ResponsiveTypography variant="h2" className="text-gray-800">
+        What&apos;s in my
+      </ResponsiveTypography>
+      <ShiftLetters
+        text="Toolbox"
+        fontVariant="h1"
+        className="font-bold text-slate-500"
+      />
+      <div className="flex h-full w-full items-center justify-center">
+        {open ? (
           <ShakeOnEnterDiv
-            className="flex items-center justify-center w-[90%] h-[70%] md:w-[70%] md:h-[90%] bg-stone-400/20  shadow-lg rounded-xl"
+            className="flex aspect-[4/3] h-[70vh] items-center justify-center rounded-2xl border-4 border-slate-500 bg-gradient-to-br from-slate-500 to-slate-400 p-3"
             shakeBehaviour={shuffle}
           >
-            <div className="relative w-[80%] h-[80%]">
+            <div className="relative h-[80%] w-[80%]">
               <motion.div className="absolute inset-0" ref={setRefs}>
                 {iconObjs.map((iconObj) => (
                   <TechIconCard
@@ -197,9 +207,11 @@ const TechSection = () => {
               </motion.div>
             </div>
           </ShakeOnEnterDiv>
-        </div>
-      </section>
-    </div>
+        ) : (
+          <ToolBox />
+        )}
+      </div>
+    </section>
   );
 };
 
