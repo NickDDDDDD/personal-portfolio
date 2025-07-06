@@ -1,19 +1,19 @@
-import ShiftLetters from "../components/reuse-components/typography/ShiftLetters.jsx";
-import AnimatedLettersContainer from "../components/reuse-components/typography/AnimatedLettersContainer.jsx";
-import MyAvatar from "../components/content-components/MyAvatar.jsx";
-import ResponsiveTypography from "../components/reuse-components/typography/ResponsiveTypography.jsx";
+import ShiftLetters from "../components/typography/ShiftLetters.jsx";
+import AnimatedLettersContainer from "../components/typography/AnimatedLettersContainer.jsx";
+import MyAvatar from "../components/MyAvatar.jsx";
+import ResponsiveTypography from "../components/typography/ResponsiveTypography.jsx";
 
 const IntroSection = () => {
   return (
-    <AnimatedLettersContainer className="bg-[#000000]  h-[60vh] md:h-[95vh] rounded-xl ">
-      <div className="flex  flex-col items-center justify-center gap-10 h-full">
-        <ResponsiveTypography variant="h2">
+    <AnimatedLettersContainer className="h-[60vh] rounded-xl bg-[#000000] md:h-[95vh]">
+      <div className="flex h-full flex-col items-center justify-center gap-10">
+        <ResponsiveTypography variant="h2" className="text-[#fafafa]">
           Hello, my name is
         </ResponsiveTypography>
         <ShiftLetters
           text="Nick"
           fontVariant="h1"
-          className="text-[#ffaf1b] font-bold"
+          className="font-bold text-[#ffaf1b]"
         />
         <MyAvatar />
       </div>

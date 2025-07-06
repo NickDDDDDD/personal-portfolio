@@ -1,15 +1,15 @@
-import HoverButton from "../components/reuse-components/buttons/HoverButton.jsx";
-import TypeText from "/src/components/reuse-components/typography/TypeText.jsx";
+import HoverButton from "../components/buttons/HoverButton.jsx";
+import TypeText from "/src/components/typography/TypeText.jsx";
 
 const ContactSection = () => {
   return (
-    <section className="h-[60vh] md:h-[95vh] flex flex-col items-center justify-center gap-10 bg-stone-200 rounded-xl border-2 border-[#ff3d00]">
+    <section className="flex h-[60vh] flex-col items-center justify-center gap-10 rounded-xl border-2 border-[#ff3d00] bg-stone-200 md:h-[95vh]">
       <TypeText
         textString={[
           "Click the button to get in touch with me.",
           "Let's build something amazing together!",
         ]}
-        className="text-3xl "
+        className="text-3xl"
       />
 
       <HoverButton>Contact me</HoverButton>

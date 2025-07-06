@@ -1,9 +1,9 @@
 import { useRef, useEffect, forwardRef } from "react";
 import PropTypes from "prop-types";
 import { useInView, motion, useScroll } from "framer-motion";
-import ShiftLetters from "/src/components/reuse-components/typography/ShiftLetters.jsx";
-import ResponsiveTypography from "../reuse-components/typography/ResponsiveTypography";
-import AnimatedLettersContainer from "/src/components/reuse-components/typography/AnimatedLettersContainer.jsx";
+import ShiftLetters from "/src/components/typography/ShiftLetters.jsx";
+import ResponsiveTypography from "../typography/ResponsiveTypography";
+import AnimatedLettersContainer from "/src/components/typography/AnimatedLettersContainer.jsx";
 
 const ContentSection = forwardRef(
   (
@@ -18,7 +18,7 @@ const ContentSection = forwardRef(
       contentContainerRef,
       children,
     },
-    ref
+    ref,
   ) => {
     const innerRef = useRef(null);
 
@@ -64,14 +64,14 @@ const ContentSection = forwardRef(
       <motion.section
         ref={innerRef}
         id={`section-${id}`}
-        className="flex flex-col gap-5 "
+        className="flex flex-col gap-5"
       >
         {displayTitle && (
           <AnimatedLettersContainer
             style={{ backgroundColor: bgColor, color: textColor }}
-            className="rounded-xl overflow-hidden  h-[30dvh] md:h-[50vh]"
+            className="h-[30dvh] overflow-hidden rounded-xl md:h-[50vh]"
           >
-            <div className=" h-full flex flex-col items-center justify-around gap-5 ">
+            <div className="flex h-full flex-col items-center justify-around gap-5">
               <ResponsiveTypography text={formattedId} variant="h3">
                 {formattedId}
               </ResponsiveTypography>
@@ -86,7 +86,7 @@ const ContentSection = forwardRef(
         <div>{children}</div>
       </motion.section>
     );
-  }
+  },
 );
 
 ContentSection.displayName = "ContentSection";

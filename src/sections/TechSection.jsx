@@ -1,14 +1,13 @@
 import { TechSectionContent } from "/src/utils/content";
 
-import TechIconCard from "../components/content-components/TechIconCard";
-import ShakeOnEnterDiv from "../components/reuse-components/ShakeOnEnterDiv.jsx";
+import TechIconCard from "../components/TechIconCard.jsx";
+import ShakeOnEnterDiv from "../components/ShakeOnEnterDiv.jsx";
 import { nanoid } from "nanoid";
 import { useState, useLayoutEffect, useCallback, useRef } from "react";
 import { useMeasure } from "react-use";
 import { motion } from "framer-motion";
-import ResponsiveTypography from "../components/reuse-components/typography/ResponsiveTypography.jsx";
-import ShiftLetters from "../components/reuse-components/typography/ShiftLetters.jsx";
-import ToolBox from "../components/content-components/Toolbox.jsx";
+import ResponsiveTypography from "../components/typography/ResponsiveTypography.jsx";
+import ShiftLetters from "../components/typography/ShiftLetters.jsx";
 const {
   ReactIcon,
   HtmlIcon,
@@ -30,7 +29,6 @@ const TechSection = () => {
   const containerRef = useRef(null);
   const [measureRef, { width, height }] = useMeasure();
   const [iconObjs, setIconObjs] = useState([]);
-  const [open, setOpen] = useState(false);
 
   const baseSize = Math.max(width, height) / 15;
   const minDistance = baseSize * 1.5;
@@ -184,12 +182,12 @@ const TechSection = () => {
         className="font-bold text-slate-500"
       />
       <div className="flex h-full w-full items-center justify-center">
-        {open ? (
-          <ShakeOnEnterDiv
-            className="flex aspect-[4/3] h-[70vh] items-center justify-center rounded-2xl border-4 border-slate-500 bg-gradient-to-br from-slate-500 to-slate-400 p-3"
-            shakeBehaviour={shuffle}
-          >
-            <div className="relative h-[80%] w-[80%]">
+        <ShakeOnEnterDiv
+          className="flex aspect-[4/3] h-[70vh] items-center justify-center rounded-2xl border-4 bg-gradient-to-br from-slate-400 to-slate-500 p-3"
+          shakeBehaviour={shuffle}
+        >
+          <div className="relative h-[80%] w-[80%]">
+            <div>
               <motion.div className="absolute inset-0" ref={setRefs}>
                 {iconObjs.map((iconObj) => (
                   <TechIconCard
@@ -206,10 +204,8 @@ const TechSection = () => {
                 ))}
               </motion.div>
             </div>
-          </ShakeOnEnterDiv>
-        ) : (
-          <ToolBox />
-        )}
+          </div>
+        </ShakeOnEnterDiv>
       </div>
     </section>
   );

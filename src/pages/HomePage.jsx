@@ -16,19 +16,19 @@ const HomePage = () => {
   const bgColors = [
     "#ffaf1b",
     "#000000",
-    "#5900cc",
-    "#2835f8",
-    "#ff003d",
-    "#ff3d00",
+    "#6d28d9",
+    "#64748b",
+    "#292524",
+    "#22c55e",
   ];
 
   const textColors = [
     "#000000",
-    "#ffffff",
-    "#ffffff",
-    "#ffffff",
-    "#ffffff",
-    "#ffffff",
+    "#fafafa",
+    "#fafafa",
+    "#fafafa",
+    "#fafafa",
+    "#fafafa",
   ];
 
   const navItems = navNames.map((name, index) => ({
@@ -50,7 +50,7 @@ const HomePage = () => {
         sectionScrollProgressValue.set(scrollYProgressValue);
       }
     },
-    [expandedId, sectionScrollProgressValue]
+    [expandedId, sectionScrollProgressValue],
   );
 
   const handleInViewChange = useCallback((id) => {
@@ -75,7 +75,7 @@ const HomePage = () => {
         }
       }
     },
-    [expandedId]
+    [expandedId],
   );
 
   console.log("HomePage render");
@@ -90,13 +90,13 @@ const HomePage = () => {
   };
 
   return (
-    <div className=" h-dvh overflow-hidden  grid grid-rows-[1fr_auto]   landscape:grid-cols-[minmax(200px,_1fr)_7fr]   ">
+    <div className="grid h-dvh grid-rows-[1fr_auto] overflow-hidden landscape:grid-cols-[minmax(200px,_1fr)_7fr]">
       {/* Content */}
       <div
         ref={contentContainerRef}
-        className="relative overflow-y-auto landscape:order-2  landscape:h-dvh  bg-stone-200"
+        className="relative overflow-y-auto bg-stone-200 landscape:order-2 landscape:h-dvh"
       >
-        <div className=" flex flex-col gap-5 p-2 md:p-7">
+        <div className="flex flex-col gap-5 p-2 md:p-7">
           {navItems.map((item, index) => (
             <ContentSection
               ref={(el) => {
@@ -120,8 +120,8 @@ const HomePage = () => {
       </div>
 
       {/* Navigation */}
-      <div className="w-screen scrollbar-hide  landscape:w-auto landscape:order-1 landscape:h-dvh landscape:overflow-y-auto  bg-stone-200 p-2 md:p-7">
-        <nav className="scrollbar-hide overflow-x-auto landscape:overflow-x-visible flex gap-1 flex-nowrap  landscape:flex-col md:gap-4">
+      <div className="scrollbar-hide w-screen bg-stone-200 p-2 md:p-7 landscape:order-1 landscape:h-dvh landscape:w-auto landscape:overflow-y-auto">
+        <nav className="scrollbar-hide flex flex-nowrap gap-1 overflow-x-auto md:gap-4 landscape:flex-col landscape:overflow-x-visible">
           {navItems.map((item, index) => (
             <NavItem
               ref={(el) => {

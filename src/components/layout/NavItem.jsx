@@ -1,13 +1,13 @@
 import { forwardRef } from "react";
 import PropTypes from "prop-types";
-import ResponsiveTypography from "/src/components/reuse-components/typography/ResponsiveTypography";
+import ResponsiveTypography from "/src/components/typography/ResponsiveTypography";
 import { useMediaQuery } from "react-responsive";
 import { useTransform, motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
 const NavItem = forwardRef(
   (
     { id, name, bgColor, textColor, isExpanded, onExpand, progressValue },
-    ref
+    ref,
   ) => {
     const isLandscape = useMediaQuery({ query: "(orientation: landscape)" });
     const formattedId = id.toString().padStart(2, "0");
@@ -27,10 +27,10 @@ const NavItem = forwardRef(
           backgroundColor: bgColor,
         }}
         className={twMerge(
-          "rounded-xl   relative flex flex-col shrink-0 p-2 justify-between items-start min-h-15  overflow-hidden   landscape:min-h-28 md:p-3 landscape:p-4 transition-all duration-300",
+          "min-h-15 relative flex shrink-0 flex-col items-start justify-between overflow-hidden rounded-xl p-2 transition-all duration-300 md:p-3 landscape:min-h-28 landscape:p-4",
           isExpanded
-            ? "w-[50vw] landscape:w-auto landscape:h-96"
-            : "w-28 landscape:w-auto landscape:h-28"
+            ? "w-[50vw] landscape:h-96 landscape:w-auto"
+            : "w-28 landscape:h-28 landscape:w-auto",
         )}
       >
         <ResponsiveTypography variant="overline" style={{ color: textColor }}>
@@ -47,7 +47,7 @@ const NavItem = forwardRef(
         {/* white dot */}
         {isExpanded && (
           <motion.div
-            className="absolute inset-0 w-full h-full"
+            className="absolute inset-0 h-full w-full"
             style={{
               translateX: !isLandscape ? translateValue : undefined,
               translateY: isLandscape ? translateValue : undefined,
@@ -56,7 +56,7 @@ const NavItem = forwardRef(
             }}
           >
             <div
-              className="absolute  size-2 md:size-3 rounded-full"
+              className="absolute size-2 rounded-full md:size-3"
               style={{
                 backgroundColor: textColor,
                 top: !isLandscape ? "20%" : "5%",
@@ -68,7 +68,7 @@ const NavItem = forwardRef(
         )}
       </button>
     );
-  }
+  },
 );
 
 NavItem.propTypes = {

@@ -1,9 +1,9 @@
-import Accordion from "../components/Accordion";
+import Accordion from "../components/projects/Accordion";
 const ProjectSection = () => {
   console.log("WorkSection render");
 
   return (
-    <section className="w-full h-full border-2 border-[#ff003d] rounded-xl">
+    <section className="h-full w-full rounded-xl border-2 border-stone-800">
       <Accordion />
     </section>
   );

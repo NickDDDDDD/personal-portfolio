@@ -1,6 +1,5 @@
-import Kanban from "../components/reuse-components/kanban/Kanban";
 const FooterSection = () => {
-  return <Kanban />;
+  return <div>footer</div>;
 };
 
 export default FooterSection;
