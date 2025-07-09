@@ -47,7 +47,7 @@ const DragCard = ({ containerRef, top, left, rotate, className, children }) => {
 
     els.forEach((el) => {
       let zIndex = parseInt(
-        window.getComputedStyle(el).getPropertyValue("z-index")
+        window.getComputedStyle(el).getPropertyValue("z-index"),
       );
 
       if (!isNaN(zIndex) && zIndex > maxZIndex) {
@@ -145,8 +145,8 @@ const TiltCard = ({ children, className, onClick }) => {
         transform,
       }}
       className={twMerge(
-        "relative rounded-sm p-1 md:rounded-xl md:p-2 bg-stone-50 shadow-md w-full h-full",
-        className
+        "relative h-full w-full rounded-md bg-stone-50 p-1 shadow-md md:rounded-2xl md:p-2",
+        className,
       )}
     >
       <motion.div
@@ -165,7 +165,7 @@ const TiltCard = ({ children, className, onClick }) => {
             ? "drop-shadow(0px 6px 6px rgba(0, 0, 0, 0.6))"
             : "drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3))",
         }}
-        className="w-full h-full"
+        className="h-full w-full"
       >
         {children}
       </motion.div>

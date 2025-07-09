@@ -19,47 +19,47 @@ const HelloSection = ({ scrollYProgressValue }) => {
   const backgroundTransform = useTransform(
     scrollYProgressValue,
     [0, 1],
-    ["0%", "60%"]
+    ["0%", "60%"],
   );
   const mountainsTransform = useTransform(
     scrollYProgressValue,
     [0, 1],
-    ["0%", "50%"]
+    ["0%", "50%"],
   );
   const jungle1Transform = useTransform(
     scrollYProgressValue,
     [0, 1],
-    ["3%", "40%"]
+    ["3%", "40%"],
   );
   const jungle2Transform = useTransform(
     scrollYProgressValue,
     [0, 1],
-    ["0%", "30%"]
+    ["0%", "30%"],
   );
   const jungle3Transform = useTransform(
     scrollYProgressValue,
     [0, 1],
-    ["0%", "20%"]
+    ["0%", "20%"],
   );
   const jungle4Transform = useTransform(
     scrollYProgressValue,
     [0, 1],
-    ["0%", "10%"]
+    ["0%", "10%"],
   );
   const jungle5Transform = useTransform(
     scrollYProgressValue,
     [0, 1],
-    ["0%", "0%"]
+    ["0%", "0%"],
   );
   const manOnMountainTransform = useTransform(
     scrollYProgressValue,
     [0, 1],
-    ["10%", "10%"]
+    ["10%", "10%"],
   );
   const overlayTransform = useTransform(scrollYProgressValue, [0, 1], [0, 1]);
 
   return (
-    <div className=" bg-[#ffaf1b]  relative aspect-[4/3] md:aspect-[16/9] overflow-hidden rounded-xl">
+    <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#ffaf1b] md:aspect-[16/9]">
       {/* Background Image */}
       <motion.div
         className="absolute inset-0 bg-cover bg-center"

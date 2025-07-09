@@ -69,9 +69,9 @@ const ContentSection = forwardRef(
         {displayTitle && (
           <AnimatedLettersContainer
             style={{ backgroundColor: bgColor, color: textColor }}
-            className="h-[30dvh] overflow-hidden rounded-xl md:h-[50vh]"
+            className="h-[20dvh] overflow-hidden rounded-2xl md:h-[50vh]"
           >
-            <div className="flex h-full flex-col items-center justify-around gap-5">
+            <div className="flex h-full flex-col items-center justify-evenly">
               <ResponsiveTypography text={formattedId} variant="h3">
                 {formattedId}
               </ResponsiveTypography>

@@ -2,6 +2,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import Project from "./ProjectTemplate";
+import ResponsiveTypography from "../typography/ResponsiveTypography";
+import { useMediaQuery } from "react-responsive";
+
 const projects = [
   {
     id: 1,
@@ -67,6 +70,7 @@ const Panel = ({
 }) => {
   const isOpen = open === id;
   const isHovered = hover === id && !isOpen;
+  const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
 
   const rotateVariants = {
     initial: { rotateX: 0 },
@@ -89,12 +93,18 @@ const Panel = ({
   return (
     <>
       <motion.button
-        className="w-full rounded-xl bg-black text-white"
+        className="w-full rounded-2xl bg-black text-white"
         onClick={handleClick}
         onMouseEnter={() => setHover(id)}
         onMouseLeave={() => setHover(0)}
         animate={{
-          height: isOpen ? "40vh" : "20vh",
+          height: isOpen
+            ? isMobile
+              ? "20vh"
+              : "40vh"
+            : isMobile
+              ? "10vh"
+              : "20vh",
         }}
         style={{
           perspective: 5000,
@@ -115,20 +125,23 @@ const Panel = ({
             transition={hoverTransition}
           >
             <motion.div
-              className="flex h-full w-full flex-col items-start justify-evenly rounded-xl bg-stone-800 p-12"
+              className="flex h-full w-full flex-col items-start justify-evenly rounded-xl bg-stone-800 p-4 md:p-12"
               variants={rotateVariants}
               animate={isHovered ? "hover" : "initial"}
               style={hoverStyle}
               transition={hoverTransition}
             >
-              <p className="text-4xl font-semibold">{title}</p>
+              <ResponsiveTypography className="font-semibold" variant="h5">
+                {title}
+              </ResponsiveTypography>
               {isOpen && (
-                <h2
-                  className="text-5xl font-semibold"
+                <ResponsiveTypography
+                  variant="h4"
+                  className="font-semibold"
                   style={{ color: discription.color }}
                 >
                   {discription.text}
-                </h2>
+                </ResponsiveTypography>
               )}
             </motion.div>
           </motion.div>

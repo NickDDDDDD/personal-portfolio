@@ -27,7 +27,7 @@ const NavItem = forwardRef(
           backgroundColor: bgColor,
         }}
         className={twMerge(
-          "min-h-15 relative flex shrink-0 flex-col items-start justify-between overflow-hidden rounded-xl p-2 transition-all duration-300 md:p-3 landscape:min-h-28 landscape:p-4",
+          "min-h-15 relative flex shrink-0 flex-col items-start justify-between overflow-hidden rounded-xl p-2 transition-all duration-300 md:rounded-2xl md:p-3 landscape:min-h-28 landscape:p-4",
           isExpanded
             ? "w-[50vw] landscape:h-96 landscape:w-auto"
             : "w-28 landscape:h-28 landscape:w-auto",

@@ -96,7 +96,7 @@ const HomePage = () => {
         ref={contentContainerRef}
         className="relative overflow-y-auto bg-stone-200 landscape:order-2 landscape:h-dvh"
       >
-        <div className="flex flex-col gap-5 p-2 md:p-7">
+        <div className="flex flex-col gap-5 p-2 md:p-6 md:pl-3">
           {navItems.map((item, index) => (
             <ContentSection
               ref={(el) => {
@@ -120,7 +120,7 @@ const HomePage = () => {
       </div>
 
       {/* Navigation */}
-      <div className="scrollbar-hide w-screen bg-stone-200 p-2 md:p-7 landscape:order-1 landscape:h-dvh landscape:w-auto landscape:overflow-y-auto">
+      <div className="scrollbar-hide w-screen bg-stone-200 p-2 md:p-6 md:pr-3 landscape:order-1 landscape:h-dvh landscape:w-auto landscape:overflow-y-auto">
         <nav className="scrollbar-hide flex flex-nowrap gap-1 overflow-x-auto md:gap-4 landscape:flex-col landscape:overflow-x-visible">
           {navItems.map((item, index) => (
             <NavItem

@@ -3,7 +3,7 @@ const ProjectSection = () => {
   console.log("WorkSection render");
 
   return (
-    <section className="h-full w-full rounded-xl border-2 border-stone-800">
+    <section className="h-full w-full rounded-2xl border-2 border-stone-800">
       <Accordion />
     </section>
   );
