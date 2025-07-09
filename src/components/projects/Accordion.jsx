@@ -38,7 +38,7 @@ const Accordion = () => {
   const [hover, setHover] = useState(0);
 
   return (
-    <div className="flex h-full w-full flex-col gap-2 p-2">
+    <div className="flex h-full w-full flex-col gap-3 p-4">
       {projects.map((item) => {
         return (
           <Panel
