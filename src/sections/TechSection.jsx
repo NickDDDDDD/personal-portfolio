@@ -172,7 +172,7 @@ const TechSection = () => {
   console.log("TechSection render");
 
   return (
-    <section className="flex h-full w-full flex-col items-center justify-center gap-5 rounded-xl border-2 border-slate-500 p-4 md:p-10">
+    <section className="flex h-full w-full flex-col items-center justify-center gap-5 rounded-xl border border-slate-500 p-4 md:p-10">
       <ResponsiveTypography variant="h3" className="text-gray-800">
         What&apos;s in my
       </ResponsiveTypography>
