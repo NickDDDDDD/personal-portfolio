@@ -1,4 +1,3 @@
-import ShiftLetters from "../components/typography/ShiftLetters.jsx";
 import AnimatedLettersContainer from "../components/typography/AnimatedLettersContainer.jsx";
 import ResponsiveTypography from "../components/typography/ResponsiveTypography.jsx";
 import Watermark from "../components/background/WaterMark.jsx";
@@ -10,11 +9,13 @@ const AboutMeSection = () => {
         <ResponsiveTypography variant="h3" className="text-gray-800">
           I&apos;m a
         </ResponsiveTypography>
-        <ShiftLetters
-          text="full stack developer"
-          fontVariant="h2"
+        <ResponsiveTypography
+          variant="h2"
           className="font-bold text-violet-700"
-        />
+        >
+          full stack developer
+        </ResponsiveTypography>
+
         <div className="w-[90%] sm:w-[80%] md:w-[70%] lg:w-[70%] xl:w-[70%]">
           <ResponsiveTypography variant="body1" className="text-gray-800">
             I like to think of myself as a front-end developer with an

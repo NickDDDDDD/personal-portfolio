@@ -1,4 +1,3 @@
-import ShiftLetters from "../components/typography/ShiftLetters.jsx";
 import AnimatedLettersContainer from "../components/typography/AnimatedLettersContainer.jsx";
 import MyAvatar from "../components/MyAvatar.jsx";
 import ResponsiveTypography from "../components/typography/ResponsiveTypography.jsx";
@@ -10,11 +9,10 @@ const IntroSection = () => {
         <ResponsiveTypography variant="h2" className="text-[#fafafa]">
           Hello, my name is
         </ResponsiveTypography>
-        <ShiftLetters
-          text="Nick"
-          fontVariant="h1"
-          className="font-bold text-[#ffaf1b]"
-        />
+        <ResponsiveTypography variant="h1" className="font-bold text-[#ffaf1b]">
+          Nick
+        </ResponsiveTypography>
+
         <MyAvatar />
       </div>
     </AnimatedLettersContainer>
