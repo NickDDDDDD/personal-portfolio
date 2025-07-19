@@ -5,8 +5,11 @@ import { FaSquareGithub } from "react-icons/fa6";
 import ResponsiveTypography from "../components/typography/ResponsiveTypography";
 const ContactSection = () => {
   return (
-    <section className="flex h-[60vh] flex-col items-center justify-center overflow-hidden rounded-2xl border border-green-500 bg-stone-200 p-6 md:h-[95vh]">
-      <div className="flex h-full w-full flex-col justify-center gap-6 md:w-1/2">
+    <section className="grid h-[60vh] w-full grid-cols-3 flex-col items-center justify-center gap-6 overflow-hidden rounded-2xl md:h-[95vh]">
+      <div className="hidden landscape:col-span-1 landscape:block landscape:h-full landscape:rounded-2xl landscape:bg-stone-300">
+        text or bg img
+      </div>
+      <div className="col-span-3 flex h-full flex-col justify-center gap-3 md:gap-6 landscape:col-span-2">
         <Card
           title="Email"
           subtitle="click to email me"

@@ -172,7 +172,7 @@ const TechSection = () => {
   console.log("TechSection render");
 
   return (
-    <section className="flex h-full w-full flex-col items-center justify-center gap-5 rounded-xl border border-slate-500 p-4 md:p-10">
+    <section className="flex h-full w-full flex-col items-center justify-center gap-5 rounded-xl border border-gray-800 p-4 md:p-10">
       <ResponsiveTypography variant="h3" className="text-gray-800">
         What&apos;s in my
       </ResponsiveTypography>
@@ -182,10 +182,7 @@ const TechSection = () => {
         className="font-bold text-slate-500"
       />
       <div className="flex h-full w-full items-center justify-center">
-        <ShakeOnEnterDiv
-          className="flex aspect-[4/3] w-[80vw] items-center justify-center rounded-2xl border-4 bg-gradient-to-br from-slate-400 to-slate-500 p-3 md:w-[50vw]"
-          shakeBehaviour={shuffle}
-        >
+        <div className="flex aspect-[4/3] w-[80vw] items-center justify-center rounded-2xl border-4 bg-gradient-to-br from-slate-400 to-slate-500 p-3 md:w-[50vw]">
           <div className="relative h-[80%] w-[80%]">
             <div>
               <motion.div className="absolute inset-0" ref={setRefs}>
@@ -205,7 +202,7 @@ const TechSection = () => {
               </motion.div>
             </div>
           </div>
-        </ShakeOnEnterDiv>
+        </div>
       </div>
     </section>
   );

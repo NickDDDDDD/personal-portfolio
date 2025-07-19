@@ -38,7 +38,7 @@ const Accordion = () => {
   const [hover, setHover] = useState(0);
 
   return (
-    <div className="flex h-full w-full flex-col gap-3 p-4">
+    <div className="flex h-full w-full flex-col gap-3">
       {projects.map((item) => {
         return (
           <Panel
@@ -157,7 +157,6 @@ const Panel = ({
             animate="open"
             exit="closed"
             layout
-            className="overflow-hidden"
           >
             {content}
           </motion.div>

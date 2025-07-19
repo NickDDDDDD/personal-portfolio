@@ -3,7 +3,7 @@ const ProjectSection = () => {
   console.log("WorkSection render");
 
   return (
-    <section className="h-full w-full rounded-2xl border border-stone-800">
+    <section className="flex h-full w-full items-center justify-center">
       <Accordion />
     </section>
   );

@@ -90,13 +90,13 @@ const HomePage = () => {
   };
 
   return (
-    <div className="grid h-dvh grid-rows-[1fr_auto] overflow-hidden landscape:grid-cols-[minmax(200px,_1fr)_7fr]">
+    <div className="grid h-dvh grid-rows-[1fr_auto] landscape:grid-cols-[minmax(200px,_1fr)_7fr]">
       {/* Content */}
       <div
         ref={contentContainerRef}
-        className="relative overflow-y-auto bg-stone-200 landscape:order-2 landscape:h-dvh"
+        className="relative overflow-x-hidden overflow-y-scroll p-9 pb-6 pt-6 landscape:order-2 landscape:h-full"
       >
-        <div className="flex flex-col gap-5 p-2 md:p-6">
+        <div className="flex flex-col gap-5">
           {navItems.map((item, index) => (
             <ContentSection
               ref={(el) => {
@@ -115,12 +115,12 @@ const HomePage = () => {
               {sectionComponents[item.name]}
             </ContentSection>
           ))}
-          <FooterSection></FooterSection>
+          <FooterSection />
         </div>
       </div>
 
       {/* Navigation */}
-      <div className="scrollbar-hide w-screen bg-stone-200 p-2 md:p-6 md:pr-3 landscape:order-1 landscape:h-dvh landscape:w-auto landscape:overflow-y-auto">
+      <div className="scrollbar-hide w-screen pb-6 pl-6 pt-6 landscape:order-1 landscape:h-full landscape:w-auto landscape:overflow-y-scroll">
         <nav className="scrollbar-hide flex flex-nowrap gap-1 overflow-x-auto md:gap-4 landscape:flex-col landscape:overflow-x-visible">
           {navItems.map((item, index) => (
             <NavItem
