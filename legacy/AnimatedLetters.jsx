@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { useMediaQuery } from "react-responsive";
-import ResponsiveTypography from "../components/typography/ResponsiveTypography";
+import ResponsiveTypography from "../src/components/typography/ResponsiveTypography";
 import { twMerge } from "tailwind-merge";
 
 // Function to generate array of letter objects from a string
