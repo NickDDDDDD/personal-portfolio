@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Project from "./ProjectTemplate";
 import ResponsiveTypography from "../typography/ResponsiveTypography";
@@ -36,6 +36,20 @@ const projects = [
 const Accordion = () => {
   const [open, setOpen] = useState(0);
   const [hover, setHover] = useState(0);
+
+  useEffect(() => {
+    if (open) {
+      document.body.style.backgroundColor = "#1a1a1a";
+      console.log("Accordion opened, background changed to dark");
+    } else {
+      document.body.style.backgroundColor = "#e7e5e4";
+      console.log("Accordion closed, background changed to white");
+    }
+
+    return () => {
+      document.body.style.backgroundColor = "#e7e5e4";
+    };
+  }, [open]);
 
   return (
     <div className="flex h-full w-full flex-col gap-3">

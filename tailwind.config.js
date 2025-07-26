@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import typography from "@tailwindcss/typography";
+
 export default {
   content: ["./src/**/*.{js,jsx,ts,tsx,html}"],
   theme: {
@@ -25,5 +27,6 @@ export default {
     function ({ addVariant }) {
       addVariant("landscape", "@media (orientation: landscape)");
     },
+    typography,
   ],
 };
