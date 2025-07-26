@@ -1,5 +1,5 @@
-import { AnimatePresence, motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import Project from "./ProjectTemplate";
 import ResponsiveTypography from "../typography/ResponsiveTypography";
@@ -33,7 +33,7 @@ const projects = [
   },
 ];
 
-const Accordion = () => {
+const Accordion = ({ scrollContainerRef }) => {
   const [open, setOpen] = useState(0);
   const [hover, setHover] = useState(0);
 
@@ -65,6 +65,7 @@ const Accordion = () => {
             title={item.title}
             discription={item.discription}
             content={item.content}
+            scrollContainerRef={scrollContainerRef}
           />
         );
       })}
@@ -81,22 +82,51 @@ const Panel = ({
   title,
   discription,
   content,
+  scrollContainerRef,
 }) => {
   const isOpen = open === id;
   const isHovered = hover === id && !isOpen;
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
+  const prevScrollRef = useRef(0);
 
   const rotateVariants = {
     initial: { rotateX: 0 },
     hover: { rotateX: -25 },
   };
+  const lockScroll = () => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const currentScroll = container.scrollTop;
+
+    container.scrollTop = currentScroll;
+
+    prevScrollRef.current = container.scrollTop;
+    console.log("Scroll locked at:", prevScrollRef.current);
+  };
+
+  const unlockScroll = () => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    console.log("Unlocking scroll to:", prevScrollRef.current);
+
+    container.scrollTo({
+      top: prevScrollRef.current,
+      behavior: "smooth",
+    });
+  };
 
   function handleClick() {
-    if (isOpen) {
-      setOpen(0);
+    // 如果当前已经有 panel 打开，且点击的是另一个 panel，则不 lock
+    if (open !== 0 && open !== id) {
+      // 直接切换，不执行 lockScroll
+      setOpen(id);
       return;
     }
-    setOpen(id);
+
+    // 其他情况（打开第一个或关闭当前）才 lockScroll
+    lockScroll();
+    setOpen(isOpen ? 0 : id);
   }
   const hoverStyle = {
     transformOrigin: "bottom center",
@@ -162,23 +192,30 @@ const Panel = ({
         </motion.div>
       </motion.button>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            key={`panel-${id}`}
-            variants={panelVariants}
-            initial="closed"
-            animate="open"
-            exit="closed"
-            layout
-          >
-            {content}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <motion.div
+        key={`panel-${id}`}
+        variants={panelVariants}
+        animate={isOpen ? "open" : "closed"}
+        layout
+        className="overflow-hidden"
+        onAnimationStart={() => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        }}
+        onAnimationComplete={unlockScroll}
+      >
+        {content}
+      </motion.div>
     </>
   );
 };
+
+Accordion.propTypes = {
+  scrollContainerRef: PropTypes.object.isRequired,
+};
+
 Panel.propTypes = {
   open: PropTypes.number.isRequired,
   hover: PropTypes.number.isRequired,
@@ -188,6 +225,7 @@ Panel.propTypes = {
   content: PropTypes.node,
   title: PropTypes.string.isRequired,
   discription: PropTypes.object.isRequired,
+  scrollContainerRef: PropTypes.object.isRequired,
 };
 
 const panelVariants = {

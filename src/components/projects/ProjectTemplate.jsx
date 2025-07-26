@@ -9,22 +9,22 @@ const ProjectTemplate = () => {
         <img src={pic} alt="terror in tilberg" />
       </div>
       <div className="col-span-2 flex flex-col items-center justify-center gap-4">
-        <div className="flex w-full flex-1 items-center justify-center rounded-full bg-[#d5e000] text-[#292524]">
+        <div className="flex w-full flex-1 items-center justify-center rounded-2xl bg-[#292524] text-[#d5e000]">
           <ResponsiveTypography variant="h6" className="font-bold">
             Project Type: Web App
           </ResponsiveTypography>
         </div>
-        <div className="flex w-full flex-1 items-center justify-center rounded-full bg-[#d5e000] text-[#292524]">
+        <div className="flex w-full flex-1 items-center justify-center rounded-2xl bg-[#292524] text-[#d5e000]">
           <ResponsiveTypography variant="h6" className="font-bold">
             Duration: July 2024 - May 2025
           </ResponsiveTypography>
         </div>
-        <div className="flex w-full flex-1 items-center justify-center rounded-full bg-[#d5e000] text-[#292524]">
+        <div className="flex w-full flex-1 items-center justify-center rounded-2xl bg-[#292524] text-[#d5e000]">
           <ResponsiveTypography variant="h6" className="font-bold">
             Team Size: 10 members
           </ResponsiveTypography>
         </div>
-        <div className="flex w-full flex-1 items-center justify-center rounded-full bg-[#d5e000] text-[#292524]">
+        <div className="flex w-full flex-1 items-center justify-center rounded-2xl bg-[#292524] text-[#d5e000]">
           <ResponsiveTypography variant="h6" className="font-bold">
             My Role: Product Owner & Frontend Developer
           </ResponsiveTypography>
