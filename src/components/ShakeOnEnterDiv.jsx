@@ -1,4 +1,4 @@
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation } from "motion/react";
 import PropTypes from "prop-types";
 import { twMerge } from "tailwind-merge";
 import { useRef } from "react";

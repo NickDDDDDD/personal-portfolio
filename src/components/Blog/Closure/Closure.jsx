@@ -5,7 +5,7 @@ import useClosure from "../../../hooks/useClosure";
 
 const Closure = () => {
   return (
-    <div className="flex flex-col gap-4 justify-center items-center p-8">
+    <div className="flex flex-col items-center justify-center gap-4 p-8">
       <CounterClosure />
       <div className="flex gap-4">
         <ReduxClosureGet />
@@ -35,9 +35,9 @@ const CounterClosure = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex justify-center items-center gap-4">
+      <div className="flex items-center justify-center gap-4">
         <button
-          className="bg-blue-300 rounded-full px-4 py-2 cursor-pointer hover:bg-blue-400 active:bg-blue-200"
+          className="cursor-pointer rounded-full bg-blue-300 px-4 py-2 hover:bg-blue-400 active:bg-blue-200"
           onClick={increment}
         >
           count++
@@ -45,9 +45,9 @@ const CounterClosure = () => {
         <p>{`real count ${count}`}</p>
       </div>
 
-      <div className="flex justify-center items-center gap-4">
+      <div className="flex items-center justify-center gap-4">
         <button
-          className="bg-blue-300  rounded-full px-4 py-2 cursor-pointer hover:bg-blue-400 active:bg-blue-200"
+          className="cursor-pointer rounded-full bg-blue-300 px-4 py-2 hover:bg-blue-400 active:bg-blue-200"
           onClick={logLater}
         >
           log after 5s
@@ -72,18 +72,18 @@ const ReduxClosureGet = () => {
   const hookUsername = getUsername();
 
   return (
-    <div className="flex flex-col gap-4 bg-neutral-900 text-neutral-100 p-4 rounded-xl w-1/2">
+    <div className="flex w-1/2 flex-col gap-4 rounded-xl bg-neutral-900 p-4 text-neutral-100">
       <p>{`username in store: ${username}`}</p>
       <p>{`username get by hook: ${hookUsername}`}</p>
 
       <input
-        className="rounded-full text-xl bg-neutral-700 px-4 py-2"
+        className="rounded-full bg-neutral-700 px-4 py-2 text-xl"
         type="text"
         value={inputValue}
         onChange={onInputValueChage}
       />
       <button
-        className="bg-red-500 rounded-full px-4 py-2 cursor-pointer"
+        className="cursor-pointer rounded-full bg-red-500 px-4 py-2"
         onClick={() => {
           dispatch(setUsername(inputValue));
           setInputValue("");
@@ -104,15 +104,15 @@ const ReduxClosureSend = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center gap-4 bg-neutral-900 text-neutral-100 p-4 rounded-xl w-1/2">
+    <div className="flex w-1/2 flex-col items-center justify-center gap-4 rounded-xl bg-neutral-900 p-4 text-neutral-100">
       <input
-        className="rounded-full text-xl bg-neutral-700 px-4 py-2"
+        className="rounded-full bg-neutral-700 px-4 py-2 text-xl"
         type="text"
         value={inputValue}
         onChange={onInputValueChage}
       />
       <button
-        className="bg-red-500 w-full rounded-full px-4 py-2 cursor-pointer"
+        className="w-full cursor-pointer rounded-full bg-red-500 px-4 py-2"
         onClick={() => {
           sendMessage(inputValue);
           setInputValue("");
@@ -133,15 +133,15 @@ const ReduxClosureSubscribe = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center gap-4 bg-neutral-900 text-neutral-100 p-4 rounded-xl w-1/2">
+    <div className="flex w-1/2 flex-col items-center justify-center gap-4 rounded-xl bg-neutral-900 p-4 text-neutral-100">
       <input
-        className="rounded-full text-xl bg-neutral-700 px-4 py-2"
+        className="rounded-full bg-neutral-700 px-4 py-2 text-xl"
         type="text"
         value={inputValue}
         onChange={onInputValueChage}
       />
       <button
-        className="bg-red-500 w-full rounded-full px-4 py-2 cursor-pointer"
+        className="w-full cursor-pointer rounded-full bg-red-500 px-4 py-2"
         onClick={() => {
           subscribeToTopic(inputValue);
           setInputValue("");

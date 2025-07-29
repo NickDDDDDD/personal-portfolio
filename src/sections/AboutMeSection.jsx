@@ -1,10 +1,9 @@
-import AnimatedLettersContainer from "../components/typography/AnimatedLettersContainer.jsx";
 import ResponsiveTypography from "../components/typography/ResponsiveTypography.jsx";
 import Watermark from "../components/background/WaterMark.jsx";
 
 const AboutMeSection = () => {
   return (
-    <AnimatedLettersContainer className="relative h-[60vh] rounded-2xl border border-stone-100 bg-stone-200 md:h-[95vh]">
+    <div className="relative h-[60vh] overflow-clip rounded-2xl border border-stone-100 bg-stone-200 md:h-[95vh]">
       <div className="absolute z-20 flex h-full flex-col items-center justify-center gap-10">
         <ResponsiveTypography variant="h3" className="text-gray-800">
           I&apos;m a
@@ -37,7 +36,7 @@ const AboutMeSection = () => {
         <Watermark text="Back-end" />
         <Watermark text="Technologies" reverse />
       </div>
-    </AnimatedLettersContainer>
+    </div>
   );
 };
 

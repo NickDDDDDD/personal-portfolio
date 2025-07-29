@@ -62,7 +62,7 @@ const Column = ({
 
   return isDragging ? (
     <div
-      className=" h-full  w-64  rounded-md border-2 border-rose-500 "
+      className="h-full w-64 rounded-md border-2 border-rose-500"
       ref={setNodeRef}
       style={style}
       {...attributes}
@@ -70,31 +70,31 @@ const Column = ({
     ></div>
   ) : (
     <div
-      className="h-full w-64 "
+      className="h-full w-64"
       ref={setNodeRef}
       style={style}
       {...attributes}
       {...listeners}
     >
-      <div className="bg-slate-800 flex flex-col  rounded-md p-2 gap-2">
+      <div className="flex flex-col gap-2 rounded-md bg-slate-800 p-2">
         {/* header */}
 
         <div
-          className="bg-slate-900 text-base cursor-grab rounded-md rounded-b-none font-bold flex p-2 justify-between items-center "
+          className="flex cursor-grab items-center justify-between rounded-md rounded-b-none bg-slate-900 p-2 text-base font-bold"
           onClick={() => setIsEditing(true)}
         >
-          <div className="flex gap-2 items-center flex-1">
+          <div className="flex flex-1 items-center gap-2">
             {/* chip for cards num in column */}
-            <div className="bg-slate-800 p-1 rounded-full text-xs self-center">
+            <div className="self-center rounded-full bg-slate-800 p-1 text-xs">
               {cards.length}
             </div>
-            <div className="flex items-center overflow-x-hidden">
+            <div className="flex items-center overflow-x-clip">
               {isEditing ? (
                 <input
                   type="text"
                   value={column.title}
                   onChange={(e) => updateColumn(column.id, e.target.value)}
-                  className="bg-slate-900 text-white resize-none outline-none focus:border-2 border-rose-500 rounded-md w-full"
+                  className="w-full resize-none rounded-md border-rose-500 bg-slate-900 text-white outline-none focus:border-2"
                   onBlur={() => setIsEditing(false)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
@@ -110,7 +110,7 @@ const Column = ({
             </div>
           </div>
           <button
-            className="stroke-gray-500 hover:stroke-white transition duration-150 hover:bg-slate-800 p-1 rounded-md"
+            className="rounded-md stroke-gray-500 p-1 transition duration-150 hover:bg-slate-800 hover:stroke-white"
             onClick={() => {
               deleteColumn(column.id);
             }}
@@ -119,7 +119,7 @@ const Column = ({
           </button>
         </div>
         {/* cards container */}
-        <div className=" flex flex-col gap-2 overflow-y-auto ">
+        <div className="flex flex-col gap-2 overflow-y-auto">
           <SortableContext items={cardsIds}>
             {cards.map((card) => (
               <Card
@@ -134,20 +134,20 @@ const Column = ({
         </div>
         {/* footer */}
         <div
-          className="overflow-hidden transition-all duration-150"
+          className="overflow-clip transition-all duration-150"
           style={{ maxHeight: isAddingCard ? "200px" : "0px" }}
         >
           <textarea
             placeholder="Do something..."
             value={cardContent}
             onChange={(e) => setCardContent(e.target.value)}
-            className="w-full p-2 border-none rounded-md bg-slate-900 text-white h-32 resize-none"
+            className="h-32 w-full resize-none rounded-md border-none bg-slate-900 p-2 text-white"
             wrap="soft"
           />
         </div>
-        <div className="flex gap-2 justify-center items-center">
+        <div className="flex items-center justify-center gap-2">
           <button
-            className="flex gap-2 cursor-pointer rounded-lg bg-slate-800  p-1 ring-rose-500 hover:ring-2 focus:ring-2 active:scale-95 transition duration-150 justify-center items-center flex-1"
+            className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-lg bg-slate-800 p-1 ring-rose-500 transition duration-150 hover:ring-2 focus:ring-2 active:scale-95"
             onClick={(e) => {
               createCard(column.id);
               e.currentTarget.blur();
@@ -158,7 +158,7 @@ const Column = ({
           </button>
           {isAddingCard && (
             <button
-              className="flex gap-2 cursor-pointer rounded-lg bg-slate-800  p-1   active:scale-95 transition duration-150 justify-center items-center flex-2 stroke-gray-500 hover:stroke-white hover:bg-slate-900"
+              className="flex-2 flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-slate-800 stroke-gray-500 p-1 transition duration-150 hover:bg-slate-900 hover:stroke-white active:scale-95"
               onClick={() => setIsAddingCard(false)}
             >
               <CloseIcon />

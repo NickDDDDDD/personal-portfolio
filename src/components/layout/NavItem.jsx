@@ -2,15 +2,24 @@ import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import ResponsiveTypography from "/src/components/typography/ResponsiveTypography";
 import { useMediaQuery } from "react-responsive";
-import { useTransform, motion } from "framer-motion";
+import { useTransform, motion } from "motion/react";
 import { twMerge } from "tailwind-merge";
 const NavItem = forwardRef(
   (
-    { id, name, bgColor, textColor, isExpanded, onExpand, progressValue },
+    {
+      id,
+      index,
+      name,
+      bgColor,
+      textColor,
+      isExpanded,
+      onExpand,
+      progressValue,
+    },
     ref,
   ) => {
     const isLandscape = useMediaQuery({ query: "(orientation: landscape)" });
-    const formattedId = id.toString().padStart(2, "0");
+    const formattedIndex = index.toString().padStart(2, "0");
 
     const translateValue = useTransform(progressValue, [0, 1], ["0%", "100%"]);
 
@@ -34,7 +43,7 @@ const NavItem = forwardRef(
         )}
       >
         <ResponsiveTypography variant="overline" style={{ color: textColor }}>
-          {formattedId}
+          {formattedIndex}
         </ResponsiveTypography>
         <ResponsiveTypography
           variant="caption"
@@ -72,7 +81,8 @@ const NavItem = forwardRef(
 );
 
 NavItem.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   isExpanded: PropTypes.bool.isRequired,
   onExpand: PropTypes.func.isRequired,

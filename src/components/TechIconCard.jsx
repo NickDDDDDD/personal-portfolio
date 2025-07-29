@@ -6,7 +6,7 @@ import {
   useMotionTemplate,
   useMotionValue,
   useSpring,
-} from "framer-motion";
+} from "motion/react";
 const TechIconCard = ({
   containerRef,
   top,

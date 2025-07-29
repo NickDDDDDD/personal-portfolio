@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import PropTypes from "prop-types";
 import ResponsiveTypography from "./ResponsiveTypography";
 import { useEffect, useRef, useState } from "react";
@@ -25,7 +25,7 @@ const ShiftLetters = ({ text, fontVariant, className }) => {
         amount: 1,
         once: true,
       }}
-      className="cursor-pointer group "
+      className="group cursor-pointer"
     >
       {generateLetters(text).map((item, i) => (
         <ShiftLetter
@@ -60,7 +60,7 @@ const ShiftLetter = ({ letter, fontVariant, className, isDescender }) => {
   }, [fontVariant, className, isDescender]);
   return (
     <div
-      className="inline-block overflow-hidden"
+      className="inline-block overflow-clip"
       style={{
         height: `${height}px`,
         verticalAlign: "top",

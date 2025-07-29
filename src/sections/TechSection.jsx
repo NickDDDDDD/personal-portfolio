@@ -4,7 +4,7 @@ import TechIconCard from "../components/TechIconCard.jsx";
 import { nanoid } from "nanoid";
 import { useState, useLayoutEffect, useCallback, useRef } from "react";
 import { useMeasure } from "react-use";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import ResponsiveTypography from "../components/typography/ResponsiveTypography.jsx";
 const {
   ReactIcon,

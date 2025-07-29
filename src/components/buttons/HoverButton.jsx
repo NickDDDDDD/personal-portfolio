@@ -6,7 +6,7 @@ import {
   useMotionTemplate,
   useMotionValue,
   useSpring,
-} from "framer-motion";
+} from "motion/react";
 import { FiArrowRight } from "react-icons/fi";
 
 const SPRING_OPTIONS = {
@@ -48,7 +48,7 @@ const HoverButton = ({ children }) => {
   };
 
   return (
-    <div className="rounded-xl mx-auto h-20 w-full max-w-72 bg-black ">
+    <div className="mx-auto h-20 w-full max-w-72 rounded-xl bg-black">
       <motion.button
         ref={ref}
         style={{
@@ -57,7 +57,7 @@ const HoverButton = ({ children }) => {
         onMouseMove={handleMove}
         onMouseLeave={handleReset}
         onMouseDown={handleReset}
-        className="rounded-xl group flex h-full w-full items-center justify-between border-2 border-black bg-white px-8 text-xl font-semibold "
+        className="group flex h-full w-full items-center justify-between rounded-xl border-2 border-black bg-white px-8 text-xl font-semibold"
       >
         <Copy>{children}</Copy>
         <Arrow />
@@ -72,7 +72,7 @@ HoverButton.propTypes = {
 
 const Copy = ({ children }) => {
   return (
-    <span className="relative overflow-hidden">
+    <span className="relative overflow-clip">
       <span className="inline-block transition-transform duration-300 group-hover:-translate-y-full">
         {children}
       </span>
@@ -88,7 +88,7 @@ Copy.propTypes = {
 };
 
 const Arrow = () => (
-  <div className="pointer-events-none flex h-6 w-6 overflow-hidden text-2xl">
+  <div className="pointer-events-none flex h-6 w-6 overflow-clip text-2xl">
     <FiArrowRight className="shrink-0 -translate-x-full text-red-500 transition-transform duration-300 group-hover:translate-x-0" />
     <FiArrowRight className="shrink-0 -translate-x-full transition-transform duration-300 group-hover:translate-x-0" />
   </div>

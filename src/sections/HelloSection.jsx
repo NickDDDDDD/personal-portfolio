@@ -1,4 +1,4 @@
-import { motion, useTransform } from "framer-motion";
+import { motion, useTransform } from "motion/react";
 import PropTypes from "prop-types";
 
 import { HeroSectionContentFirewatch } from "/src/utils/content";
@@ -59,7 +59,7 @@ const HelloSection = ({ scrollYProgressValue }) => {
   const overlayTransform = useTransform(scrollYProgressValue, [0, 1], [0, 1]);
 
   return (
-    <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#ffaf1b] md:aspect-[16/9]">
+    <div className="relative aspect-[4/3] overflow-clip rounded-2xl bg-[#ffaf1b] md:aspect-[16/9]">
       {/* Background Image */}
       <motion.div
         className="absolute inset-0 bg-cover bg-center"

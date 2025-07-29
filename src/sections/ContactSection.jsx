@@ -1,11 +1,12 @@
 import { FiMail } from "react-icons/fi";
 import { FaLinkedin } from "react-icons/fa";
 import { FaSquareGithub } from "react-icons/fa6";
-
 import ResponsiveTypography from "../components/typography/ResponsiveTypography";
+import PropTypes from "prop-types";
+
 const ContactSection = () => {
   return (
-    <section className="grid h-[60vh] w-full grid-cols-3 flex-col items-center justify-center gap-6 overflow-hidden rounded-2xl md:h-[95vh]">
+    <section className="grid h-[60vh] w-full grid-cols-3 flex-col items-center justify-center gap-6 overflow-clip rounded-2xl md:h-[95vh]">
       <div className="hidden landscape:col-span-1 landscape:block landscape:h-full landscape:rounded-2xl landscape:bg-stone-300">
         text or bg img
       </div>
@@ -37,7 +38,7 @@ const Card = ({ title, subtitle, Icon, href }) => {
   return (
     <a
       href={href}
-      className="group relative flex flex-1 flex-col justify-evenly overflow-hidden rounded-2xl border-[1px] border-neutral-300 bg-white p-6"
+      className="group relative flex flex-1 flex-col justify-evenly overflow-clip rounded-2xl border-[1px] border-neutral-300 bg-white p-6"
     >
       <div className="absolute inset-0 translate-y-[100%] bg-gradient-to-r from-green-500 to-green-400 transition-transform duration-300 group-hover:translate-y-[0%]" />
 
@@ -57,6 +58,13 @@ const Card = ({ title, subtitle, Icon, href }) => {
       </ResponsiveTypography>
     </a>
   );
+};
+
+Card.propTypes = {
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string.isRequired,
+  Icon: PropTypes.elementType.isRequired,
+  href: PropTypes.string.isRequired,
 };
 
 export default ContactSection;

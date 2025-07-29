@@ -54,13 +54,13 @@ const Card = ({ card, deleteCard, editCard, containerRef }) => {
       : {};
   return isDragging ? (
     <div
-      className="border-rose-500 border-2 flex-shrink-0 h-20  w-full rounded-md p-2"
+      className="h-20 w-full flex-shrink-0 rounded-md border-2 border-rose-500 p-2"
       ref={setNodeRef}
       style={style}
     />
   ) : (
     <div
-      className="bg-slate-900 flex-shrink-0 h-20  w-full rounded-md p-2"
+      className="h-20 w-full flex-shrink-0 rounded-md bg-slate-900 p-2"
       onMouseOver={() => setIsMouseOver(true)}
       onMouseLeave={() => setIsMouseOver(false)}
       ref={setNodeRef}
@@ -68,11 +68,11 @@ const Card = ({ card, deleteCard, editCard, containerRef }) => {
       {...attributes}
       {...listeners}
     >
-      <div className="relative " ref={anchorRef}>
+      <div className="relative" ref={anchorRef}>
         <p>{card.title}</p>
         {isMouseOver && (
           <button
-            className="absolute top-0 right-0 stroke-white hover:bg-slate-800 p-1 rounded-md"
+            className="absolute right-0 top-0 rounded-md stroke-white p-1 hover:bg-slate-800"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <EllipsisIcon />
@@ -82,11 +82,11 @@ const Card = ({ card, deleteCard, editCard, containerRef }) => {
           anchorRect &&
           createPortal(
             <div
-              className="absolute  bg-slate-800 rounded-md shadow-lg z-10 transition-all duration-150 overflow-hidden"
+              className="absolute z-10 overflow-clip rounded-md bg-slate-800 shadow-lg transition-all duration-150"
               style={menuStyle}
             >
               <button
-                className="w-full text-left px-4 py-2 hover:bg-slate-900"
+                className="w-full px-4 py-2 text-left hover:bg-slate-900"
                 onClick={() => {
                   deleteCard(card.id);
                   setIsMenuOpen(false);
@@ -95,7 +95,7 @@ const Card = ({ card, deleteCard, editCard, containerRef }) => {
                 Delete
               </button>
             </div>,
-            containerRef.current
+            containerRef.current,
           )}
       </div>
     </div>

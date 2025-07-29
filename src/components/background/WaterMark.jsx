@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import { twMerge } from "tailwind-merge";
 
 const Watermark = ({ reverse, text, className }) => (
-  <div className="flex -translate-y-12 select-none overflow-hidden">
+  <div className="flex -translate-y-12 select-none overflow-clip">
     <TranslateWrapper reverse={reverse}>
       <span
         className={twMerge(
-          "w-fit whitespace-nowrap text-[20vmax] font-black uppercase leading-[0.75] ",
-          className
+          "w-fit whitespace-nowrap text-[20vmax] font-black uppercase leading-[0.75]",
+          className,
         )}
       >
         {text}
@@ -17,8 +17,8 @@ const Watermark = ({ reverse, text, className }) => (
     <TranslateWrapper reverse={reverse}>
       <span
         className={twMerge(
-          "ml-48 w-fit whitespace-nowrap text-[20vmax] font-black uppercase leading-[0.75] ",
-          className
+          "ml-48 w-fit whitespace-nowrap text-[20vmax] font-black uppercase leading-[0.75]",
+          className,
         )}
       >
         {text}

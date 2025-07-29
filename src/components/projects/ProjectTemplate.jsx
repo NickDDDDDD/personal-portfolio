@@ -5,7 +5,7 @@ import ResponsiveTypography from "../typography/ResponsiveTypography";
 const ProjectTemplate = () => {
   return (
     <div className="grid h-full w-full grid-cols-3 gap-4">
-      <div className="col-span-1 overflow-hidden rounded-2xl">
+      <div className="col-span-1 overflow-clip rounded-2xl">
         <img src={pic} alt="terror in tilberg" />
       </div>
       <div className="col-span-2 flex flex-col items-center justify-center gap-4">
@@ -31,7 +31,7 @@ const ProjectTemplate = () => {
         </div>
       </div>
       <div className="relative col-span-3 rounded-xl bg-[#292524]">
-        <div className="prose prose-h2:text-[#d5e000] prose-h3:text-[#d5e000] prose-invert prose-2xl max-w-none p-8 marker:text-[#d5e000]">
+        <div className="prose prose-2xl prose-invert max-w-none p-8 marker:text-[#d5e000] prose-h2:text-[#d5e000] prose-h3:text-[#d5e000]">
           <ReactMarkdown>{Description}</ReactMarkdown>
         </div>
       </div>

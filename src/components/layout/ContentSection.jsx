@@ -1,14 +1,14 @@
 import { useRef, useEffect, forwardRef } from "react";
 import PropTypes from "prop-types";
-import { useInView, motion, useScroll } from "framer-motion";
+import { motion, useInView, useScroll } from "motion/react";
 import ShiftLetters from "/src/components/typography/ShiftLetters.jsx";
 import ResponsiveTypography from "../typography/ResponsiveTypography";
-import AnimatedLettersContainer from "/src/components/typography/AnimatedLettersContainer.jsx";
 
 const ContentSection = forwardRef(
   (
     {
       id,
+      index,
       name,
       bgColor,
       displayTitle = true,
@@ -58,7 +58,7 @@ const ContentSection = forwardRef(
       return () => unsubscribe();
     }, [scrollYProgress, id, onScrollProgress, isInView]);
 
-    const formattedId = id.toString().padStart(2, "0");
+    const formattedIndex = index.toString().padStart(2, "0");
 
     return (
       <motion.section
@@ -67,13 +67,13 @@ const ContentSection = forwardRef(
         className="flex flex-col gap-5"
       >
         {displayTitle && (
-          <AnimatedLettersContainer
+          <div
             style={{ backgroundColor: bgColor, color: textColor }}
             className="h-[20dvh] rounded-2xl md:h-[50vh]"
           >
             <div className="flex h-full flex-col items-center justify-evenly">
-              <ResponsiveTypography text={formattedId} variant="h3">
-                {formattedId}
+              <ResponsiveTypography variant="h3">
+                {formattedIndex}
               </ResponsiveTypography>
               <ShiftLetters
                 text={name}
@@ -81,7 +81,7 @@ const ContentSection = forwardRef(
                 className="font-bold"
               />
             </div>
-          </AnimatedLettersContainer>
+          </div>
         )}
         <div>{children}</div>
       </motion.section>
@@ -91,7 +91,8 @@ const ContentSection = forwardRef(
 
 ContentSection.displayName = "ContentSection";
 ContentSection.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   bgColor: PropTypes.string.isRequired,
   textColor: PropTypes.string.isRequired,

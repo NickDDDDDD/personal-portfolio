@@ -18,7 +18,7 @@ const Kanban = () => {
   const [columns, setColumns] = useState([]);
   const columnsIds = useMemo(
     () => columns.map((column) => column.id),
-    [columns]
+    [columns],
   );
   const [cards, setCards] = useState([]);
   const [activeColumn, setActiveColumn] = useState(null);
@@ -34,7 +34,7 @@ const Kanban = () => {
         delay: 250,
         tolerance: 5,
       },
-    })
+    }),
   );
 
   useEffect(() => {
@@ -66,8 +66,8 @@ const Kanban = () => {
   function updateColumn(id, title) {
     setColumns(
       columns.map((column) =>
-        column.id === id ? { ...column, title } : column
-      )
+        column.id === id ? { ...column, title } : column,
+      ),
     );
   }
 
@@ -120,7 +120,7 @@ const Kanban = () => {
       setCards((prev) => {
         const activeIndex = prev.findIndex((card) => card.id === active.id);
         const newCards = prev.map((card) =>
-          card.id === active.id ? { ...card, columnId: over.id } : card
+          card.id === active.id ? { ...card, columnId: over.id } : card,
         );
         return arrayMove(newCards, activeIndex, newCards.length - 1);
       });
@@ -158,7 +158,7 @@ const Kanban = () => {
   }
 
   return (
-    <div className=" h-[65dvh] md:h-[95dvh] w-full bg-slate-950 flex  overflow-x-auto overflow-y-hidden text-white p-12">
+    <div className="flex h-[65dvh] w-full overflow-x-auto overflow-y-clip bg-slate-950 p-12 text-white md:h-[95dvh]">
       <DndContext
         sensors={sensors}
         onDragStart={handleDragStart}
@@ -169,13 +169,13 @@ const Kanban = () => {
         {/* kanban area */}
         <div
           className={twMerge(
-            "mx-auto flex h-full justify-start items-start gap-4  relative",
-            isDragging ? "touch-none" : ""
+            "relative mx-auto flex h-full items-start justify-start gap-4",
+            isDragging ? "touch-none" : "",
           )}
           ref={containerRef}
         >
           {/* columns */}
-          <div className="flex h-full justify-start items-start gap-4">
+          <div className="flex h-full items-start justify-start gap-4">
             <SortableContext items={columnsIds}>
               {columns.map((column) => (
                 <Column
@@ -191,7 +191,7 @@ const Kanban = () => {
             </SortableContext>
           </div>
           <button
-            className="flex self-start gap-2 cursor-pointer rounded-lg bg-slate-800   px-8 py-4 ring-rose-500 hover:ring-2 focus:ring-2 active:scale-95 transition duration-150"
+            className="flex cursor-pointer gap-2 self-start rounded-lg bg-slate-800 px-8 py-4 ring-rose-500 transition duration-150 hover:ring-2 focus:ring-2 active:scale-95"
             onClick={(e) => {
               createColumn();
               e.currentTarget.blur();
