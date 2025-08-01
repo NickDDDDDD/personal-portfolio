@@ -3,30 +3,24 @@ import { FaLinkedin } from "react-icons/fa";
 import { FaSquareGithub } from "react-icons/fa6";
 import ResponsiveTypography from "../components/typography/ResponsiveTypography";
 import PropTypes from "prop-types";
+import DotGrid from "../components/DotGrid";
 
 const ContactSection = () => {
   return (
     <section className="grid h-[60vh] w-full grid-cols-3 flex-col items-center justify-center gap-6 overflow-clip rounded-2xl md:h-[95vh]">
-      <div className="hidden landscape:col-span-1 landscape:block landscape:h-full landscape:rounded-2xl landscape:bg-stone-300">
-        text or bg img
+      <div className="hidden landscape:col-span-1 landscape:block landscape:h-full landscape:rounded-2xl">
+        <DotGrid />
       </div>
       <div className="col-span-3 flex h-full flex-col justify-center gap-3 md:gap-6 landscape:col-span-2">
-        <Card
-          title="Email"
-          subtitle="click to email me"
-          href="#"
-          Icon={FiMail}
-        />
+        <Card title="Email" subtitle="click to email me" Icon={FiMail} />
         <Card
           title="GitHub"
           subtitle="click to view my GitHub"
-          href="#"
           Icon={FaSquareGithub}
         />
         <Card
           title="LinkedIn"
           subtitle="click to view my LinkedIn"
-          href="#"
           Icon={FaLinkedin}
         />
       </div>
@@ -34,12 +28,9 @@ const ContactSection = () => {
   );
 };
 
-const Card = ({ title, subtitle, Icon, href }) => {
+const Card = ({ title, subtitle, Icon }) => {
   return (
-    <a
-      href={href}
-      className="group relative flex flex-1 flex-col justify-evenly overflow-clip rounded-2xl border-[1px] border-neutral-300 bg-white p-6"
-    >
+    <div className="group relative flex flex-1 flex-col justify-evenly overflow-clip rounded-2xl border-[1px] border-neutral-300 bg-white p-6">
       <div className="absolute inset-0 translate-y-[100%] bg-gradient-to-r from-green-500 to-green-400 transition-transform duration-300 group-hover:translate-y-[0%]" />
 
       <Icon className="absolute right-0 top-0 z-10 h-full w-auto text-stone-100 transition-transform duration-300 group-hover:rotate-12 group-hover:text-emerald-500" />
@@ -56,7 +47,7 @@ const Card = ({ title, subtitle, Icon, href }) => {
       >
         {subtitle}
       </ResponsiveTypography>
-    </a>
+    </div>
   );
 };
 
@@ -64,7 +55,6 @@ Card.propTypes = {
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string.isRequired,
   Icon: PropTypes.elementType.isRequired,
-  href: PropTypes.string.isRequired,
 };
 
 export default ContactSection;
