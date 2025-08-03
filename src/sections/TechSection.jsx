@@ -1,11 +1,12 @@
 import { TechSectionContent } from "/src/utils/content";
 
 import TechIconCard from "../components/TechIconCard.jsx";
-import { nanoid } from "nanoid";
-import { useState, useLayoutEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useMeasure } from "react-use";
 import { motion } from "motion/react";
 import ResponsiveTypography from "../components/typography/ResponsiveTypography.jsx";
+import PoissonDiskSampling from "poisson-disk-sampling";
+
 const {
   ReactIcon,
   HtmlIcon,
@@ -27,49 +28,10 @@ const TechSection = () => {
   const containerRef = useRef(null);
   const [measureRef, { width, height }] = useMeasure();
   const [iconObjs, setIconObjs] = useState([]);
+  const [open, setOpen] = useState(false);
 
   const baseSize = Math.max(width, height) / 15;
-  const minDistance = baseSize * 1.5;
-
-  const setRefs = (node) => {
-    containerRef.current = node;
-    measureRef(node);
-  };
-
-  const generateRandomPosition = useCallback(
-    (existingPositions) => {
-      let position;
-      let isValid = false;
-      const maxAttempts = 1000;
-      let attempts = 0;
-
-      while (!isValid && attempts < maxAttempts) {
-        const top = Math.random() * (height - baseSize);
-        const left = Math.random() * (width - baseSize);
-
-        position = { top, left };
-
-        isValid = existingPositions.every(
-          (pos) =>
-            Math.sqrt((pos.top - top) ** 2 + (pos.left - left) ** 2) >
-            minDistance,
-        );
-
-        attempts++;
-      }
-
-      if (!isValid) {
-        console.warn("Unable to find a valid position after maxAttempts.");
-        position = {
-          top: Math.random() * (height - baseSize),
-          left: Math.random() * (width - baseSize),
-        };
-      }
-
-      return position;
-    },
-    [baseSize, height, minDistance, width],
-  );
+  const minDistance = baseSize * 2;
 
   const generateIcons = useCallback(() => {
     const icons = [
@@ -89,64 +51,100 @@ const TechSection = () => {
       Postman,
     ];
 
-    const positions = [];
-    const iconObjs = icons.map((Icon) => {
-      const { top, left } = generateRandomPosition(positions);
-      positions.push({ top, left });
+    const pds = new PoissonDiskSampling({
+      shape: [width - baseSize * 2, height - baseSize * 2],
+      minDistance: minDistance,
+      tries: 50,
+    });
 
+    const points = pds.fill();
+
+    const sliced = points.slice(0, icons.length);
+
+    return icons.map((Icon, index) => {
+      const [left, top] = sliced[index] || [0, 0];
       return {
         Icon,
-        id: nanoid(),
+        id: index,
         rotate: Math.random() * 60 - 30,
         top: `${top}px`,
         left: `${left}px`,
         size: `${baseSize}px`,
       };
     });
+  }, [baseSize, width, height, minDistance]);
 
-    return iconObjs;
-  }, [baseSize, generateRandomPosition]);
-
-  useLayoutEffect(() => {
-    if (width > 0 && height > 0) {
+  useEffect(() => {
+    if (open && width > 0 && height > 0) {
       setIconObjs(generateIcons());
     }
-  }, [generateIcons, width, height]);
+  }, [open, width, height, generateIcons]);
 
   console.log("TechSection render");
 
   return (
-    <section className="flex h-full w-full flex-col items-center justify-center gap-5 rounded-xl border border-gray-800 p-4 md:p-10">
-      <ResponsiveTypography variant="h3" className="text-gray-800">
-        What&apos;s in my
-      </ResponsiveTypography>
+    <section
+      className="aspect-video w-full rounded-2xl bg-gradient-to-br from-slate-400 to-slate-500 p-12"
+      onClick={() => setOpen(true)}
+    >
+      {open ? (
+        <div
+          className="relative h-full w-full"
+          style={{ perspective: 1000 }}
+          ref={(el) => {
+            containerRef.current = el;
+            measureRef(el);
+          }}
+        >
+          {iconObjs.map((iconObj) => {
+            const randomTilt =
+              (Math.random() * 45 + 45) * (Math.random() > 0.5 ? 1 : -1);
 
-      <ResponsiveTypography variant="h2" className="font-bold text-slate-500">
-        toolbox
-      </ResponsiveTypography>
-      <div className="flex h-full w-full items-center justify-center">
-        <div className="flex aspect-[4/3] w-[80vw] items-center justify-center rounded-2xl border-4 bg-gradient-to-br from-slate-400 to-slate-500 p-3 md:w-[50vw]">
-          <div className="relative h-[80%] w-[80%]">
-            <div>
-              <motion.div className="absolute inset-0" ref={setRefs}>
-                {iconObjs.map((iconObj) => (
-                  <TechIconCard
-                    key={iconObj.id}
-                    containerRef={containerRef}
-                    rotate={iconObj.rotate}
-                    top={iconObj.top}
-                    left={iconObj.left}
-                  >
-                    <iconObj.Icon
-                      style={{ width: iconObj.size, height: iconObj.size }}
-                    />
-                  </TechIconCard>
-                ))}
+            return (
+              <motion.div
+                key={iconObj.id}
+                style={{
+                  position: "absolute",
+                  top: iconObj.top,
+                  left: iconObj.left,
+                  rotate: iconObj.rotate,
+                }}
+                initial={{ scale: 1, y: 0 }}
+                animate={{
+                  scale: [1, 1.4, 1],
+                  y: [0, -100, 0],
+                  rotateY: [0, randomTilt, 0],
+                }}
+                transition={{
+                  duration: 0.5,
+                  times: [0, 0.5, 1],
+                  ease: ["easeOut", "easeIn"],
+                  delay: iconObj.id * 0.02,
+                }}
+              >
+                <TechIconCard containerRef={containerRef}>
+                  <iconObj.Icon
+                    style={{ width: iconObj.size, height: iconObj.size }}
+                  />
+                </TechIconCard>
               </motion.div>
-            </div>
-          </div>
+            );
+          })}
         </div>
-      </div>
+      ) : (
+        <div className="flex h-full w-full items-center justify-center gap-6">
+          <ResponsiveTypography variant="h2" className="text-slate-300">
+            What&apos;s in my
+          </ResponsiveTypography>
+
+          <ResponsiveTypography
+            variant="h1"
+            className="font-bold text-slate-600"
+          >
+            toolbox
+          </ResponsiveTypography>
+        </div>
+      )}
     </section>
   );
 };

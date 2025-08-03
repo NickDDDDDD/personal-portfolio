@@ -7,22 +7,9 @@ import {
   useMotionValue,
   useSpring,
 } from "motion/react";
-const TechIconCard = ({
-  containerRef,
-  top,
-  left,
-  rotate,
-  className,
-  children,
-}) => {
+const TechIconCard = ({ containerRef, className, children }) => {
   return (
-    <DragCard
-      containerRef={containerRef}
-      rotate={rotate}
-      top={top}
-      left={left}
-      className={className}
-    >
+    <DragCard containerRef={containerRef} className={className}>
       <TiltCard>{children}</TiltCard>
     </DragCard>
   );
@@ -30,14 +17,11 @@ const TechIconCard = ({
 
 TechIconCard.propTypes = {
   containerRef: PropTypes.object.isRequired,
-  top: PropTypes.string.isRequired,
-  left: PropTypes.string.isRequired,
-  rotate: PropTypes.number.isRequired,
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
 };
 
-const DragCard = ({ containerRef, top, left, rotate, className, children }) => {
+const DragCard = ({ containerRef, className, children }) => {
   const [zIndex, setZIndex] = useState(0);
 
   const updateZIndex = () => {
@@ -62,23 +46,14 @@ const DragCard = ({ containerRef, top, left, rotate, className, children }) => {
     <motion.div
       onMouseDown={updateZIndex}
       animate={{
-        top,
-        left,
-        rotate,
         zIndex,
       }}
-      transition={{ duration: 0.6 }}
       style={{
-        top,
-        left,
         zIndex,
-        willChange: "transform",
-        transform: ` rotate(${rotate}deg)`,
       }}
-      className={twMerge("drag-elements absolute", className)}
+      className={twMerge("", className)}
       drag
       dragConstraints={containerRef}
-      dragMomentum={false}
       dragElastic={0.65}
     >
       {children}
@@ -88,9 +63,6 @@ const DragCard = ({ containerRef, top, left, rotate, className, children }) => {
 
 DragCard.propTypes = {
   containerRef: PropTypes.object.isRequired,
-  top: PropTypes.string.isRequired,
-  left: PropTypes.string.isRequired,
-  rotate: PropTypes.number.isRequired,
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
 };
@@ -145,7 +117,7 @@ const TiltCard = ({ children, className, onClick }) => {
         transform,
       }}
       className={twMerge(
-        "relative h-full w-full rounded-md bg-stone-50 p-1 shadow-md md:rounded-2xl md:p-2",
+        "relative h-full w-full rounded-md border-2 border-stone-200 bg-stone-50 p-1 shadow-md md:rounded-2xl md:p-2",
         className,
       )}
     >

@@ -3,25 +3,26 @@ import Watermark from "../components/background/WaterMark.jsx";
 
 const AboutMeSection = () => {
   return (
-    <div className="relative h-[60vh] overflow-clip rounded-2xl border border-stone-100 bg-stone-200 md:h-[95vh]">
+    <div className="relative h-[60vh] overflow-clip rounded-2xl bg-stone-200 md:h-[95vh]">
       <div className="absolute z-20 flex h-full flex-col items-center justify-center gap-10">
         <ResponsiveTypography variant="h3" className="text-gray-800">
           I&apos;m a
         </ResponsiveTypography>
         <ResponsiveTypography
-          variant="h2"
+          variant="h1"
           className="font-bold text-violet-700"
         >
-          full stack developer
+          software engineer
         </ResponsiveTypography>
 
         <div className="w-[90%] sm:w-[80%] md:w-[70%] lg:w-[70%] xl:w-[70%]">
-          <ResponsiveTypography variant="body1" className="text-gray-800">
-            I like to think of myself as a front-end developer with an
-            understanding of back-end technologies. This allows me to approach
-            problems in two ways: starting from the product to find the right
-            technology, or starting from the technology to discover what kinds
-            of products can be built
+          <ResponsiveTypography variant="h6" className="text-stone-500">
+            Hi, I&apos;m a software engineer who loves creating things that
+            solve real problems. I believe there is no single best technology —
+            only the one that fits the problem best. This mindset drives me to
+            bridge the gap between technology and people, translating complex
+            technical concepts into intuitive solutions and working with others
+            to bring those ideas to life.
           </ResponsiveTypography>
         </div>
       </div>
