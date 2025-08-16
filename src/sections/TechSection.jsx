@@ -84,7 +84,7 @@ const TechSection = () => {
 
   return (
     <section
-      className="aspect-video w-full rounded-2xl bg-gradient-to-br from-slate-400 to-slate-500 p-12"
+      className="aspect-video w-full rounded-2xl bg-gradient-to-br from-slate-400 to-slate-500 p-2 md:p-12"
       onClick={() => setOpen(true)}
     >
       {open ? (
