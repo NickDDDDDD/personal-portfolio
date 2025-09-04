@@ -18,24 +18,24 @@ const projects = [
     },
     content: <Project />,
   },
-  {
-    id: 2,
-    title: "Project 2",
-    discription: {
-      text: "This is a project description",
-      color: "#d5e000",
-    },
-    content: <PlaceHolder2 />,
-  },
-  {
-    id: 3,
-    title: "Project 3",
-    discription: {
-      text: "This is a project description",
-      color: "#d5e000",
-    },
-    content: <PlaceHolder3 />,
-  },
+  // {
+  //   id: 2,
+  //   title: "Project 2",
+  //   discription: {
+  //     text: "This is a project description",
+  //     color: "#d5e000",
+  //   },
+  //   content: <PlaceHolder2 />,
+  // },
+  // {
+  //   id: 3,
+  //   title: "Project 3",
+  //   discription: {
+  //     text: "This is a project description",
+  //     color: "#d5e000",
+  //   },
+  //   content: <PlaceHolder3 />,
+  // },
 ];
 
 const Accordion = () => {
